@@ -145,8 +145,8 @@ $('#satellite').click(function(){
   var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
   var roadsall = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infra_redvial_osm_2016_gt_2.geojson?token=AWa3umrkbZpL2VZXCIIaJkR15o-4Jo_Aks5ZdmxCwA%3D%3D";
 
-  var majorroads = "";
-  
+  var majorroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/major_infra_redvial_osm_2016.geojson?token=AWa3uoVS2zMSU2MIwc0kLP3maAAJAesBks5Zdm5JwA%3D%3D";
+
 
 
 // 2.2 VARIABLES
@@ -344,6 +344,8 @@ $(document).ready(function(){
 });
 
 
+
+
 //4.2 LOADING MUNICIPAL DATA
 var myStyle = function(feature){
   var pov = feature.properties.gen_pov;
@@ -391,7 +393,28 @@ $(document).ready(function(){
       })
     });
 
-
+//4.2 LOADING THE MAJOR ROAD NETWORK DATA
+  $(document).ready(function(){
+    $.ajax(majorroads).done(function(data) {
+      parsedData14 = JSON.parse(data);
+      console.log(parsedData14);
+      console.log("parsed14");
+      console.log(parsedData14.features[0].geometry.coordinates);
+      console.log(parsedData14.features[0].geometry.coordinates[0][0]);
+      layerMappedPolygons = _.each(parsedData10,function(item){
+        L.geoJson(parsedData14,
+          {
+            style: {opacity:0.8,width:2,},
+            pointToLayer: function (feature, latlngs) {
+              return new L.polyline(latlngs, {color:'red'
+              }
+            );
+          }}
+        ).addTo(map).bindPopup("road");
+      }
+     );
+    });
+  });
 
 //4.3 EXPORT TABLE
 var tableToExcel = (function() {
