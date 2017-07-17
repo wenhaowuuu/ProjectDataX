@@ -143,8 +143,10 @@ $('#satellite').click(function(){
 
 
   var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
-  var roads = "";
+  var roadsall = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infra_redvial_osm_2016_gt_2.geojson?token=AWa3umrkbZpL2VZXCIIaJkR15o-4Jo_Aks5ZdmxCwA%3D%3D";
 
+  var majorroads = "";
+  
 
 
 // 2.2 VARIABLES
