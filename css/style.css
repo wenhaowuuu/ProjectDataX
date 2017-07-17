@@ -42,6 +42,19 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
   background-color: #fff;
 }
 
+.layers{
+  position:relative;
+  top:6px;
+  left:15px;
+}
+
+.layerlabel{
+  position:relative;
+  left:18px;
+  top:3px;
+  font-weight:normal;
+}
+
 .chartsarea{
   position:absolute;
   top:160px;

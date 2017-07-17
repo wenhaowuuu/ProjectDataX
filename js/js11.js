@@ -136,13 +136,15 @@ $('#satellite').click(function(){
 // 2. CREATE VARIABLES
 // 2.1 DATA SOURCE URLS
   var southamerica = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/south_america.geojson";
-
   var northtriangle = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/guatemala.geojson";
 
   var municipality = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
-  var highschool = "http://services2.arcgis.com/So9L2GYDzmW40U1b/ArcGIS/rest/services/High_Schools_in_Triangulo_Norte/FeatureServer/0?f=pjson";
   var municipality1 = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
+
+
   var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
+  var roads = "";
+
 
 
 // 2.2 VARIABLES
@@ -176,7 +178,7 @@ $('#satellite').click(function(){
        $('#exceltitle').text(layer.feature.properties.m_name);
        //ZOOM TO THE SELECTED MUNICIPALITY
        map.fitBounds(layer.getBounds(),{
-                  padding: [360,360]
+                  padding: [100,100]
                 });
        order = order + 1;
        console.log(order);
@@ -196,7 +198,9 @@ $('#satellite').click(function(){
      // $('#selection').text(namelist);
 
      // <div id="results" style="display: none;">
-     document.getElementById("results").style.display = "inline";
+    //  document.getElementById("results").style.display = "inline";
+
+
      console.log(layer.feature);
        $('#LENGTH').text(layer.feature.properties.m_name);
        $('#POP').text(layer.feature.properties.d_name);
@@ -208,7 +212,7 @@ $('#satellite').click(function(){
        var fadeout = {
          // 'color': '#0000ff',
          // 'weight': 2,
-         'opacity': 0.2,
+         'opacity': 0.05,
        };
        layerMappedPolygons.setStyle(fadeout);
 
