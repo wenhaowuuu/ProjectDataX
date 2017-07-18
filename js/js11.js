@@ -139,9 +139,9 @@ $('#satellite').click(function(){
   var northtriangle = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/guatemala.geojson";
 
 
-  var Guatemala = "";
-  var Honduras = "";
-  var Salvador = "";
+  var Guatemala = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/guatemala.geojson?token=AWa3ujj3WJDeoABdZInPIhnTSYkS3B5Kks5Zd5vrwA%3D%3D";
+  var Honduras = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/Honduras.geojson?token=AWa3uvKtwxzSEa1dGdu8oqlVEMSPY5alks5Zd5xEwA%3D%3D";
+  var Salvador = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/SalVardo.geojson?token=AWa3us5Y4fPzPzYtApgHmkKpUFki0Dekks5Zd5w0wA%3D%3D";
 
 
   var department = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/dept_joinbase.geojson?token=AWa3ulA7r0EP6hvXnzERqDWlb0C1DWkeks5Zd5HUwA%3D%3D";
@@ -166,10 +166,6 @@ $('#satellite').click(function(){
   var Hospitals;
   var Schools;
 
-
-  // var layerMappedMarkers;
-  // var layerMappedPolygons;
-
   var layerselected = [];
   var namelist = [];
   var namelistvalue = [];
@@ -187,10 +183,6 @@ $('#satellite').click(function(){
 
 
   var fadeout = {
-    // 'color': '#0000ff',
-    // 'weight': 2,
-    // style: myStyle,
-    // 'color': '#DB7849',
     'opacity': 0.05,
   };
 
@@ -212,7 +204,6 @@ var numberofClicks = 0;
 
        //Click odd number of times - loading the shape, while
        //click even number of times - removing it.
-
       //  if (numberofClicks % 2 == 0){
       //    //1. change the selection style;
       //    layer.setStyle(myStyle);
@@ -378,220 +369,196 @@ var myChart1 = new Chart(ctx1, {
 
 
 // 4. LOADING REAL DATA
+//4.0 LOADING THREE NATIONS BOUNDARY
+$(document).ready(function(){
+  $.ajax(Guatemala).done(function(data) {
+    parsedData21 = JSON.parse(data);
+    // console.log(parsedData10);
+    console.log("parsed21");
+    console.log(parsedData21.features[0].properties.country);
+    layerMappedPolygons = _.each(parsedData21,function(item){
+      L.geoJson(parsedData21,
+        {
+          style: {opacity:0.4},
+          pointToLayer: function (feature, latlngs) {
+            return new L.Polygon(latlngs, {
+            }
+          );
+        }}
+      ).addTo(map).bindPopup("text");
+    }
+  );
+  });
+});
+
+
+$(document).ready(function(){
+  $.ajax(Salvador).done(function(data) {
+    parsedData22 = JSON.parse(data);
+    console.log("parsed22");
+    console.log(parsedData22.features[0].properties.country);
+    layerMappedPolygons = _.each(parsedData22,function(item){
+      L.geoJson(parsedData22,
+        {
+          style: {opacity:0.4},
+          pointToLayer: function (feature, latlngs) {
+            return new L.Polygon(latlngs, {
+            }
+          );
+        }}
+      ).addTo(map).bindPopup("text");
+    }
+  );
+  });
+});
+
+
+$(document).ready(function(){
+  $.ajax(Honduras).done(function(data) {
+    parsedData23 = JSON.parse(data);
+    console.log("parsed23");
+    console.log(parsedData23.features[0].properties.country);
+    layerMappedPolygons = _.each(parsedData23,function(item){
+      L.geoJson(parsedData23,
+        {
+          style: {opacity:0.4},
+          pointToLayer: function (feature, latlngs) {
+            return new L.Polygon(latlngs, {
+            }
+          );
+        }}
+      ).addTo(map).bindPopup("text");
+    }
+  );
+  });
+});
+
+
+
+
+
 // 4.1 LOADING SOUTH AMERICA DATA
 //SELECT THE LAYERS YOU WANT
-
-
 
 // console.log(document.getElementById("infrastructure").checked);
 //ADD THE LAYERS TO THE MAP
 var selectedmaps = [];
-//some push functions in the click events
-//then display here...
+var x1, x2, x3, x4;
 
-
-// $('#showmap').click(function(){
-// //this should be a single display map function
-//
-//
-// });
-
-
-$("#roads1").change(function(){
+$('#roads1').change(function(){
   if(this.checked){
-    console.log("roads1");
-    //LOAD THE PRIMARY ROAD NETWORKS
-    PrimaryRoads = _.each(parsedData14,function(item){
-      L.geoJson(parsedData14,
-        {
-          style: {opacity:0.8,width:1.5,color:'#F39C12'},
-          pointToLayer: function (feature, latlngs) {
-            return new L.polyline(latlngs, {
+    x1 = true;
+  }
+});
+
+$('#roads2').change(function(){
+  if(this.checked){
+    x2 = true;
+  }
+});
+
+$('#hospital').change(function(){
+  if(this.checked){
+    x3 = true;
+  }
+});
+
+$('#school').change(function(){
+  if(this.checked){
+    x4 = true;
+  }
+});
+
+
+$('#showmap').click(function(){
+  console.log(x1,x2,x3,x4);
+  //LOAD PRIMARY ROAD NETWORK
+    if (x1 == true){
+      PrimaryRoads = _.each(parsedData14,function(item){
+        L.geoJson(parsedData14,
+          {
+            style: {opacity:0.8,width:1.5,color:'#F39C12'},
+            pointToLayer: function (feature, latlngs) {
+              return new L.polyline(latlngs, {
+              }
+            );
+          }}
+        ).addTo(map).bindPopup("road1");
+      }
+      );
+      selectedmaps.push(PrimaryRoads);
+    }
+    // else {};
+
+    if (x2 == true){
+        //LOAD THE SECONDARY ROAD NETWORKS
+        SecondaryRoads = _.each(parsedData15,function(item){
+          L.geoJson(parsedData15,
+            {
+              style: {opacity:0.3,width:0.5,color:'#F9E79F'},
+              pointToLayer: function (feature, latlngs) {
+                return new L.polyline(latlngs, {
+                }
+              );
+            }}
+          ).addTo(map).bindPopup("road2");
+        }
+        );
+        selectedmaps.push(SecondaryRoads);
+    }
+    // else {};
+
+    if (x3 == true){
+      //LOAD THE HIGH SCHOOL DATA
+         Schools = _.each(parsedData16,function(item){
+            L.geoJson(parsedData16,
+              {
+                pointToLayer: function (feature, latlngs) {
+                  return new L.marker(latlngs, {
+                    icon:schoolicon// radius:10,
+                      // color:yellow,
+                    });
+                  }
+              }).addTo(map).bindPopup("High Schools");
             }
           );
-        }}
-      ).addTo(map).bindPopup("road1");
-    }
-   );
+          selectedmaps.push(Schools);
+      }
+      // else {};
 
-  }
+      if (x4 == true){
+        //LOAD HOSPITAL DATA
+        Hospitals = _.each(parsedData17,function(item){
+           L.geoJson(parsedData17,
+             {
+               style: {opacity:0.3,width:0.5,color:'#4DAC58'},
+               pointToLayer: function (feature, latlngs) {
+                 return new L.marker(latlngs, {
+                   icon:schoolicon// radius:10,
+                     // color:yellow,
+                   });
+                 }
+             }).addTo(map).bindPopup("Hospitals");
+           }
+         );
+         selectedmaps.push(Schools);
+      }
+      // else {};
 });
 
 
-$("#roads2").change(function(){
-  if(this.checked){
-    console.log("roads2");
-    //LOAD THE SECONDARY ROAD NETWORKS
-    SecondaryRoads = _.each(parsedData15,function(item){
-      L.geoJson(parsedData15,
-        {
-          style: {opacity:0.3,width:0.5,color:'#F9E79F'},
-          pointToLayer: function (feature, latlngs) {
-            return new L.polyline(latlngs, {
-            }
-          );
-        }}
-      ).addTo(map).bindPopup("road2");
-    }
-    );
-
-  }
-});
-
-
-$("#hospital").change(function(){
-  if(this.checked){
-    console.log("hospital1");
-    //LOAD THE HOSPITALS
-    healthcenter
-
-  }
-});
-
-
-
-
-
-
-
-
+//DOWNLOAD DATA OF DIFFERENT LAYERS
 //LOAD HEALTH CENTERS
 $(document).ready(function(){
   $.ajax(healthcenter).done(function(data) {
     parsedData17 = JSON.parse(data);
     console.log(parsedData17);
     console.log("parsed17");
-
-
-
-
   });
 });
 
 
-//THE WHOLE SCHOOL DATA IS HUGE
-//YOU CAN LIMIT THE RENDERING ONLY TO THOSE SELECTED
-$("#school").change(function(){
-  if(this.checked){
-    // console.log("school1");
-
-    //LOAD THE HIGHSCHOOL NETWORKS
-    var schoolicon = L.icon({
-      iconUrl:'marker-icon.png',
-      iconSize:[15,24],
-      iconAnchor:[8,10],
-    })
-
-    console.log("schools are here");
-    console.log(parsedData16.features);
-    console.log(parsedData16.features[0]);
-    console.log(parsedData16.features[1]);
-    // console.log(parsedData16.features[1]);
-
-//DEFINE THE SELECTED LAYER
-var layershape = layerselected[0];
-    // var searchWithin = {
-    //   "type": "FeatureCollection",
-    //   "features": [
-    //     {
-    //       "type": "Feature",
-    //       "properties": {},
-    //       "geometry": {
-    //         "type": "Polygon",
-    //         "coordinates": [[
-    //           [-46.653,-23.543],
-    //           [-46.634,-23.5346],
-    //           [-46.613,-23.543],
-    //           [-46.614,-23.559],
-    //           [-46.631,-23.567],
-    //           [-46.653,-23.560],
-    //           [-46.653,-23.543]
-    //         ]]
-    //       }
-    //     }
-    //   ]
-    // };
-
-
-//DEFINE ALL THE HIGHSCHOOL DATA POINTS
-    var schoolpoints = _.each(parsedData16,function(item){
-      L.geoJson(parsedData16,
-        {
-          pointToLayer: function (feature, latlngs) {
-            return new L.marker(latlngs, {
-              icon:schoolicon// radius:10,
-              // color:yellow,
-              });
-            }
-        });
-    });
-
-    var ptsWithin = function(){
-      console.log("within");
-      return turf.within(schoolpoints, layershape);
-
-    };
-
-    ptsWithin().addTo(map);
-
-
-
-
-
-
-
-
-    Schools = _.each(parsedData16,function(item){
-      // console.log("schools are ready.");
-      // console.log(parsedData16);
-      // console.log(parsedData16.features[0]);
-
-      // SELECT THOSE ONLY WITHIN THE MUNICIPALITY
-      // if(item./// == layer.features.m_name){
-      //
-      //
-      // ]}
-
-
-      // L.geoJson(parsedData16,
-      //   {
-      //     pointToLayer: function (feature, latlngs) {
-      //       return new L.marker(latlngs, {
-      //         icon:schoolicon// radius:10,
-      //         // color:yellow,
-      //         });
-      //       }
-      //   }).addTo(map).bindPopup("High Schools");
-
-      }
-    );
-  }
-});
-
-
-//LOADING THE SCHOOL DATA
-// $(document).ready(function(){
-//   $.ajax(highschool).done(function(data) {
-//     parsedData12 = JSON.parse(data);
-//     console.log(parsedData12);
-//     console.log("parsed12");
-//     layerMappedPolygons = L.geoJson(parsedData12,
-//       {
-//         pointToLayer: function (feature, latlngs) {
-//           return new L.marker(latlngs, {
-//             icon:schoolicon// radius:10,
-//             // color:yellow,
-//             });
-//           }
-//       }).addTo(map).bindPopup("High Schools");
-//     });
-// });
-
-
-
-
-
-
+//LOAD SOUTH AMERICA COUNTRY DATA
 $(document).ready(function(){
   $.ajax(southamerica).done(function(data) {
     parsedData10 = JSON.parse(data);
@@ -613,55 +580,6 @@ $(document).ready(function(){
   });
 });
 
-
-
-
-//4.2 LOADING MUNICIPAL DATA
-var myStyle = function(feature){
-  var pov = feature.properties.gen_pov;
-  switch(true){
-    case (pov < 10):return{color:"#EFC4AF"};
-    case (pov >= 10 && pov < 30):return{color:"#D48F6E"};
-    case (pov >= 30 && pov < 50):return{color:"#DB7849"};
-    case (pov >= 50 && pov < 75):return{color:"#ED692A"};
-    case (pov >= 75):return{color:"#F33105"};
-  }
-  return {};
-};
-
-
-$(document).ready(function(){
-  $.ajax(municipality1).done(function(data) {
-    parsedData13 = JSON.parse(data);
-    console.log(parsedData13);
-    console.log("parsed13");
-    layerMappedPolygons = L.geoJson(parsedData13,
-      {
-        style: myStyle,
-        pointToLayer: function (feature, latlng) {
-          return new L.Polygon(latlng, {
-          });
-        },
-
-        onEachFeature: function(feature,layer){
-            layer.bindPopup(
-              "<b>Municipality Name: </b>" +
-              feature.properties.m_name +
-              "</br>" +
-              "<b>Poverty Rate: </b>" +
-              feature.properties.gen_pov +
-              "</br>" +
-              "<b>Department Name: </b>" +
-              feature.properties.d_name +
-              "</br>" +
-              "<b>Data Collected Year: </b>" +
-              feature.properties.year
-            )
-          }
-        }).addTo(map);
-        layerMappedPolygons.eachLayer(eachFeatureFunction);
-      })
-    });
 
 //LOAD DEPARTMENT BOUNDARIES
   $(document).ready(function(){
@@ -715,6 +633,153 @@ $(document).ready(function(){
       console.log("parsed16");
     });
   });
+
+
+
+
+
+//THE WHOLE SCHOOL DATA IS HUGE
+//YOU CAN LIMIT THE RENDERING ONLY TO THOSE SELECTED
+// $("#school").change(function(){
+//   if(this.checked){
+//     // console.log("school1");
+//
+//     //LOAD THE HIGHSCHOOL NETWORKS
+//     var schoolicon = L.icon({
+//       iconUrl:'marker-icon.png',
+//       iconSize:[15,24],
+//       iconAnchor:[8,10],
+//     })
+//
+//     console.log("schools are here");
+//     console.log(parsedData16.features);
+//     console.log(parsedData16.features[0]);
+//     console.log(parsedData16.features[1]);
+//     // console.log(parsedData16.features[1]);
+//
+// //DEFINE THE SELECTED LAYER
+// var layershape = layerselected[0];
+//     // var searchWithin = {
+//     //   "type": "FeatureCollection",
+//     //   "features": [
+//     //     {
+//     //       "type": "Feature",
+//     //       "properties": {},
+//     //       "geometry": {
+//     //         "type": "Polygon",
+//     //         "coordinates": [[
+//     //           [-46.653,-23.543],
+//     //           [-46.634,-23.5346],
+//     //           [-46.613,-23.543],
+//     //           [-46.614,-23.559],
+//     //           [-46.631,-23.567],
+//     //           [-46.653,-23.560],
+//     //           [-46.653,-23.543]
+//     //         ]]
+//     //       }
+//     //     }
+//     //   ]
+//     // };
+//
+//
+// //DEFINE ALL THE HIGHSCHOOL DATA POINTS
+//     var schoolpoints = _.each(parsedData16,function(item){
+//       L.geoJson(parsedData16,
+//         {
+//           pointToLayer: function (feature, latlngs) {
+//             return new L.marker(latlngs, {
+//               icon:schoolicon// radius:10,
+//               // color:yellow,
+//               });
+//             }
+//         });
+//     });
+//
+//     var ptsWithin = function(){
+//       console.log("within");
+//       return turf.within(schoolpoints, layershape);
+//
+//     };
+//
+//     ptsWithin().addTo(map);
+
+
+
+//LOADING THE SCHOOL DATA
+// $(document).ready(function(){
+//   $.ajax(highschool).done(function(data) {
+//     parsedData12 = JSON.parse(data);
+//     console.log(parsedData12);
+//     console.log("parsed12");
+//     layerMappedPolygons = L.geoJson(parsedData12,
+//       {
+//         pointToLayer: function (feature, latlngs) {
+//           return new L.marker(latlngs, {
+//             icon:schoolicon// radius:10,
+//             // color:yellow,
+//             });
+//           }
+//       }).addTo(map).bindPopup("High Schools");
+//     });
+// });
+
+
+
+
+
+
+
+
+
+
+
+//4.2 LOADING MUNICIPAL DATA
+var myStyle = function(feature){
+  var pov = feature.properties.gen_pov;
+  switch(true){
+    case (pov < 10):return{color:"#EFC4AF"};
+    case (pov >= 10 && pov < 30):return{color:"#D48F6E"};
+    case (pov >= 30 && pov < 50):return{color:"#DB7849"};
+    case (pov >= 50 && pov < 75):return{color:"#ED692A"};
+    case (pov >= 75):return{color:"#F33105"};
+  }
+  return {};
+};
+
+
+$(document).ready(function(){
+  $.ajax(municipality1).done(function(data) {
+    parsedData13 = JSON.parse(data);
+    console.log(parsedData13);
+    console.log("parsed13");
+    layerMappedPolygons = L.geoJson(parsedData13,
+      {
+        style: myStyle,
+        pointToLayer: function (feature, latlng) {
+          return new L.Polygon(latlng, {
+          });
+        },
+
+        onEachFeature: function(feature,layer){
+            layer.bindPopup(
+              "<b>Municipality Name: </b>" +
+              feature.properties.m_name +
+              "</br>" +
+              "<b>Poverty Rate: </b>" +
+              feature.properties.gen_pov +
+              "</br>" +
+              "<b>Department Name: </b>" +
+              feature.properties.d_name +
+              "</br>" +
+              "<b>Data Collected Year: </b>" +
+              feature.properties.year
+            )
+          }
+        }).addTo(map);
+        layerMappedPolygons.eachLayer(eachFeatureFunction);
+      })
+    });
+
 
 
 
