@@ -370,10 +370,22 @@ var myChart1 = new Chart(ctx1, {
 // 4. LOADING REAL DATA
 // 4.1 LOADING SOUTH AMERICA DATA
 //SELECT THE LAYERS YOU WANT
-//
+
 
 
 // console.log(document.getElementById("infrastructure").checked);
+//ADD THE LAYERS TO THE MAP
+var selectedmaps = [];
+//some push functions in the click events
+//then display here...
+
+
+// $('#showmap').click(function(){
+// //this should be a single display map function
+//
+//
+// });
+
 
 $("#roads1").change(function(){
   if(this.checked){
