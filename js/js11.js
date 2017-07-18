@@ -138,10 +138,14 @@ $('#satellite').click(function(){
   var southamerica = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/south_america.geojson";
   var northtriangle = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/guatemala.geojson";
 
+  var department = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/dept_joinbase.geojson?token=AWa3ulA7r0EP6hvXnzERqDWlb0C1DWkeks5Zd5HUwA%3D%3D";
+
+
+
   var municipality = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
   var municipality1 = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
 
-  // var hospital = "";
+  var healthcenter = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/healthcenters_segeplan_2010.geojson?token=AWa3uu4HC5P_wTYFCaksa2u2C8t4hRV5ks5Zd5GcwA%3D%3D";
   var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
   // var roadsall = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infra_redvial_osm_2016_gt_2.geojson?token=AWa3umrkbZpL2VZXCIIaJkR15o-4Jo_Aks5ZdmxCwA%3D%3D";
 
@@ -433,8 +437,29 @@ $("#hospital").change(function(){
   if(this.checked){
     console.log("hospital1");
     //LOAD THE HOSPITALS
+    healthcenter
 
   }
+});
+
+
+
+
+
+
+
+
+//LOAD HEALTH CENTERS
+$(document).ready(function(){
+  $.ajax(healthcenter).done(function(data) {
+    parsedData17 = JSON.parse(data);
+    console.log(parsedData17);
+    console.log("parsed17");
+
+
+
+
+  });
 });
 
 
@@ -632,6 +657,27 @@ $(document).ready(function(){
       })
     });
 
+//LOAD DEPARTMENT BOUNDARIES
+  $(document).ready(function(){
+    $.ajax(department).done(function(data) {
+      parsedData18 = JSON.parse(data);
+      console.log(parsedData18);
+      console.log("parsed18");
+      layerMappedPolygons = _.each(parsedData18,function(item){
+        L.geoJson(parsedData18,
+          {
+            style: {opacity:0.3,color:"#E1E1DB"},
+            pointToLayer: function (feature, latlngs) {
+              return new L.Polygon(latlngs, {
+
+              }
+            );
+          }}
+        ).addTo(map).bindPopup("departments");
+      }
+    );
+    });
+  });
 
 //4.2 LOADING SECONDARY ROAD NETWORK DATA
 $(document).ready(function(){
