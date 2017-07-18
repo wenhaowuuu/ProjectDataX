@@ -141,17 +141,24 @@ $('#satellite').click(function(){
   var municipality = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
   var municipality1 = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
 
-
+  // var hospital = "";
   var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
-  var roadsall = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infra_redvial_osm_2016_gt_2.geojson?token=AWa3umrkbZpL2VZXCIIaJkR15o-4Jo_Aks5ZdmxCwA%3D%3D";
+  // var roadsall = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infra_redvial_osm_2016_gt_2.geojson?token=AWa3umrkbZpL2VZXCIIaJkR15o-4Jo_Aks5ZdmxCwA%3D%3D";
 
   var majorroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/major_infra_redvial_osm_2016.geojson?token=AWa3uoVS2zMSU2MIwc0kLP3maAAJAesBks5Zdm5JwA%3D%3D";
+  var secondaryroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/Secondary_infra_redvial_osm_2016.geojson?token=AWa3ume5fwG9rH-l740D9NlioFIxbpV4ks5Zd0LWwA%3D%3D";
 
 
 
 // 2.2 VARIABLES
-  var layerMappedMarkers;
-  var layerMappedPolygons;
+  var PrimaryRoads;
+  var SecondaryRoads;
+  var Hospitals;
+  var Schools;
+
+
+  // var layerMappedMarkers;
+  // var layerMappedPolygons;
 
   var layerselected = [];
   var namelist = [];
@@ -169,113 +176,153 @@ $('#satellite').click(function(){
 
 
 
+  var fadeout = {
+    // 'color': '#0000ff',
+    // 'weight': 2,
+    // style: myStyle,
+    // 'color': '#DB7849',
+    'opacity': 0.05,
+  };
+
+  var highlight = {
+    'color': '#0000FF',
+    'weight': 2,
+    'opacity': 0.8,
+  };
 
 
 //3. FUNCTIONS
 // 3.1 WHEN THE LAYER IS CLICKED:
+var numberofClicks = 0;
   var eachFeatureFunction = function(layer) {
      layer.on('click', function (event) {
-       //UPDATE THE EXCEL TABLE INFO TO BE DOWNLOADED
-       // id="exceltitle"
-       $('#exceltitle').text(layer.feature.properties.m_name);
-       //ZOOM TO THE SELECTED MUNICIPALITY
-       map.fitBounds(layer.getBounds(),{
-                  padding: [100,100]
-                });
-       order = order + 1;
-       console.log(order);
+       //you can't really do this because the number of times clicked is not stored with the layer itself.
+       //come back to this later!
+       numberofClicks = numberofClicks + 1;
 
-     //PUSH INTO THE LAYER SELECTION GROUP
-     layerselected.push(layer);
-     console.log(layerselected);
-     namelist.push(layer.feature.properties.m_name);
-     console.log(namelist);
+       //Click odd number of times - loading the shape, while
+       //click even number of times - removing it.
 
-     _.each(namelist,function(name){
-       list = order + '.' + name;
-     })
+      //  if (numberofClicks % 2 == 0){
+      //    //1. change the selection style;
+      //    layer.setStyle(myStyle);
+      //    layer.setStyle(fadeout);
+      //    //2. remove it from the layer selection list
+      //    layerselected = layerselected.filter(function(item){
+      //      return item !== layer
+      //    })
+      //
+      //    //  arr = arr.filter(function(item) {
+      //    //    return item !== value
+      //    //  })
+      //
+      //    console.log(layerselected);
+      //
+      //    //3. remove the graph and text;
+      //    map.removeLayer(myChart);
+      //
+      //    //4. remove it from the excel;
+      //  }
+       //
+      //  else {
 
-     $('#selection').append(blank + blank + blank + list + " ");
+         //UPDATE THE EXCEL TABLE INFO TO BE DOWNLOADED
+         // id="exceltitle"
+         $('#exceltitle').text(layer.feature.properties.m_name);
+         //ZOOM TO THE SELECTED MUNICIPALITY
+         map.fitBounds(layer.getBounds(),{
+                    padding: [100,100]
+                  });
+         order = order + 1;
+         console.log(order);
 
-     // $('#selection').text(namelist);
+       //PUSH INTO THE LAYER SELECTION GROUP
+       layerselected.push(layer);
+       console.log(layerselected);
+       namelist.push(layer.feature.properties.m_name);
+       console.log(namelist);
 
-     // <div id="results" style="display: none;">
-    //  document.getElementById("results").style.display = "inline";
+       _.each(namelist,function(name){
+         list = order + '.' + name;
+       })
+
+       $('#selection').append(blank + blank + blank + list + " ");
+
+       // $('#selection').text(namelist);
+
+       // <div id="results" style="display: none;">
+      //  document.getElementById("results").style.display = "inline";
+         console.log(layer.feature);
+         $('#LENGTH').text(layer.feature.properties.m_name);
+         $('#POP').text(layer.feature.properties.d_name);
+         $('#30PCT').text(layer.feature.properties.gen_pov);
+         $('#60PCT').text(layer.feature.properties.id);
+         $('#90PCT').text(layer.feature.properties.year);
+
+         //HIGHLIGHT THE MAP CLICKED
+
+         layerMappedPolygons.setStyle(fadeout);
 
 
-     console.log(layer.feature);
-       $('#LENGTH').text(layer.feature.properties.m_name);
-       $('#POP').text(layer.feature.properties.d_name);
-       $('#30PCT').text(layer.feature.properties.gen_pov);
-       $('#60PCT').text(layer.feature.properties.id);
-       $('#90PCT').text(layer.feature.properties.year);
-
-       //HIGHLIGHT THE MAP CLICKED
-       var fadeout = {
-         // 'color': '#0000ff',
-         // 'weight': 2,
-         'opacity': 0.05,
-       };
-       layerMappedPolygons.setStyle(fadeout);
-
-       var highlight = {
-         'color': '#0000FF',
-         'weight': 2,
-         'opacity': 0.8,
-       };
-       layer.setStyle(highlight);
+         layer.setStyle(highlight);
 
 
-       //LINK DATA WITH THE GRAPH
-       if(myChart){
-         map.removeLayer(myChart);
-       }
-       else{
-         var ctx2 = document.getElementById("myChart2").getContext('2d');
-         var myChart = new Chart(ctx2, {
-             type: 'bar',
-             data: {
-                 labels: [layer.feature.properties.m_name, "Average", "UN"],
-                 datasets: [{
-                     label: 'Poverty',
-                     data: [layer.feature.properties.gen_pov, 50, 30],
-                     backgroundColor: [
-                         'rgba(255, 99, 132, 0.4)',
-                         'rgba(54, 162, 235, 0.4)',
-                         'rgba(255, 206, 86, 0.4)',
+         //LINK DATA WITH THE GRAPH
+         if(myChart){
+           map.removeLayer(myChart);
+         }
+         else{
+           var ctx2 = document.getElementById("myChart2").getContext('2d');
+           var myChart = new Chart(ctx2, {
+               type: 'bar',
+               data: {
+                   labels: [layer.feature.properties.m_name, "Average", "UN"],
+                   datasets: [{
+                       label: 'Poverty',
+                       data: [layer.feature.properties.gen_pov, 50, 30],
+                       backgroundColor: [
+                           'rgba(255, 99, 132, 0.4)',
+                           'rgba(54, 162, 235, 0.4)',
+                           'rgba(255, 206, 86, 0.4)',
 
-                     ],
-                     borderColor: [
-                         'rgba(255,99,132,1)',
-                         'rgba(54, 162, 235, 1)',
-                         'rgba(255, 206, 86, 1)',
-                     ],
-                     borderWidth: 1
-                 }]
-             },
-             options: {
-                 scales: {
-                     yAxes: [{
-                         ticks: {
-                             beginAtZero:true
-                             }
-                           }]
+                       ],
+                       borderColor: [
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255, 206, 86, 1)',
+                       ],
+                       borderWidth: 1
+                   }]
+               },
+               options: {
+                   scales: {
+                       yAxes: [{
+                           ticks: {
+                               beginAtZero:true
+                               }
+                             }]
+                           }
                          }
-                       }
-             });
-           }
-         }
-       )};
+               });
+             }
+      //  };
 
 
-       var myFilter = function(feature) {
-         if (feature.properties.gen_pov===' ') {
-         return false;
+
          }
-         else {
-           return true;
-         }
-       };
+
+
+   )};
+
+
+var myFilter = function(feature) {
+     if (feature.properties.gen_pov===' ') {
+     return false;
+     }
+     else {
+       return true;
+     }
+   };
 
 
 
@@ -322,6 +369,186 @@ var myChart1 = new Chart(ctx1, {
 
 // 4. LOADING REAL DATA
 // 4.1 LOADING SOUTH AMERICA DATA
+//SELECT THE LAYERS YOU WANT
+//
+
+
+// console.log(document.getElementById("infrastructure").checked);
+
+$("#roads1").change(function(){
+  if(this.checked){
+    console.log("roads1");
+    //LOAD THE PRIMARY ROAD NETWORKS
+    PrimaryRoads = _.each(parsedData14,function(item){
+      L.geoJson(parsedData14,
+        {
+          style: {opacity:0.8,width:1.5,color:'#F39C12'},
+          pointToLayer: function (feature, latlngs) {
+            return new L.polyline(latlngs, {
+            }
+          );
+        }}
+      ).addTo(map).bindPopup("road1");
+    }
+   );
+
+  }
+});
+
+
+$("#roads2").change(function(){
+  if(this.checked){
+    console.log("roads2");
+    //LOAD THE SECONDARY ROAD NETWORKS
+    SecondaryRoads = _.each(parsedData15,function(item){
+      L.geoJson(parsedData15,
+        {
+          style: {opacity:0.3,width:0.5,color:'#F9E79F'},
+          pointToLayer: function (feature, latlngs) {
+            return new L.polyline(latlngs, {
+            }
+          );
+        }}
+      ).addTo(map).bindPopup("road2");
+    }
+    );
+
+  }
+});
+
+
+$("#hospital").change(function(){
+  if(this.checked){
+    console.log("hospital1");
+    //LOAD THE HOSPITALS
+
+  }
+});
+
+
+//THE WHOLE SCHOOL DATA IS HUGE
+//YOU CAN LIMIT THE RENDERING ONLY TO THOSE SELECTED
+$("#school").change(function(){
+  if(this.checked){
+    // console.log("school1");
+
+    //LOAD THE HIGHSCHOOL NETWORKS
+    var schoolicon = L.icon({
+      iconUrl:'marker-icon.png',
+      iconSize:[15,24],
+      iconAnchor:[8,10],
+    })
+
+    console.log("schools are here");
+    console.log(parsedData16.features);
+    console.log(parsedData16.features[0]);
+    console.log(parsedData16.features[1]);
+    // console.log(parsedData16.features[1]);
+
+//DEFINE THE SELECTED LAYER
+var layershape = layerselected[0];
+    // var searchWithin = {
+    //   "type": "FeatureCollection",
+    //   "features": [
+    //     {
+    //       "type": "Feature",
+    //       "properties": {},
+    //       "geometry": {
+    //         "type": "Polygon",
+    //         "coordinates": [[
+    //           [-46.653,-23.543],
+    //           [-46.634,-23.5346],
+    //           [-46.613,-23.543],
+    //           [-46.614,-23.559],
+    //           [-46.631,-23.567],
+    //           [-46.653,-23.560],
+    //           [-46.653,-23.543]
+    //         ]]
+    //       }
+    //     }
+    //   ]
+    // };
+
+
+//DEFINE ALL THE HIGHSCHOOL DATA POINTS
+    var schoolpoints = _.each(parsedData16,function(item){
+      L.geoJson(parsedData16,
+        {
+          pointToLayer: function (feature, latlngs) {
+            return new L.marker(latlngs, {
+              icon:schoolicon// radius:10,
+              // color:yellow,
+              });
+            }
+        });
+    });
+
+    var ptsWithin = function(){
+      console.log("within");
+      return turf.within(schoolpoints, layershape);
+
+    };
+
+    ptsWithin().addTo(map);
+
+
+
+
+
+
+
+
+    Schools = _.each(parsedData16,function(item){
+      // console.log("schools are ready.");
+      // console.log(parsedData16);
+      // console.log(parsedData16.features[0]);
+
+      // SELECT THOSE ONLY WITHIN THE MUNICIPALITY
+      // if(item./// == layer.features.m_name){
+      //
+      //
+      // ]}
+
+
+      // L.geoJson(parsedData16,
+      //   {
+      //     pointToLayer: function (feature, latlngs) {
+      //       return new L.marker(latlngs, {
+      //         icon:schoolicon// radius:10,
+      //         // color:yellow,
+      //         });
+      //       }
+      //   }).addTo(map).bindPopup("High Schools");
+
+      }
+    );
+  }
+});
+
+
+//LOADING THE SCHOOL DATA
+// $(document).ready(function(){
+//   $.ajax(highschool).done(function(data) {
+//     parsedData12 = JSON.parse(data);
+//     console.log(parsedData12);
+//     console.log("parsed12");
+//     layerMappedPolygons = L.geoJson(parsedData12,
+//       {
+//         pointToLayer: function (feature, latlngs) {
+//           return new L.marker(latlngs, {
+//             icon:schoolicon// radius:10,
+//             // color:yellow,
+//             });
+//           }
+//       }).addTo(map).bindPopup("High Schools");
+//     });
+// });
+
+
+
+
+
+
 $(document).ready(function(){
   $.ajax(southamerica).done(function(data) {
     parsedData10 = JSON.parse(data);
@@ -393,7 +620,19 @@ $(document).ready(function(){
       })
     });
 
-//4.2 LOADING THE MAJOR ROAD NETWORK DATA
+
+//4.2 LOADING SECONDARY ROAD NETWORK DATA
+$(document).ready(function(){
+  $.ajax(secondaryroads).done(function(data) {
+    parsedData15 = JSON.parse(data);
+    console.log(parsedData15);
+    console.log("parsed15");
+    console.log(parsedData15.features[0].geometry.coordinates);
+    console.log(parsedData15.features[0].geometry.coordinates[0][0]);
+  });
+});
+
+//4.3 LOADING THE MAJOR ROAD NETWORK DATA
   $(document).ready(function(){
     $.ajax(majorroads).done(function(data) {
       parsedData14 = JSON.parse(data);
@@ -401,20 +640,22 @@ $(document).ready(function(){
       console.log("parsed14");
       console.log(parsedData14.features[0].geometry.coordinates);
       console.log(parsedData14.features[0].geometry.coordinates[0][0]);
-      layerMappedPolygons = _.each(parsedData10,function(item){
-        L.geoJson(parsedData14,
-          {
-            style: {opacity:0.8,width:2,},
-            pointToLayer: function (feature, latlngs) {
-              return new L.polyline(latlngs, {color:'red'
-              }
-            );
-          }}
-        ).addTo(map).bindPopup("road");
-      }
-     );
     });
   });
+
+//4.4 LOADING THE HIGHSCHOOL DATA
+  $(document).ready(function(){
+    $.ajax(highschool).done(function(data) {
+      parsedData16 = JSON.parse(data);
+      console.log(parsedData16);
+      console.log("parsed16");
+    });
+  });
+
+
+
+
+
 
 //4.3 EXPORT TABLE
 var tableToExcel = (function() {

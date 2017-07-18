@@ -113,9 +113,18 @@
             <br>
             <label for="dest">Layers include:</label>
             <br>
-            <input class="layers" type="checkbox" name="vehicle" value="Bike"><label class="layerlabel">Infrastructure</label><br>
-            <input class="layers" type="checkbox" name="vehicle" value="Bike"><label class="layerlabel">Hospitals</label><br>
-            <input class="layers" type="checkbox" name="vehicle" value="Bike"><label class="layerlabel">Schools</label><br>
+            <input id="roads1" class="layers" type="checkbox" name="vehicle" value="Bike">
+            <label class="layerlabel">Primary Roads</label><br>
+            <input id="roads2" class="layers" type="checkbox" name="vehicle" value="Bike">
+            <label class="layerlabel">Secondary Roads</label><br>
+            <input id="hospital" class="layers" type="checkbox" name="vehicle" value="Bike">
+            <label class="layerlabel">Hospitals</label><br>
+            <input id="school" class="layers" type="checkbox" name="vehicle" value="Bike">
+            <label class="layerlabel">Schools</label><br>
+            <!-- <br> -->
+            <button class="btn btn-default dropdown-toggle" type="button" id="showmap" data-toggle="dropdown" aria-haspopup="true">
+              Show Layers
+            </button>
           </div>
         </div>
 
