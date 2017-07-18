@@ -451,6 +451,10 @@ li{
   display:none;
 }
 
+#testPDF{
+  z-index:-20;
+  display:none;
+}
 
 /*//CHINESE GDP RATE*/
 /*#fill1{

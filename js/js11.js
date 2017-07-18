@@ -198,6 +198,7 @@ $('#satellite').click(function(){
 var numberofClicks = 0;
   var eachFeatureFunction = function(layer) {
      layer.on('click', function (event) {
+       //TO ADD THE RE-CLICK THEN DE-SELECT FUNCTION
        //you can't really do this because the number of times clicked is not stored with the layer itself.
        //come back to this later!
        numberofClicks = numberofClicks + 1;
@@ -227,9 +228,28 @@ var numberofClicks = 0;
        //
       //  else {
 
+
+
+
+
+
+
+
          //UPDATE THE EXCEL TABLE INFO TO BE DOWNLOADED
          // id="exceltitle"
          $('#exceltitle').text(layer.feature.properties.m_name);
+
+         //UPDATE THE PDF INFO TO BE DOWNLOADED
+        //  $('#exceltitle').text(layer.feature.properties.m_name);
+
+
+
+
+
+
+
+
+
          //ZOOM TO THE SELECTED MUNICIPALITY
          map.fitBounds(layer.getBounds(),{
                     padding: [100,100]
@@ -636,10 +656,10 @@ $(document).ready(function(){
 
 
 
-
-
 //THE WHOLE SCHOOL DATA IS HUGE
-//YOU CAN LIMIT THE RENDERING ONLY TO THOSE SELECTED
+//YOU CAN LIMIT THE RENDERING ONLY TO THOSE FALLING
+// WITIN THE SELECTED LAYERS
+
 // $("#school").change(function(){
 //   if(this.checked){
 //     // console.log("school1");
@@ -702,34 +722,6 @@ $(document).ready(function(){
 //     };
 //
 //     ptsWithin().addTo(map);
-
-
-
-//LOADING THE SCHOOL DATA
-// $(document).ready(function(){
-//   $.ajax(highschool).done(function(data) {
-//     parsedData12 = JSON.parse(data);
-//     console.log(parsedData12);
-//     console.log("parsed12");
-//     layerMappedPolygons = L.geoJson(parsedData12,
-//       {
-//         pointToLayer: function (feature, latlngs) {
-//           return new L.marker(latlngs, {
-//             icon:schoolicon// radius:10,
-//             // color:yellow,
-//             });
-//           }
-//       }).addTo(map).bindPopup("High Schools");
-//     });
-// });
-
-
-
-
-
-
-
-
 
 
 
@@ -798,3 +790,57 @@ var tableToExcel = (function() {
     window.location.href = uri + base64(format(template, ctx))
   }
 })()
+
+//USE MIT OPEN LICENSE TO EANABLE PDF DOWNLOAD FUNCTION
+// https://jsfiddle.net/pdfjs/9engc9mw/?utm_source=website&utm_medium=embed&utm_campaign=9engc9mw
+// https://codepen.io/SitePoint/pen/rxPNpG
+
+
+var PDFvalue = $('#PDFheading').text();
+console.log(PDFvalue);
+
+
+var tableToPDF = function(){
+  console.log("PDF starts");
+  var doc = new jsPDF();
+  doc.text(20, 20, 'Infrastructure Efficiency Profile of' + PDFheading);
+  doc.save('test.pdf');
+
+  // doc.setFont("courier");
+  // doc.setFontType("normal");
+  // doc.text(20, 30, 'This is courier normal.');
+  //
+  // doc.setFont("times");
+  // doc.setFontType("italic");
+  // doc.text(20, 40, 'This is times italic.');
+  //
+  // doc.setFont("helvetica");
+  // doc.setFontType("bold");
+  // doc.text(20, 50, 'This is helvetica bold.');
+  //
+  // doc.setFont("courier");
+  // doc.setFontType("bolditalic");
+  // doc.text(20, 60, 'This is courier bolditalic.');
+  //
+  // doc.setFont("times");
+  // doc.setFontType("normal");
+  // doc.text(105, 80, 'This is centred text.', null, null, 'center');
+  // doc.text(105, 90, 'And a little bit more underneath it.', null, null, 'center');
+  // doc.text(200, 100, 'This is right aligned text', null, null, 'right');
+  // doc.text(200, 110, 'And some more', null, null, 'right');
+  // doc.text(20, 120, 'Back to left');
+  //
+  // doc.text(20, 140, '10 degrees rotated', null, 10);
+  // doc.text(20, 160, '-10 degrees rotated', null, -10);
+
+  console.log("PDF ready");
+};
+
+
+
+
+
+// var tableToPDF = (function(){
+//
+//
+// })
