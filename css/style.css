@@ -24,6 +24,11 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
     z-index:100;
 }*/
 
+.main-heading{
+  position:relative;
+  left:10px;
+}
+
 .sidebar {
     position: absolute;
     left: 340px;
@@ -45,12 +50,12 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 .layers{
   position:relative;
   top:6px;
-  left:15px;
+  left:10px;
 }
 
 .layerlabel{
   position:relative;
-  left:18px;
+  left:20px;
   top:3px;
   font-weight:normal;
 }
@@ -176,6 +181,7 @@ div.intro p {
 .storylink{
   position:relative;
   top:30px;
+  left:10px;
   font-family:inherit;
   font-weight: bold;
   font-size:14px;
@@ -289,6 +295,7 @@ canvas {
   -ms-user-select: none;
 }
 
+
 #chartjs-tooltip {
   opacity: 1;
   position: absolute;
@@ -324,7 +331,7 @@ canvas {
 #header_text{
   position:relative;
   top:5px;
-  left:5px;
+  left:10px;
   color:#ffffff;
   font-weight:normal;
   font-family:sans-serif;
@@ -345,7 +352,7 @@ canvas {
 #sidebar-heading{
   position:relative;
   top:5px;
-  left:0;
+  left:5px;;
   color:#f07f30;
   font-weight:normal;
   font-family:inherit;
@@ -395,6 +402,13 @@ li{
   /*position:absolute;*/
   /*right:30px;
   bottom:20px;*/
+  margin:10px;
+  z-index: 60;
+}
+
+#hidemap{
+  position:relative;
+  left:5px;
   margin:10px;
   z-index: 60;
 }
@@ -491,7 +505,7 @@ li{
 #image{
   position:relative;
   border:6px solid #f07f30;
-  left:0;
+  left:3px;
   width:385px;
   top:10px;
   bottom: 10px;

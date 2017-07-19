@@ -172,7 +172,13 @@ $('#satellite').click(function(){
 
 
 
+
 // 2.2 VARIABLES
+  var SalVardoB;
+  var HondurasB;
+  var GuatemalaB;
+  var DepartmentsB;
+
   var PrimaryRoads;
   var SecondaryRoads;
   var Hospitals;
@@ -494,18 +500,18 @@ $(document).ready(function(){
     // console.log(parsedData10);
     console.log("parsed21");
     console.log(parsedData21.features[0].properties.country);
-    layerMappedPolygons = _.each(parsedData21,function(item){
-      L.geoJson(parsedData21,
-        {
-          style: {opacity:0.4},
-          pointToLayer: function (feature, latlngs) {
-            return new L.Polygon(latlngs, {
-            }
-          );
-        }}
-      ).addTo(map).bindPopup("text");
-    }
-  );
+  //   layerMappedPolygons = _.each(parsedData21,function(item){
+  //     L.geoJson(parsedData21,
+  //       {
+  //         style: {opacity:0.4},
+  //         pointToLayer: function (feature, latlngs) {
+  //           return new L.Polygon(latlngs, {
+  //           }
+  //         );
+  //       }}
+  //     ).addTo(map).bindPopup("text");
+  //   }
+  // );
   });
 });
 
@@ -515,18 +521,18 @@ $(document).ready(function(){
     parsedData22 = JSON.parse(data);
     console.log("parsed22");
     console.log(parsedData22.features[0].properties.country);
-    layerMappedPolygons = _.each(parsedData22,function(item){
-      L.geoJson(parsedData22,
-        {
-          style: {opacity:0.4},
-          pointToLayer: function (feature, latlngs) {
-            return new L.Polygon(latlngs, {
-            }
-          );
-        }}
-      ).addTo(map).bindPopup("text");
-    }
-  );
+  //   layerMappedPolygons = _.each(parsedData22,function(item){
+  //     L.geoJson(parsedData22,
+  //       {
+  //         style: {opacity:0.4},
+  //         pointToLayer: function (feature, latlngs) {
+  //           return new L.Polygon(latlngs, {
+  //           }
+  //         );
+  //       }}
+  //     ).addTo(map).bindPopup("text");
+  //   }
+  // );
   });
 });
 
@@ -536,22 +542,46 @@ $(document).ready(function(){
     parsedData23 = JSON.parse(data);
     console.log("parsed23");
     console.log(parsedData23.features[0].properties.country);
-    layerMappedPolygons = _.each(parsedData23,function(item){
-      L.geoJson(parsedData23,
-        {
-          style: {opacity:0.4},
-          pointToLayer: function (feature, latlngs) {
-            return new L.Polygon(latlngs, {
-            }
-          );
-        }}
-      ).addTo(map).bindPopup("text");
-    }
-  );
+  //   layerMappedPolygons = _.each(parsedData23,function(item){
+  //     L.geoJson(parsedData23,
+  //       {
+  //         style: {opacity:0.4},
+  //         pointToLayer: function (feature, latlngs) {
+  //           return new L.Polygon(latlngs, {
+  //           }
+  //         );
+  //       }}
+  //     ).addTo(map).bindPopup("text");
+  //   }
+  // );
   });
 });
 
 
+
+
+
+//LOAD DEPARTMENT BOUNDARIES
+  $(document).ready(function(){
+    $.ajax(department).done(function(data) {
+      parsedData18 = JSON.parse(data);
+      console.log(parsedData18);
+      console.log("parsed18");
+    //   layerMappedPolygons = _.each(parsedData18,function(item){
+    //     L.geoJson(parsedData18,
+    //       {
+    //         style: {opacity:0.3,color:"#E1E1DB"},
+    //         pointToLayer: function (feature, latlngs) {
+    //           return new L.Polygon(latlngs, {
+    //
+    //           }
+    //         );
+    //       }}
+    //     ).addTo(map).bindPopup("departments");
+    //   }
+    // );
+    });
+  });
 
 
 
@@ -561,7 +591,22 @@ $(document).ready(function(){
 // console.log(document.getElementById("infrastructure").checked);
 //ADD THE LAYERS TO THE MAP
 var selectedmaps = [];
-var x1, x2, x3, x4;
+var y0, y1, x1, x2, x3, x4;
+
+$('#nation').change(function(){
+  if(this.checked){
+    y0 = true;
+  }
+});
+
+$('#department').change(function(){
+  if(this.checked){
+    y1 = true;
+  }
+});
+
+
+
 
 $('#roads1').change(function(){
   if(this.checked){
@@ -590,6 +635,75 @@ $('#school').change(function(){
 
 $('#showmap').click(function(){
   console.log(x1,x2,x3,x4);
+  //LOAD NATIONAL BOUNDARIES
+  if (y0 == true){
+    GuatemalaB = _.each(parsedData21,function(item){
+        L.geoJson(parsedData21,
+          {
+            style: {opacity:0.4},
+            pointToLayer: function (feature, latlngs) {
+              return new L.Polygon(latlngs, {
+              }
+            );
+          }}
+        ).addTo(map).bindPopup("Guatemala");
+      }
+    );
+
+
+    SalvadorB = _.each(parsedData22,function(item){
+      L.geoJson(parsedData22,
+        {
+          style: {opacity:0.4},
+          pointToLayer: function (feature, latlngs) {
+            return new L.Polygon(latlngs, {
+            }
+          );
+        }}
+      ).addTo(map).bindPopup("El Salvador");
+    }
+  );
+
+
+    HondurasB = _.each(parsedData23,function(item){
+      L.geoJson(parsedData23,
+        {
+          style: {opacity:0.4},
+          pointToLayer: function (feature, latlngs) {
+            return new L.Polygon(latlngs, {
+            }
+          );
+        }}
+      ).addTo(map).bindPopup("Honduras");
+    }
+  );
+
+}
+
+
+
+
+
+  //LOAD DEPARTMENTAL BOUNDARIES
+  if (y1 == true){
+    DepartmentsB = _.each(parsedData18,function(item){
+        L.geoJson(parsedData18,
+          {
+            style: {opacity:0.3,color:"#E1E1DB"},
+            pointToLayer: function (feature, latlngs) {
+              return new L.Polygon(latlngs, {
+
+              }
+            );
+          }}
+        ).addTo(map).bindPopup("departments");
+      }
+    );
+
+  }
+
+
+
   //LOAD PRIMARY ROAD NETWORK
     if (x1 == true){
       PrimaryRoads = _.each(parsedData14,function(item){
@@ -720,28 +834,6 @@ $(document).ready(function(){
   });
 });
 
-
-//LOAD DEPARTMENT BOUNDARIES
-  $(document).ready(function(){
-    $.ajax(department).done(function(data) {
-      parsedData18 = JSON.parse(data);
-      console.log(parsedData18);
-      console.log("parsed18");
-      layerMappedPolygons = _.each(parsedData18,function(item){
-        L.geoJson(parsedData18,
-          {
-            style: {opacity:0.3,color:"#E1E1DB"},
-            pointToLayer: function (feature, latlngs) {
-              return new L.Polygon(latlngs, {
-
-              }
-            );
-          }}
-        ).addTo(map).bindPopup("departments");
-      }
-    );
-    });
-  });
 
 //4.2 LOADING SECONDARY ROAD NETWORK DATA
 $(document).ready(function(){
@@ -1009,8 +1101,8 @@ var tableToPDF = function(){
   doc.setFont("times");
   doc.setFontType("italic");
   doc.setFontSize(12);
-  doc.text(10, 286, '* This data was obtained from ');
-  doc.text(10, 290, '' + P_source);
+  doc.text(5, 286, '* This data was obtained from ');
+  doc.text(5, 290, '' + P_source);
 
 
   // doc.setFont("helvetica");
