@@ -296,7 +296,7 @@ var numberofClicks = 0;
 
          //ZOOM TO THE SELECTED MUNICIPALITY
          map.fitBounds(layer.getBounds(),{
-                    padding: [100,100]
+                    padding: [80,80]
                   });
          order = order + 1;
          console.log(order);
@@ -346,9 +346,9 @@ var numberofClicks = 0;
                        label: 'Poverty',
                        data: [layer.feature.properties.gen_pov, 50, 30],
                        backgroundColor: [
-                           'rgba(255, 99, 132, 0.4)',
-                           'rgba(54, 162, 235, 0.4)',
-                           'rgba(255, 206, 86, 0.4)',
+                           'rgba(255, 99, 132, 0.5)',
+                           'rgba(54, 162, 235, 0.5)',
+                           'rgba(255, 206, 86, 0.5)',
 
                        ],
                        borderColor: [
@@ -383,11 +383,11 @@ var numberofClicks = 0;
                  labels: ["Accessibility", "Economy", "Sustainability", "Resiliency", "Vulnerabilty", "Connectivity"],
                  datasets: [{
                    label: P_muni,
-                   backgroundColor: "rgba(255,120,35,0.4)",
-                   data: [65, 75, 70, 80, 60, 80]
+                   backgroundColor: "rgba(255,120,35,0.5)",
+                   data: [65, 75, 70, 80, 55, 80]
                  }, {
                    label: "Regional Average",
-                   backgroundColor: "rgba(50,120,230,0.4)",
+                   backgroundColor: "rgba(50,120,230,0.5)",
                    data: [54, 65, 60, 70, 70, 75]
                  }]
                };
