@@ -205,6 +205,18 @@ $('#satellite').click(function(){
   };
 
 
+
+//set PDF variables
+var P_country = ' ';
+var P_department = ' ';
+var P_muni = ' ';
+var P_pov = ' ';
+var P_id = ' ';
+var P_year = ' ';
+var P_source = ' ';
+
+
+
 //3. FUNCTIONS
 // 3.1 WHEN THE LAYER IS CLICKED:
 var numberofClicks = 0;
@@ -252,6 +264,14 @@ var numberofClicks = 0;
          $('#X_PovertyRate').text(layer.feature.properties.gen_pov);
         //  $('#X_department').text(layer.feature.properties.d_name);
          //UPDATE THE PDF INFO TO BE DOWNLOADED
+         P_country = layer.feature.properties.country;
+         P_department = layer.feature.properties.d_name;
+         P_muni = layer.feature.properties.m_name;
+         P_pov = layer.feature.properties.gen_pov;
+         P_id = layer.feature.properties.id;
+         P_year = layer.feature.properties.year;
+         P_source = layer.feature.properties.source;
+
         //  $('#exceltitle').text(layer.feature.properties.m_name);
 
 
@@ -825,53 +845,106 @@ var tableToExcel = (function() {
 // GENERATE A MAP IN THE DOWNLOADABLE PDF REPORT
 // https://stackoverflow.com/questions/35447928/dynamically-create-image-map-via-javascript
 
+//REALLY GOOD REFERENCE
+// https://mrrio.github.io/
+
+
 var PDFvalue = $('#PDFheading').text();
 console.log(PDFvalue);
+
+// P_country = layer.feature.properties.country;
+// P_department = layer.feature.properties.d_name;
+// P_muni = layer.feature.properties.m_name;
+// P_pov = layer.feature.properties.gen_pov;
+// P_id = layer.feature.properties.id;
+// P_year = layer.feature.properties.year;
+
 
 
 var tableToPDF = function(){
   console.log("PDF starts");
   var doc = new jsPDF();
 
-  doc.text(20, 20, 'Infrastructure Efficiency Profile of' + PDFheading);
+  //GEOADAPTIVE COPYRIGHT
+  doc.setFontSize(10);
+  doc.setFontType("light");
+  doc.setFont("inherit");
+  doc.text(10, 5, 'DataXLat @ Geoadaptive LLC')
+  //DIVIDING LINE
+  doc.setLineWidth(1);
+  doc.setDrawColor(255,140,40);
+  doc.line(0, 8, 240, 8);
+
+  doc.setFont("times");
+  doc.setFontSize(20);
+  doc.setFontType("bold");
+  doc.text(10, 20, 'Infrastructure Efficiency Profile of ');
+  doc.setTextColor(255,140,40);
+  doc.text(120, 20, ' ' + P_muni);
+  // doc.text(20, 30, '     ');
 
   //INTRO
-  doc.setFont("courier");
+  doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(20, 30, 'In this COUNTRY, in the department of DEPARTMENT,');
-  doc.text(20, 40, 'this City of CITY is selected.');
+  doc.setFontSize(16);
+  doc.setTextColor(0,0,0);
+  doc.text(10, 40, 'Following is a brief summary of infrastructure efficiency condition in ');
+  doc.text(10, 46, '' + P_muni + ', department of ' + P_department + ', in ' + P_country + '.');
+  // doc.text(10, 50, 'this City of ' + P_muni + ' is selected.');
 
 
 
   //SOCIAL ECONOMIC INFO
   doc.setFont("georgia");
-  // doc.setFontType("italic");
-  doc.text(20, 60, 'This municipality has a poverty rate of 12%.');
+  doc.setFontType("bold");
+  doc.text(10, 70, '1) SOCIAL-ECONOMIC');
+  doc.setFont("times");
+  doc.setFontType("normal");
+  doc.text(10, 80, P_muni + ' has a poverty rate of ' + P_pov + '%.');
 
   //TRANSPORTATION
   doc.setFont("georgia");
-  doc.text(20, 80, 'Total Length of Road: ' + '1000 km');
-  doc.text(20, 90, 'Road Density (area/roads km): ' + '1000 km');
-  doc.text(20, 100, 'Typology Split (rural/urban): ' + '1000 km');
-  doc.text(20, 110, 'Typology split (km x major/secondary/tertiary): ' + '1000 km');
-  doc.text(20, 120, 'Road Efficiency (% population within 30 minutes of road): ' + '1000 km');
+  doc.setFontType("bold");
+  doc.text(10, 100, '2) TRANSPORTATION');
+  doc.setFont("times");
+  doc.setFontType("normal");
+  doc.text(10, 110, 'Total Length of Road: ' + '1000 km');
+  doc.text(10, 120, 'Road Density (area/roads km): ' + '1000 km');
+  doc.text(10, 130, 'Typology Split (rural/urban): ' + '1000 km');
+  doc.text(10, 140, 'Typology split (km x major/secondary/tertiary): ' + '1000 km');
+  doc.text(10, 150, 'Road Efficiency (% population within 30 minutes of road): ' + '1000 km');
 
 
   //UTILITY
   doc.setFont("georgia");
-  doc.text(20, 140, 'Sanitation (% of coverage): ' + '1000 km');
-  doc.text(20, 150, 'Electricity (% of coverage): ' + '1000 km');
-  doc.text(20, 160, 'Water (% of coverage): ' + '1000 km');
-  doc.text(20, 170, 'Basic Needs Unsatisfied (% of coverage): ' + '50%');
+  doc.setFontType("bold");
+  doc.text(10, 170, '3) UTILITY');
+  doc.setFont("times");
+  doc.setFontType("normal");
+  doc.text(10, 180, 'Sanitation (% of coverage): ' + '1000 km');
+  doc.text(10, 190, 'Electricity (% of coverage): ' + '1000 km');
+  doc.text(10, 200, 'Water (% of coverage): ' + '1000 km');
+  doc.text(10, 210, 'Basic Needs Unsatisfied (% of coverage): ' + '50%');
 
 
   //EDUCATION
   doc.setFont("georgia");
-  doc.text(20, 190, 'Literacy Rate: ' + '75%');
+  doc.setFontType("bold");
+  doc.text(10, 230, '4) EDUCATION');
+  doc.setFont("times");
+  doc.setFontType("normal");
+  doc.text(10, 240, 'Literacy Rate: ' + '75%');
 
   //OTHER NOTES
   doc.setFont("georgia");
-  doc.text(20, 210, 'Notes: ' + 'things to keep in mind');
+  doc.text(10, 260, 'Notes: ' + 'things to keep in mind');
+
+  //OTHER NOTES
+  doc.setFont("times");
+  doc.setFontType("italic");
+  doc.setFontSize(12);
+  doc.text(10, 286, '* This data was obtained from ');
+  doc.text(10, 290, '' + P_source);
 
 
   // doc.setFont("helvetica");
@@ -892,7 +965,6 @@ var tableToPDF = function(){
   //
   // doc.text(20, 140, '10 degrees rotated', null, 10);
   // doc.text(20, 160, '-10 degrees rotated', null, -10);
-
   doc.save('test.pdf');
   console.log("PDF ready");
 };
