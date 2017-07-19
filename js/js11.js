@@ -687,7 +687,7 @@ $('#showmap').click(function(){
     GuatemalaB = _.each(parsedData21,function(item){
         L.geoJson(parsedData21,
           {
-            style: {opacity:0.4},
+            style: {opacity:0.2},
             pointToLayer: function (feature, latlngs) {
               return new L.Polygon(latlngs, {
               }
@@ -701,7 +701,7 @@ $('#showmap').click(function(){
     SalvadorB = _.each(parsedData22,function(item){
       L.geoJson(parsedData22,
         {
-          style: {opacity:0.4},
+          style: {opacity:0.2},
           pointToLayer: function (feature, latlngs) {
             return new L.Polygon(latlngs, {
             }
@@ -715,7 +715,7 @@ $('#showmap').click(function(){
     HondurasB = _.each(parsedData23,function(item){
       L.geoJson(parsedData23,
         {
-          style: {opacity:0.4},
+          style: {opacity:0.2},
           pointToLayer: function (feature, latlngs) {
             return new L.Polygon(latlngs, {
             }
@@ -736,7 +736,7 @@ $('#showmap').click(function(){
     DepartmentsB = _.each(parsedData18,function(item){
         L.geoJson(parsedData18,
           {
-            style: {opacity:0.3,color:"#E1E1DB"},
+            style: {opacity:0.2,color:"#E1E1DB"},
             pointToLayer: function (feature, latlngs) {
               return new L.Polygon(latlngs, {
 
@@ -756,7 +756,7 @@ $('#showmap').click(function(){
       PrimaryRoads = _.each(parsedData14,function(item){
         L.geoJson(parsedData14,
           {
-            style: {opacity:0.8,width:1.5,color:'#F39C12'},
+            style: {opacity:0.6,width:1.5,color:'#F39C12'},
             pointToLayer: function (feature, latlngs) {
               return new L.polyline(latlngs, {
               }
@@ -794,7 +794,7 @@ $('#showmap').click(function(){
               {
                 pointToLayer: function (feature, latlngs) {
                   return new L.circleMarker(latlngs, {
-                     radius:5,
+                     radius:3,
                      fillColor:'#41D0EA',
                      color:'#2365D8',
                      weight:1,
@@ -818,7 +818,7 @@ $('#showmap').click(function(){
               //  style: {opacity:0.3,width:0.5,color:'#E5EF12'},
                pointToLayer: function (feature, latlngs) {
                  return new L.circleMarker(latlngs, {
-                    radius:6,
+                    radius:4,
                     fillColor:'#E5EF12',
                     color:'#EBA430',
                     weight:1,
