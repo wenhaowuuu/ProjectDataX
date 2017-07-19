@@ -841,6 +841,8 @@ var tableToPDF = function(){
   doc.text(20, 30, 'In this COUNTRY, in the department of DEPARTMENT,');
   doc.text(20, 40, 'this City of CITY is selected.');
 
+
+
   //SOCIAL ECONOMIC INFO
   doc.setFont("georgia");
   // doc.setFontType("italic");
