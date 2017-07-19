@@ -15,6 +15,18 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.pn
 }).addTo(map);
 
 
+var schoolicon = L.icon({
+      iconUrl:'marker-icon.png',
+      iconSize:[15,24],
+      iconAnchor:[8,10],
+    });
+
+var schoolicon = L.icon({
+      iconUrl:'marker-icon.png',
+      iconSize:[8,10],
+      iconAnchor:[5,7],
+    });
+
 
 //1.2 SWITCH BASEMAPS
 $('#dark').click(function(){
@@ -198,6 +210,7 @@ $('#satellite').click(function(){
 var numberofClicks = 0;
   var eachFeatureFunction = function(layer) {
      layer.on('click', function (event) {
+       console.log(layer.feature.properties);
        //TO ADD THE RE-CLICK THEN DE-SELECT FUNCTION
        //you can't really do this because the number of times clicked is not stored with the layer itself.
        //come back to this later!
@@ -229,16 +242,15 @@ var numberofClicks = 0;
       //  else {
 
 
-
-
-
-
-
-
          //UPDATE THE EXCEL TABLE INFO TO BE DOWNLOADED
          // id="exceltitle"
          $('#exceltitle').text(layer.feature.properties.m_name);
-
+         $('#X_ID').text(layer.feature.properties.id);
+         $('#X_country').text(layer.feature.properties.country);
+         $('#X_department').text(layer.feature.properties.d_name);
+         $('#X_municipality').text(layer.feature.properties.m_name);
+         $('#X_PovertyRate').text(layer.feature.properties.gen_pov);
+        //  $('#X_department').text(layer.feature.properties.d_name);
          //UPDATE THE PDF INFO TO BE DOWNLOADED
         //  $('#exceltitle').text(layer.feature.properties.m_name);
 
@@ -529,48 +541,82 @@ $('#showmap').click(function(){
     // else {};
 
     if (x3 == true){
-      //LOAD THE HIGH SCHOOL DATA
-         Schools = _.each(parsedData16,function(item){
+      //LOAD THE HEALTH CENTERS DATA
+         Hospitals = _.each(parsedData16,function(item){
             L.geoJson(parsedData16,
               {
                 pointToLayer: function (feature, latlngs) {
-                  return new L.marker(latlngs, {
-                    icon:schoolicon// radius:10,
-                      // color:yellow,
+                  return new L.circleMarker(latlngs, {
+                     radius:5,
+                     fillColor:'#41D0EA',
+                     color:'#2365D8',
+                     weight:1,
+                     opacity:0.3,
+                     fillOpacity:0.3,
                     });
                   }
-              }).addTo(map).bindPopup("High Schools");
+              }).addTo(map).bindPopup("Hospitals");
             }
           );
-          selectedmaps.push(Schools);
+          selectedmaps.push(Hospitals);
       }
       // else {};
 
+      // var circle = L.circleMarker().addTo(map);
+
+//
+// var geojsonMarkerOptions = {
+//     radius: 8,
+//     fillColor: "#ff7800",
+//     color: "#000",
+//     weight: 1,
+//     opacity: 1,
+//     fillOpacity: 0.8
+// };
+
+
       if (x4 == true){
-        //LOAD HOSPITAL DATA
-        Hospitals = _.each(parsedData17,function(item){
+        //LOAD THE SCHOOL DATA
+        Schools = _.each(parsedData17,function(item){
            L.geoJson(parsedData17,
              {
-               style: {opacity:0.3,width:0.5,color:'#4DAC58'},
+              //  style: {opacity:0.3,width:0.5,color:'#E5EF12'},
                pointToLayer: function (feature, latlngs) {
-                 return new L.marker(latlngs, {
-                   icon:schoolicon// radius:10,
-                     // color:yellow,
+                 return new L.circleMarker(latlngs, {
+                    radius:6,
+                    fillColor:'#E5EF12',
+                    color:'#EBA430',
+                    weight:1,
+                    opacity:0.3,
+                    fillOpacity:0.3,
                    });
                  }
-             }).addTo(map).bindPopup("Hospitals");
+             }).addTo(map).bindPopup("Schools");
            }
          );
          selectedmaps.push(Schools);
       }
       // else {};
+
 });
 
 
 //DOWNLOAD DATA OF DIFFERENT LAYERS
-//LOAD HEALTH CENTERS
+//LOAD THE HOSPITAL DATA
+// var healthcenter = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/healthcenters_segeplan_2010.geojson?token=AWa3uu4HC5P_wTYFCaksa2u2C8t4hRV5ks5Zd5GcwA%3D%3D";
+// var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
+
+  $(document).ready(function(){
+    $.ajax(healthcenter).done(function(data) {
+      parsedData16 = JSON.parse(data);
+      console.log(parsedData16);
+      console.log("parsed16");
+    });
+  });
+
+//LOAD HIGHSCHOOLS
 $(document).ready(function(){
-  $.ajax(healthcenter).done(function(data) {
+  $.ajax(highschool).done(function(data) {
     parsedData17 = JSON.parse(data);
     console.log(parsedData17);
     console.log("parsed17");
@@ -645,14 +691,7 @@ $(document).ready(function(){
     });
   });
 
-//4.4 LOADING THE HIGHSCHOOL DATA
-  $(document).ready(function(){
-    $.ajax(highschool).done(function(data) {
-      parsedData16 = JSON.parse(data);
-      console.log(parsedData16);
-      console.log("parsed16");
-    });
-  });
+
 
 
 
@@ -795,6 +834,8 @@ var tableToExcel = (function() {
 // https://jsfiddle.net/pdfjs/9engc9mw/?utm_source=website&utm_medium=embed&utm_campaign=9engc9mw
 // https://codepen.io/SitePoint/pen/rxPNpG
 
+// GENERATE A MAP IN THE DOWNLOADABLE PDF REPORT
+// https://stackoverflow.com/questions/35447928/dynamically-create-image-map-via-javascript
 
 var PDFvalue = $('#PDFheading').text();
 console.log(PDFvalue);
