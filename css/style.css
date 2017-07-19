@@ -94,7 +94,7 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 
 div.description{
   position:absolute;
-  top:700px;
+  bottom:40px;
   right:20px;
   width:300px;
   background-color: rgba(171, 150, 150, .4);

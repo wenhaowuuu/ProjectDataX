@@ -493,6 +493,9 @@ var myFilter = function(feature) {
 
 
 // 4. LOADING REAL DATA
+//ZOOM TO SELECTED LOCATIONS
+//ANOTHER METHOD HERE: http://learn.jquery.com/using-jquery-core/faq/how-do-i-get-the-text-value-of-a-selected-option/
+
 var changeBasemap1 = function(location1){
   var value1 = location1.value;
   console.log(value1);
