@@ -562,18 +562,6 @@ $('#showmap').click(function(){
       }
       // else {};
 
-      // var circle = L.circleMarker().addTo(map);
-
-//
-// var geojsonMarkerOptions = {
-//     radius: 8,
-//     fillColor: "#ff7800",
-//     color: "#000",
-//     weight: 1,
-//     opacity: 1,
-//     fillOpacity: 0.8
-// };
-
 
       if (x4 == true){
         //LOAD THE SCHOOL DATA
@@ -844,17 +832,46 @@ console.log(PDFvalue);
 var tableToPDF = function(){
   console.log("PDF starts");
   var doc = new jsPDF();
-  doc.text(20, 20, 'Infrastructure Efficiency Profile of' + PDFheading);
-  doc.save('test.pdf');
 
-  // doc.setFont("courier");
-  // doc.setFontType("normal");
-  // doc.text(20, 30, 'This is courier normal.');
-  //
-  // doc.setFont("times");
+  doc.text(20, 20, 'Infrastructure Efficiency Profile of' + PDFheading);
+
+  //INTRO
+  doc.setFont("courier");
+  doc.setFontType("normal");
+  doc.text(20, 30, 'In this COUNTRY, in the department of DEPARTMENT,');
+  doc.text(20, 40, 'this City of CITY is selected.');
+
+  //SOCIAL ECONOMIC INFO
+  doc.setFont("georgia");
   // doc.setFontType("italic");
-  // doc.text(20, 40, 'This is times italic.');
-  //
+  doc.text(20, 60, 'This municipality has a poverty rate of 12%.');
+
+  //TRANSPORTATION
+  doc.setFont("georgia");
+  doc.text(20, 80, 'Total Length of Road: ' + '1000 km');
+  doc.text(20, 90, 'Road Density (area/roads km): ' + '1000 km');
+  doc.text(20, 100, 'Typology Split (rural/urban): ' + '1000 km');
+  doc.text(20, 110, 'Typology split (km x major/secondary/tertiary): ' + '1000 km');
+  doc.text(20, 120, 'Road Efficiency (% population within 30 minutes of road): ' + '1000 km');
+
+
+  //UTILITY
+  doc.setFont("georgia");
+  doc.text(20, 140, 'Sanitation (% of coverage): ' + '1000 km');
+  doc.text(20, 150, 'Electricity (% of coverage): ' + '1000 km');
+  doc.text(20, 160, 'Water (% of coverage): ' + '1000 km');
+  doc.text(20, 170, 'Basic Needs Unsatisfied (% of coverage): ' + '50%');
+
+
+  //EDUCATION
+  doc.setFont("georgia");
+  doc.text(20, 190, 'Literacy Rate: ' + '75%');
+
+  //OTHER NOTES
+  doc.setFont("georgia");
+  doc.text(20, 210, 'Notes: ' + 'things to keep in mind');
+
+
   // doc.setFont("helvetica");
   // doc.setFontType("bold");
   // doc.text(20, 50, 'This is helvetica bold.');
@@ -874,6 +891,7 @@ var tableToPDF = function(){
   // doc.text(20, 140, '10 degrees rotated', null, 10);
   // doc.text(20, 160, '-10 degrees rotated', null, -10);
 
+  doc.save('test.pdf');
   console.log("PDF ready");
 };
 
