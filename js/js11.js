@@ -198,10 +198,22 @@ $('#satellite').click(function(){
     'opacity': 0.05,
   };
 
+  // var highlight = {
+  //   'color': '#0000FF',
+  //   'weight': 2,
+  //   'opacity': 0.8,
+  // };
+
   var highlight = {
-    'color': '#0000FF',
-    'weight': 2,
-    'opacity': 0.8,
+    // 'border-style': 'dotted',
+    // 'border-width': '5px',
+    // 'border-color': 'rgba(255, 255, 0, 0.9)',
+    // 'weight': 2,
+    // 'borderColor': 'yellow',
+    // 'border': '5px solid yellow',
+    'color':'#416FEA',
+    'opacity': 0.2,
+
   };
 
 
@@ -324,7 +336,7 @@ var numberofClicks = 0;
          if(myChart){
            map.removeLayer(myChart);
          }
-         else{
+         else {
            var ctx2 = document.getElementById("myChart2").getContext('2d');
            var myChart = new Chart(ctx2, {
                type: 'bar',
@@ -358,9 +370,37 @@ var numberofClicks = 0;
                          }
                });
              }
+
+
+             //LOAD THE RADAR CHART
+             if (radarChart){
+               map.removeLayer(radarChart);
+             }
+             else {
+               var marksCanvas = document.getElementById("myChart1");
+
+               var marksData = {
+                 labels: ["Accessibility", "Economy", "Sustainability", "Resiliency", "Vulnerabilty", "Connectivity"],
+                 datasets: [{
+                   label: P_muni,
+                   backgroundColor: "rgba(255,120,35,0.4)",
+                   data: [65, 75, 70, 80, 60, 80]
+                 }, {
+                   label: "Regional Average",
+                   backgroundColor: "rgba(50,120,230,0.4)",
+                   data: [54, 65, 60, 70, 70, 75]
+                 }]
+               };
+
+               var radarChart = new Chart(marksCanvas, {
+                 type: 'radar',
+                 data: marksData
+               });
+             }
+
+
+
       //  };
-
-
 
          }
 
@@ -380,43 +420,69 @@ var myFilter = function(feature) {
 
 
 // 3.2 LOADING CHARTS
-var ctx1 = document.getElementById("myChart1").getContext('2d');
-var myChart1 = new Chart(ctx1, {
-    type: 'bar',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: 'ROSE MAP SCORE',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.4)',
-                'rgba(54, 162, 235, 0.4)',
-                'rgba(255, 206, 86, 0.4)',
-                'rgba(75, 192, 192, 0.4)',
-                'rgba(153, 102, 255, 0.4)',
-                'rgba(255, 159, 64, 0.4)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
+//CREATE RADAR CHART
+// var marksCanvas = document.getElementById("myChart1");
+//
+// var marksData = {
+//   labels: ["English", "Maths", "Physics", "Chemistry", "Biology", "History"],
+//   datasets: [{
+//     label: "P_muni",
+//     backgroundColor: "rgba(255,50,20,0.4)",
+//     data: [65, 75, 70, 80, 60, 80]
+//   }, {
+//     label: "Regional Average",
+//     backgroundColor: "rgba(0,0,250,0.4)",
+//     data: [54, 65, 60, 70, 70, 75]
+//   }]
+// };
+//
+// var radarChart = new Chart(marksCanvas, {
+//   type: 'radar',
+//   data: marksData
+// });
+
+
+
+
+
+//PLACEHOLDER:
+// var ctx1 = document.getElementById("myChart1").getContext('2d');
+// var myChart1 = new Chart(ctx1, {
+//     type: 'bar',
+//     data: {
+//         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+//         datasets: [{
+//             label: 'ROSE MAP SCORE',
+//             data: [12, 19, 3, 5, 2, 3],
+//             backgroundColor: [
+//                 'rgba(255, 99, 132, 0.4)',
+//                 'rgba(54, 162, 235, 0.4)',
+//                 'rgba(255, 206, 86, 0.4)',
+//                 'rgba(75, 192, 192, 0.4)',
+//                 'rgba(153, 102, 255, 0.4)',
+//                 'rgba(255, 159, 64, 0.4)'
+//             ],
+//             borderColor: [
+//                 'rgba(255,99,132,1)',
+//                 'rgba(54, 162, 235, 1)',
+//                 'rgba(255, 206, 86, 1)',
+//                 'rgba(75, 192, 192, 1)',
+//                 'rgba(153, 102, 255, 1)',
+//                 'rgba(255, 159, 64, 1)'
+//             ],
+//             borderWidth: 1
+//         }]
+//     },
+//     options: {
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero:true
+//                 }
+//             }]
+//         }
+//     }
+// });
 
 
 

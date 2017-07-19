@@ -210,6 +210,10 @@ button.link { background:none;border:none; }
   }
 
 
+.X_colhead{
+  /*width:4px;*/
+  background-color: #000000;
+  }
 
 
 .cartodb-mobile div.cartodb-timeslider .slider-wrapper {
@@ -274,6 +278,8 @@ button.link { background:none;border:none; }
 	-o-border-radius:0;
 	border-radius:0
 }
+
+
 
 
 /*ALL IDS*/
