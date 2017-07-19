@@ -493,6 +493,53 @@ var myFilter = function(feature) {
 
 
 // 4. LOADING REAL DATA
+var changeBasemap1 = function(location1){
+  var value1 = location1.value;
+  console.log(value1);
+  if(value1 == 'Guatemala'){
+      map.setView([15.372844, -90.544976],8);
+  }
+  if(value1 == 'Honduras'){
+      map.setView([14.811574, -86.953985],8);
+  }
+  if(value1 == 'El Salvador'){
+      map.setView([13.650275, -88.850540],8);
+  }
+};
+
+
+
+var changeBasemap2 = function(location2){
+  var value2 = location2.value;
+  console.log(value2);
+  if(value2 == 'Peten'){
+      map.setView([16.936401, -90.036336],9);
+  }
+  if(value2 == 'Guatemala'){
+      map.setView([14.643792, -90.467986],9);
+  }
+  if(value2 == 'Alta Verapaz'){
+      map.setView([15.649419, -90.143057],9);
+  }
+};
+
+
+
+var changeBasemap3 = function(location3){
+  var value3 = location3.value;
+  console.log(value3);
+  if(value3 == 'La Libertad'){
+      map.setView([16.849479, -90.426450],10);
+  }
+  if(value3 == 'Guatemala'){
+      map.setView([14.629168, -90.519007],10);
+  }
+  if(value3 == 'Coban'){
+      map.setView([15.466670, -90.383285],10);
+  }
+};
+
+
 //4.0 LOADING THREE NATIONS BOUNDARY
 $(document).ready(function(){
   $.ajax(Guatemala).done(function(data) {

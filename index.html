@@ -149,24 +149,27 @@
         <div class="search" style="display:inline-block;position:relative;left:10px;">
           <div style="display:inline-block;">
             <div class="option" class="leaflet-bar">
-              <select name="basemaps" id="basemaps" onChange="changeBasemap(basemaps)">
-                <option value="Topographic">Guatemala</option>
-                <option value="Streets">Honduras</option>
-                <option value="NationalGeographic">El Salvador</option>
+              <select name="basemaps" id="location1" onChange="changeBasemap1(this)">
+                <option value="">Country</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Honduras">Honduras</option>
+                <option value="El Salvador">El Salvador</option>
                 <!-- <option value="Oceans">Country 4</option>
                 <option value="Oceans1">Country 5</option> -->
               </select>
-              <select name="basemaps" id="basemaps" onChange="changeBasemap(basemaps)">
-                <option value="Streets">Petén</option>
-                <option value="Topographic">Guatemala</option>
-                <option value="NationalGeographic">Alta Verapaz</option>
+              <select name="basemaps" id="location2" onChange="changeBasemap2(this)">
+                <option value="">Department</option>
+                <option value="Peten">Peten</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Alta Verapaz">Alta Verapaz</option>
                 <!-- <option value="Oceans">Department D</option>
                 <option value="Oceans1">Department E</option> -->
               </select>
-              <select name="basemaps" id="basemaps" onChange="changeBasemap(basemaps)">
-                <option value="Streets">La Libertad</option>
-                <option value="Topographic">Guatemala</option>
-                <option value="NationalGeographic">Cobán</option>
+              <select name="basemaps" id="location3" onChange="changeBasemap3(this)">
+                <option value="">Municipality</option>
+                <option value="La Libertad">La Libertad</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Cobán">Cobán</option>
                 <!-- <option value="Oceans">Municipal D</option>
                 <option value="Oceans1">Municipal E</option> -->
               </select>
