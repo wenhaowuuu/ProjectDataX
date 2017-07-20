@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- FOR PREVIEWING THE WEBSITE -->
+    <!-- http://rawgit.com/ -->
+<!-- read the reference in ESRI maps -->
+<!-- https://github.com/Esri/esri-leaflet/blob/master/README.md#demos -->
+
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
+    integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
+    crossorigin=""/>
+
+    <input id ="download2" type="button" value="Export to Excel">
+    <table id ="testTable" summary="Infrastructure Efficiency Profile." rules="groups" frame="hsides" border="2">
+      <caption>PROFILE FOR MUNICIPALITY <p style="background-color: #f07f30; color: #ffffff; font-weight: bold;" id="exceltitle"></p></caption>
+      <caption>DataXLat @ GeoAdaptive LLC</caption>
+      <!-- <colgroup align="center"></colgroup> -->
+      <!-- <colgroup align="left"></colgroup> -->
+      <!-- <colgroup span="2" align="center"></colgroup> -->
+      <!-- <colgroup span="3" align="center"></colgroup> -->
+      <thead valign="top">
+        <tr>
+          <th>ID</th>
+          <th>Country</th>
+          <th>Department</th>
+          <th>Municipality</th>
+          <!-- <th style="background-color: #D0F3B4; color: #000000" border="1">Social-Economy<br>Poverty Rate: % of population living in poverty</th>
+          <th style="background-color: #F7BA61; color: #000000" border="1">Transportation<br>Total Length of Roads (km)</th>
+          <th style="background-color: #F7BA61; color: #000000" border="1">Transportation<br>Road Density (area/roads km)</th>
+          <th style="background-color: #F7BA61; color: #000000" border="1">Transportation<br>Typology split: Rural / Urban</th>
+          <th style="background-color: #F7BA61; color: #000000" border="1">Transportation<br>Typology split: km x mayor, secondary, tertiary</th>
+          <th style="background-color: #F7BA61; color: #000000" border="1">Transportation<br>Road efficiency (% population within 30 minutes of road)</th>
+          <th style="background-color: #70D4F9; color: #000000" border="1">Utility<br>Sanitation: % of coverage</th>
+          <th style="background-color: #70D4F9; color: #000000" border="1">Utility<br>Electricity: % of coverage</th>
+          <th style="background-color: #70D4F9; color: #000000" border="1">Utility<br>Water: % of coverage</th>
+          <th style="background-color: #70D4F9; color: #000000" border="1">Utility<br>Basic Needs Unsatisfied:</th>
+          <th style="background-color: #4F87F8; color: #000000" border="1">Other<br>Notes:</th>
+           -->
+          <th class = "X_colhead" border="1">Social-Economy<br>Poverty Rate: % of population living in poverty</th>
+          <th class = "X_colhead" border="1">Transportation<br>Total Length of Roads (km)</th>
+          <th class = "X_colhead" border="1">Transportation<br>Road Density (area/roads km)</th>
+          <th class = "X_colhead" border="1">Transportation<br>Typology split: Rural / Urban</th>
+          <th class = "X_colhead" border="1">Transportation<br>Typology split: km x mayor, secondary, tertiary</th>
+          <th class = "X_colhead" border="1">Transportation<br>Road efficiency (% population within 30 minutes of road)</th>
+          <th class = "X_colhead" border="1">Utility<br>Sanitation: % of coverage</th>
+          <th class = "X_colhead" border="1">Utility<br>Electricity: % of coverage</th>
+          <th class = "X_colhead" border="1">Utility<br>Water: % of coverage</th>
+          <th class = "X_colhead" border="1">Utility<br>Basic Needs Unsatisfied:</th>
+          <th class = "X_colhead" border="1">Other<br>Notes:</th>
+        </tr>
+      </thead>
+           <tbody>
+             <tr>
+               <td id = "X_ID">0001</td>
+               <td id = "X_country">Honduras</td>
+               <td id = "X_department">Peten</td>
+               <td id = "X_municipality">Quito</td>
+               <td id = "X_PovertyRate">12%</td>
+               <td id = "X_rdlength">3671</td>
+               <td id = "X_rddensity">200</td>
+               <td id = "X_typologysplit1">6:4</td>
+               <td id = "X_typologysplit2">1:3:6</td>
+               <td id = "X_rdefficiency">35</td>
+               <td id = "X_sanitation">73</td>
+               <td id = "X_Electricity">85</td>
+               <td id = "X_Water">90</td>
+               <td id = "X_BasicNeeds">24</td>
+               <td id = "X_Notes">something to consider</td>
+             </tr>
+
+<!--
+            <tbody><tr><td>1200</td>
+             <td>Unicode (BMP of ISO/IEC-10646)</td>
+             <td></td><td></td><td>X</td><td>X</td><td>*</td></tr><tr><td>1250</td>
+               <td style="font-weight: bold">Windows 3.1 Eastern European</td>
+                 <td>X</td><td></td><td>X</td><td>X</td><td>X</td></tr><tr><td>1251</td>
+                 <td>Windows 3.1 Cyrillic</td><td>X</td><td></td><td>X</td><td>X</td><td>X</td></tr><tr><td>1252</td><td>Windows 3.1 US (ANSI)</td>
+                   <td>X</td><td></td><td>X</td><td>X</td><td>X</td></tr>
+                   <tr><td>1253</td><td>Windows 3.1 Greek</td><td>X</td><td></td><td>X</td><td>X</td><td>X</td></tr>
+                   <tr><td>1254</td><td>Windows 3.1 Turkish</td><td>X</td><td></td><td>X</td><td>X</td><td>X</td></tr>
+                   <tr><td>1255</td><td>Hebrew</td><td>X</td><td></td><td></td><td></td><td>X</td></tr>
+                   <tr><td>1256</td><td>Arabic</td><td>X</td><td></td><td></td><td></td><td>X</td></tr>
+                   <tr><td>1257</td><td>Baltic</td><td>X</td><td></td><td></td><td></td><td>X</td></tr>
+                   <tr><td>1361</td><td>Korean (Johab)</td><td>X</td><td></td><td></td><td>**</td><td>X</td></tr>
+             </tbody>
+             <tbody>
+               <tr><td>437</td><td>MS-DOS United States</td><td></td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+               <tr><td>708</td><td>Arabic (ASMO 708)</td><td></td><td>X</td><td></td><td></td><td>X</td></tr>
+               <tr><td>709</td><td>Arabic (ASMO 449+, BCON V4)</td><td></td><td>X</td><td></td><td></td><td>X</td></tr>
+               <tr><td>710</td><td>Arabic (Transparent Arabic)</td><td></td><td>X</td><td></td><td></td><td>X</td></tr>
+               <tr><td>720</td><td>Arabic (Transparent ASMO)</td><td></td><td>X</td><td></td><td></td><td>X</td></tr>
+             </tbody> -->
+      </table>
+
+
+
+      <!-- //PDF BASIC FRAMEWORK -->
+      <div id = "testPDF">
+        <h1 id = "PDFheading">The PDF Heading </h1>
+          <h2 class = "title">The Title </h2>
+            <h3 class = "subtitle"> The Subtitle </h3>
+              <p class = "text">the description </p>
+            <h3 class = "subtitle"> The Subtitle </h3>
+              <p class = "text">the description </p>
+      </div>
+
+
+          <meta charset='utf-8' />
+          <title></title>
+          <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+          <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+          <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
+          <style>
+              body { margin:0; padding:0; }
+              #map0 { position:absolute; left:400px; right:0; top:30px; bottom:0; }
+          </style>
+
+
+
+  </head>
+  <body>
+    <div id='map0'></div>
+    <!-- <div id="map2" style="position: absolute; right:0; left: 400px; top: 30px; height:100%; z-index:20;"></div> -->
+
+<!--
+    <button class="btn btn-default dropdown-toggle" type="button" id="ARCGIS" data-toggle="dropdown" aria-haspopup="true">
+      ARCGIS-ONLINE
+    </button> -->
+
+
+    <!--Left Panel-->
+    <div id = "header">
+      <p id = "header_text"><strong>GEOADAPTIVE &nbsp; </strong></p>
+    </div>
+
+    <div style="display: block; over-flow:auto; position: absolute; left: 4px; width: 400px; top: 30px; data-bottom="false" z-index:50;">
+        <h1 class = "main-heading"><strong>INFRASTRUCTURE EFFICIENCY </strong> in <br><strong id = "color"> North Traingle </strong></h1>
+
+            <img id = "image" src="https://anypy.imgix.net/destination/guatemala-city-guatemala/Guatemala.City-8.jpg">
+
+            <br>
+
+        <br>
+        <br>
+        <label id="selectionlabel" for="dest" style="position:relative; left:10px;">Look for a Municipality</label>
+        <br>
+        <div class="search" style="display:inline-block;position:relative;left:10px;">
+          <div style="display:inline-block;">
+            <div class="option" class="leaflet-bar">
+              <select name="basemaps" id="location1" onChange="changeBasemap1(this)">
+                <option value="">Country</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Honduras">Honduras</option>
+                <option value="El Salvador">El Salvador</option>
+                <!-- <option value="Oceans">Country 4</option>
+                <option value="Oceans1">Country 5</option> -->
+              </select>
+              <select name="basemaps" id="location2" onChange="changeBasemap2(this)">
+                <option value="">Department</option>
+                <option value="Peten">Peten</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Alta Verapaz">Alta Verapaz</option>
+                <!-- <option value="Oceans">Department D</option>
+                <option value="Oceans1">Department E</option> -->
+              </select>
+              <select name="basemaps" id="location3" onChange="changeBasemap3(this)">
+                <option value="">Municipality</option>
+                <option value="La Libertad">La Libertad</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Coban">Coban</option>
+                <!-- <option value="Oceans">Municipal D</option>
+                <option value="Oceans1">Municipal E</option> -->
+              </select>
+            </div>
+            <br>
+            <label for="dest">Layers include:</label>
+            <br>
+            <input id="nation" class="layers" type="checkbox" name="vehicle" value="Bike">
+            <label class="layerlabel">National Boundary</label><br>
+            <input id="department" class="layers" type="checkbox" name="vehicle" value="Bike">
+            <label class="layerlabel">Departmental Boundary</label><br>
+
+
+            <input id="roads1" class="layers" type="checkbox" name="vehicle" value="Bike">
+            <label class="layerlabel">Primary Roads</label><br>
+            <input id="roads2" class="layers" type="checkbox" name="vehicle" value="Bike">
+            <label class="layerlabel">Secondary Roads</label><br>
+            <input id="hospital" class="layers" type="checkbox" name="vehicle" value="Bike">
+            <label class="layerlabel">Hospitals</label><br>
+            <input id="school" class="layers" type="checkbox" name="vehicle" value="Bike">
+            <label class="layerlabel">Schools</label><br>
+            <!-- <br> -->
+            <button class="btn btn-default dropdown-toggle" type="button" id="showmap" data-toggle="dropdown" aria-haspopup="true">
+              Show Layers
+            </button>
+            <button class="btn btn-default dropdown-toggle" type="button" id="hidemap" data-toggle="dropdown" aria-haspopup="true">
+              Remove All Layers
+            </button>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:5px;width:390px;top:510px;">
+          <div id="results" style="display: none;">
+
+            <h5 id = "selection"></h5>
+            <h2 id = "sidebar-heading"><span id="LENGTH">City Name</span></h2>
+            <p class="annotation">
+              <span class="glyphicon glyphicon glyphicon-star"></span>
+              Road Indicators:
+              The Municipality of <span id="LENGTH"><strong>City Name </strong></span> is located in the
+              <span id="POP"><strong> department name </strong></span> department.
+              <br>
+              <br>
+              <span class="glyphicon glyphicon glyphicon-star"></span>
+              Population Indicators:
+              <span id="30PCT"><strong>gen_pov</strong></span> % of its population live in poverty.
+              <br>
+              <br>
+              <span class="glyphicon glyphicon glyphicon-star"></span>
+              Access to Institutions:
+              Its dataset's ID is <span id="60PCT"><strong>ID</strong></span> and the data was collected in year
+              <span id="90PCT"><strong></strong></span>.
+            </p>
+
+          </div>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div style = "position:absolute;left:5px;width:390px;top:850px;">
+            <p class = storylink> About the DATA SOURCE &nbsp;
+               <a href="http://geoadaptive.com/home/practices/dataxlat/"target="_blank">
+                 <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+               </a>
+            </p>
+            <!-- <p> There are over 10 cities in China with population over 10,000,000 in 2017. -->
+        </div>
+    </div>
+    <div id="map" style="position: absolute; right:0; left: 400px; top: 30px; height:100%; z-index:10;"></div>
+      <div class="dropdown1">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Change BaseMaps
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li id = "dark"><a href="#">Dark</a></li>
+              <li id = "light"><a href="#">Light</a></li>
+              <li id = "satellite"><a href="#">Satellite</a></li>
+          </ul>
+      </div>
+      <div class="hint">
+        <p> Hint*: Click the boundaries to read statistics.</p>
+      </div>
+
+        <br>
+        <br>
+      <div class="dropdown2">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Change Scale
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <!-- <li id = "global"><a href="#">Global</a></li> -->
+              <li id = "Global"><a href="#">Global</a></li>
+              <li id = "Regional"><a href="#">Regional</a></li>
+              <li id = "AOI"><a href="#">AOI</a></li>
+          </ul>
+      </div>
+      <div class="chartsarea">
+        <!-- <canvas class="charts" id="myChart0" width="300" height="300"></canvas>
+        <br> -->
+        <canvas class="charts" id="myChart1" width="300" height="300"></canvas>
+        <br>
+        <canvas class="charts" id="myChart2" width="300" height="200"></canvas>
+        <!-- <canvas class="charts" id="myChart3" width="300" height="200"></canvas> -->
+      </div>
+      <div class="description">
+
+
+
+        <p>This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. <br><br><strong>Please select a municipality first for downloadable PDF and EXCEL table. </strong></p>
+
+        <!-- <button type="submit" onclick="window.open('file.doc')">Download!</button> -->
+
+        <button class="btn btn-default dropdown-toggle" type="button" id="download1" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+          Download PDF
+        </button>
+        <button class="btn btn-default dropdown-toggle" type="button" id="download2" onclick="tableToExcel('testTable', 'Infrastructure Efficiency Profile')" value="Export to Excel" data-toggle="dropdown" aria-haspopup="true">
+          Download EXCEL
+        </button>
+        <br>
+      </div>
+
+
+      <div class="legend">
+          <h5>Poverty Rates of Municipalities</h5>
+          <div>
+            <div class = label1 id = fill1></div><p class = label1> < 10%</p>
+          </div>
+          <div>
+            <div class = label1 id = fill2></div><p class = label1>10% - 30%</p>
+          </div>
+          <div>
+            <div class = label1 id = fill3></div><p class = label1>30% - 50%</p>
+          </div>
+          <div>
+            <div class = label1 id = fill4></div><p class = label1>50% - 75%</p>
+          </div>
+          <div>
+            <div class = label1 id = fill5></div><p class = label1> > 75%</p>
+          </div>
+      </div>
+
+      <!-- A click on  -->
+      <!-- Javascript Imports -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+      <!-- <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+      <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet-src.js"
+      integrity="sha384-TWB9xRHTlLQmqAngHwD7usGcf4akGf0JP6aHwlgilpmOu2UuBq5aWLsDAh39iSn1"
+      crossorigin=""></script>
+      <script
+          src="https://code.jquery.com/jquery-2.2.4.min.js"
+          integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+          crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+
+      <script>
+        // var bbox = turf.bbox(features);
+      </script>
+      <!-- <script src="js/MidTerm-setup.js"></script> -->
+      <!-- <script src="bootstrap.js"></script> -->
+      <script src="js/js11.js"></script>
+      <!-- Copyright (c) 2010-2016 James Hall, https://github.com/MrRio/jsPDF -->
+
+
+  </body>
+</html>
