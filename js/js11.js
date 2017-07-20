@@ -1,4 +1,5 @@
 //AS OF JULY 20TH, THE UPDATE HERE
+//the migration is complete.
 // TARGET: TO LEARN THE OSMNX TOOLBOX
 // AUTOMATICALLY IDENTIFY AND GENERATE STREET NETWORK
 // http://geoffboeing.com/
