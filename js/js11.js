@@ -239,6 +239,10 @@ $('#satellite').click(function(){
   var municipality = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
   var municipality1 = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson";
 
+  //THE CLEANED DATASET
+  var muni_clean = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/nt_muni_joined_clean.geojson";
+
+
   var healthcenter = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/healthcenters_segeplan_2010.geojson?token=AWa3uu4HC5P_wTYFCaksa2u2C8t4hRV5ks5Zd5GcwA%3D%3D";
   var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
   // var roadsall = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infra_redvial_osm_2016_gt_2.geojson?token=AWa3umrkbZpL2VZXCIIaJkR15o-4Jo_Aks5ZdmxCwA%3D%3D";
@@ -276,8 +280,32 @@ $('#satellite').click(function(){
   var parsedData4;
   var filterFunction;
 
+  //DEFINE THE IE SCORING FACTORS FOR THE RADAR CHART
+  var RD_1ST;
+  var RD_2ND;
+  var RD_3RD;
 
 
+
+  //1. TOTAL LENGTH
+  var RD_LENGTH;
+  //2. DENSITY
+  var RD_DENSITY;
+  //3. URBAN ROAD LENGTH
+  var RD_URBAN;
+
+  //4. RURAL ROAD LENGTH
+  var RD_RURAL;
+
+  //5. SECONDARY RD PER 1ST RD
+  var RD_2ND_1ST = RD_2ND / RD_1ST;
+
+  //6. TERTIARY RD PER 1ST RD
+  var RD_3RD_1ST = RD_3RD / RD_1ST;
+
+
+
+  //DEFINE THE FADING AND HIGHLIGHTING EFFECT WHEN CLICKED ON LAYERS
   var fadeout = {
     'opacity': 0.05,
   };
@@ -1157,6 +1185,43 @@ $(document).ready(function(){
       })
     });
 
+
+
+$('#MUNI').click(function(){
+  $(document).ready(function(){
+    $.ajax(muni_clean).done(function(data) {
+      parsedData00 = JSON.parse(data);
+      console.log(parsedData00);
+      console.log("parsed00");
+      layerMappedPolygons = L.geoJson(parsedData00,
+        {
+          style: {opacity:0.4,width:0.5,color:'#EFC00F'},
+          pointToLayer: function (feature, latlng) {
+            return new L.Polygon(latlng, {
+            });
+          },
+
+          onEachFeature: function(feature,layer){
+              // layer.bindPopup(
+              //   "<b>Municipality Name: </b>" +
+              //   feature.properties.m_name +
+              //   "</br>" +
+              //   "<b>Poverty Rate: </b>" +
+              //   feature.properties.gen_pov +
+              //   "</br>" +
+              //   "<b>Department Name: </b>" +
+              //   feature.properties.d_name +
+              //   "</br>" +
+              //   "<b>Data Collected Year: </b>" +
+              //   feature.properties.year
+              // )
+            }
+          }).addTo(map);
+          layerMappedPolygons.eachLayer(eachFeatureFunction);
+        })
+      });
+
+})
 
 // $(document).ready(function(){
 //   $.ajax(municipality1).done(function(data) {
