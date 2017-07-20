@@ -339,6 +339,17 @@ var P_id = ' ';
 var P_year = ' ';
 var P_source = ' ';
 
+var P_length = ' ';
+var P_density = ' ';
+var P_rd_urban = ' ';
+var P_rd_rural = ' ';
+var P_rd_1 = ' ';
+var P_rd_2 = ' ';
+var P_rd_3 = ' ';
+
+var P_rd_21 = ' ';
+var P_rd_31 = ' ';
+
 
 
 //3. FUNCTIONS
@@ -395,6 +406,17 @@ var numberofClicks = 0;
          P_id = layer.feature.properties.id;
          P_year = layer.feature.properties.year;
          P_source = layer.feature.properties.source;
+
+         P_length = layer.feature.properties.rd_length;
+         P_density = layer.feature.properties.rd_density;
+         P_rd_urban = layer.feature.properties.rd_urban;
+         P_rd_rural = layer.feature.properties.rd_rural;
+         P_rd_1 = layer.feature.properties.rd_major;
+         P_rd_2 = layer.feature.properties.rd_second;
+         P_rd_3 = layer.feature.properties.rd_tertiar;
+         P_rd_21 = layer.feature.properties.rd_second / layer.feature.properties.rd_major;
+         P_rd_31 = layer.feature.properties.rd_tertiar / layer.feature.properties.rd_major;
+
 
         //  $('#exceltitle').text(layer.feature.properties.m_name);
 
@@ -1202,6 +1224,47 @@ $('#MUNI').click(function(){
           },
 
           onEachFeature: function(feature,layer){
+
+            layer.bindPopup(
+              "<b>Department Name: </b>" +
+              feature.properties.d_name +
+              "</br>" +
+              "<b>Municipality Name: </b>" +
+              feature.properties.m_name +
+              "</br>" +
+              "<b>Total Road Length: </b>" +
+              feature.properties.rd_length + " km" +
+              "</br>" +
+
+              "<b>Road Density: </b>" +
+              feature.properties.rd_density + " per square km" +
+              "</br>" +
+
+              "<b>Road Length in Urban Area: </b>" +
+              feature.properties.rd_urban + " km" +
+              "</br>" +
+
+              "<b>Road Length in Rural Area: </b>" +
+              feature.properties.rd_rural + " km" +
+              "</br>" +
+
+              "<b>Major Road: </b>" +
+              feature.properties.rd_major + " km" +
+              "</br>" +
+
+              "<b>Secondary Road: </b>" +
+              feature.properties.rd_second + " km" +
+              "</br>" +
+
+              "<b>Tertiary Road: </b>" +
+              feature.properties.rd_tertiar + " km" +
+              "</br>" +
+
+              "</br>" +
+              "<b>Data Collected Year: </b>" +
+              feature.properties.year
+            )
+
               // layer.bindPopup(
               //   "<b>Municipality Name: </b>" +
               //   feature.properties.m_name +
@@ -1298,6 +1361,9 @@ console.log(PDFvalue);
 
 
 
+
+
+
 var tableToPDF = function(){
   console.log("PDF starts");
   var doc = new jsPDF();
@@ -1339,49 +1405,57 @@ var tableToPDF = function(){
   doc.setFontType("normal");
   doc.text(10, 80, P_muni + ' has a poverty rate of ' + P_pov + '%.');
 
+
+
   //TRANSPORTATION
   doc.setFont("georgia");
   doc.setFontType("bold");
   doc.text(10, 100, '2) TRANSPORTATION');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 110, 'Total Length of Road: ' + '1000 km');
-  doc.text(10, 120, 'Road Density (area/roads km): ' + '1000 km');
-  doc.text(10, 130, 'Typology Split (rural/urban): ' + '1000 km');
-  doc.text(10, 140, 'Typology split (km x major/secondary/tertiary): ' + '1000 km');
-  doc.text(10, 150, 'Road Efficiency (% population within 30 minutes of road): ' + '1000 km');
+  doc.text(10, 110, 'Total Length of Road: ' + P_length + ' km');
+  doc.text(10, 120, 'Road Density: ' + P_density + ' km per square km');
+  doc.text(10, 130, 'Road in Urban Area: ' + P_rd_urban + ' km');
+  doc.text(10, 140, 'Road in Rural Area: ' + P_rd_rural + ' km');
+  doc.text(10, 150, 'Major Road: ' + P_rd_1 + ' km');
+  doc.text(10, 160, 'Secondary Road: ' + P_rd_2 + ' km');
+  doc.text(10, 170, 'Tertiary Road: ' + P_rd_3 + ' km');
+
+
+  // doc.text(10, 150, 'Typology split (km x major/secondary/tertiary): ' + '1000 km');
+  doc.text(10, 180, 'Road Efficiency (% population within 30 minutes of road): ' + '1000 km');
 
 
   //UTILITY
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 170, '3) UTILITY');
+  doc.text(10, 200, '3) UTILITY');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 180, 'Sanitation (% of coverage): ' + '1000 km');
-  doc.text(10, 190, 'Electricity (% of coverage): ' + '1000 km');
-  doc.text(10, 200, 'Water (% of coverage): ' + '1000 km');
-  doc.text(10, 210, 'Basic Needs Unsatisfied (% of coverage): ' + '50%');
+  doc.text(10, 210, 'Sanitation (% of coverage): ' + '1000 km');
+  doc.text(10, 220, 'Electricity (% of coverage): ' + '1000 km');
+  doc.text(10, 230, 'Water (% of coverage): ' + '1000 km');
+  doc.text(10, 240, 'Basic Needs Unsatisfied (% of coverage): ' + '50%');
 
 
   //EDUCATION
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 230, '4) EDUCATION');
+  doc.text(10, 260, '4) EDUCATION');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 240, 'Literacy Rate: ' + '75%');
+  doc.text(10, 270, 'Literacy Rate: ' + '75%');
 
   //OTHER NOTES
   doc.setFont("georgia");
-  doc.text(10, 260, 'Notes: ' + 'things to keep in mind');
+  doc.text(10, 290, 'Notes: ' + 'things to keep in mind');
 
   //OTHER NOTES
   doc.setFont("times");
   doc.setFontType("italic");
   doc.setFontSize(12);
-  doc.text(5, 286, '* This data was obtained from ');
-  doc.text(5, 290, '' + P_source);
+  doc.text(5, 306, '* This data was obtained from ');
+  doc.text(5, 310, '' + P_source);
 
 
   // doc.setFont("helvetica");
