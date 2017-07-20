@@ -765,7 +765,7 @@ $(document).ready(function(){
 // console.log(document.getElementById("infrastructure").checked);
 //ADD THE LAYERS TO THE MAP
 var selectedmaps = [];
-var y0, y1, x1, x2, x3, x4;
+var y0, y1, y2, x1, x2, x3, x4;
 
 $('#nation').change(function(){
   if(this.checked){
@@ -784,6 +784,16 @@ $('#department').change(function(){
   }
   if(!this.checked){
     y1 = false;
+  }
+});
+
+
+$('#municipality').change(function(){
+  if(this.checked){
+    y2 = true;
+  }
+  if(!this.checked){
+    y2 = false;
   }
 });
 
@@ -870,7 +880,7 @@ $('#showmap').click(function(){
 }
 
 
-  //LOAD DEPARTMENTAL BOUNDARIES
+//LOAD DEPARTMENTAL BOUNDARIES
   if (y1 == true){
     _.each(parsedData18,function(item){
         var itemB = L.geoJson(parsedData18,
@@ -891,6 +901,27 @@ $('#showmap').click(function(){
 
   }
 
+
+  // //LOAD THE MUNICIPALITY LAYER
+  // if (y2 == true){
+  //   _.each(parsedData00,function(item){
+  //       var itemB = L.geoJson(parsedData00,
+  //         {
+  //           style: {opacity:0.2,color:"#E1E1DB"},
+  //           pointToLayer: function (feature, latlngs) {
+  //             return new L.Polygon(latlngs, {
+  //
+  //             }
+  //           );
+  //         }}
+  //       ).addTo(map).bindPopup("departments");
+  //
+  //       DepartmentsB.push(itemB);
+  //
+  //     }
+  //   );
+  //
+  // }
 
 
   //LOAD PRIMARY ROAD NETWORK
@@ -1006,11 +1037,11 @@ $('#hidemap').click(function(){
     map.removeLayer(layer);
   });
 
-  _.each(Hospitals,function(){
+  _.each(Hospitals,function(layer){
     map.removeLayer(layer);
   });
 
-  _.each(Schools,function(){
+  _.each(Schools,function(layer){
     map.removeLayer(layer);
   });
 
@@ -1174,38 +1205,40 @@ var myStyle = function(feature){
 };
 
 
-$(document).ready(function(){
-  $.ajax(municipality1).done(function(data) {
-    parsedData13 = JSON.parse(data);
-    console.log(parsedData13);
-    console.log("parsed13");
-    layerMappedPolygons = L.geoJson(parsedData13,
-      {
-        style: {opacity:0.4,width:0.5,color:'#EFC4AF'},
-        pointToLayer: function (feature, latlng) {
-          return new L.Polygon(latlng, {
-          });
-        },
-
-        onEachFeature: function(feature,layer){
-            layer.bindPopup(
-              "<b>Municipality Name: </b>" +
-              feature.properties.m_name +
-              "</br>" +
-              "<b>Poverty Rate: </b>" +
-              feature.properties.gen_pov +
-              "</br>" +
-              "<b>Department Name: </b>" +
-              feature.properties.d_name +
-              "</br>" +
-              "<b>Data Collected Year: </b>" +
-              feature.properties.year
-            )
-          }
-        }).addTo(map);
-        layerMappedPolygons.eachLayer(eachFeatureFunction);
-      })
-    });
+//THE OLD MUNICIPAL LAYER
+//
+// $(document).ready(function(){
+//   $.ajax(municipality1).done(function(data) {
+//     parsedData13 = JSON.parse(data);
+//     console.log(parsedData13);
+//     console.log("parsed13");
+//     layerMappedPolygons = L.geoJson(parsedData13,
+//       {
+//         style: {opacity:0.4,width:0.5,color:'#EFC4AF'},
+//         pointToLayer: function (feature, latlng) {
+//           return new L.Polygon(latlng, {
+//           });
+//         },
+//
+//         onEachFeature: function(feature,layer){
+//             layer.bindPopup(
+//               "<b>Municipality Name: </b>" +
+//               feature.properties.m_name +
+//               "</br>" +
+//               "<b>Poverty Rate: </b>" +
+//               feature.properties.gen_pov +
+//               "</br>" +
+//               "<b>Department Name: </b>" +
+//               feature.properties.d_name +
+//               "</br>" +
+//               "<b>Data Collected Year: </b>" +
+//               feature.properties.year
+//             )
+//           }
+//         }).addTo(map);
+//         layerMappedPolygons.eachLayer(eachFeatureFunction);
+//       })
+//     });
 
 
 
@@ -1217,7 +1250,7 @@ $('#MUNI').click(function(){
       console.log("parsed00");
       layerMappedPolygons = L.geoJson(parsedData00,
         {
-          style: {opacity:0.4,width:0.5,color:'#EFC00F'},
+          style: {opacity:0.4,width:0.5,color:'#EFC4AF'},
           pointToLayer: function (feature, latlng) {
             return new L.Polygon(latlng, {
             });
@@ -1233,31 +1266,36 @@ $('#MUNI').click(function(){
               feature.properties.m_name +
               "</br>" +
               "<b>Total Road Length: </b>" +
-              feature.properties.rd_length + " km" +
+              feature.properties.rd_length.toPrecision(6) + " km" +
               "</br>" +
 
               "<b>Road Density: </b>" +
-              feature.properties.rd_density + " per square km" +
+              feature.properties.rd_density.toPrecision(6) + " per square km" +
               "</br>" +
 
-              "<b>Road Length in Urban Area: </b>" +
-              feature.properties.rd_urban + " km" +
+
+              "<b>Urban / Rural Road Ratio: </b>" +
+              (feature.properties.rd_urban / feature.properties.rd_rural).toPrecision(6) +
               "</br>" +
 
-              "<b>Road Length in Rural Area: </b>" +
-              feature.properties.rd_rural + " km" +
-              "</br>" +
+              // "<b>Road Length in Urban Area: </b>" +
+              // feature.properties.rd_urban + " km" +
+              // "</br>" +
+              //
+              // "<b>Road Length in Rural Area: </b>" +
+              // feature.properties.rd_rural + " km" +
+              // "</br>" +
 
               "<b>Major Road: </b>" +
-              feature.properties.rd_major + " km" +
+              feature.properties.rd_major.toPrecision(6) + " km" +
               "</br>" +
 
               "<b>Secondary Road: </b>" +
-              feature.properties.rd_second + " km" +
+              feature.properties.rd_second.toPrecision(6) + " km" +
               "</br>" +
 
               "<b>Tertiary Road: </b>" +
-              feature.properties.rd_tertiar + " km" +
+              feature.properties.rd_tertiar.toPrecision(6) + " km" +
               "</br>" +
 
               "</br>" +
@@ -1265,20 +1303,7 @@ $('#MUNI').click(function(){
               feature.properties.year
             )
 
-              // layer.bindPopup(
-              //   "<b>Municipality Name: </b>" +
-              //   feature.properties.m_name +
-              //   "</br>" +
-              //   "<b>Poverty Rate: </b>" +
-              //   feature.properties.gen_pov +
-              //   "</br>" +
-              //   "<b>Department Name: </b>" +
-              //   feature.properties.d_name +
-              //   "</br>" +
-              //   "<b>Data Collected Year: </b>" +
-              //   feature.properties.year
-              // )
-            }
+           }
           }).addTo(map);
           layerMappedPolygons.eachLayer(eachFeatureFunction);
         })

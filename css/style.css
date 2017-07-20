@@ -599,6 +599,10 @@ li{
   }
 }
 
+#newmuni{
+  position: relative;
+  left:10px;
+}
 /*
 #issues{
   float:right;
