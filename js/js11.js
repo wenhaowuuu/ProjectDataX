@@ -1,3 +1,8 @@
+// TARGET: TO LEARN THE OSMNX TOOLBOX
+// AUTOMATICALLY IDENTIFY AND GENERATE STREET NETWORK
+// http://geoffboeing.com/
+
+
 ///1. SETUP AND BASEMAP
 
 //1.1 SETUP BASEMAP
@@ -13,7 +18,6 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.pn
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
   subdomains: 'abcd'
 }).addTo(map);
-
 
 var schoolicon = L.icon({
       iconUrl:'marker-icon.png',
