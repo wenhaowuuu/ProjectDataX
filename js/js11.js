@@ -4,6 +4,9 @@
 // AUTOMATICALLY IDENTIFY AND GENERATE STREET NETWORK
 // http://geoffboeing.com/
 
+//POLYGON EDITING OPERATIONS:
+//QUITE COOL HERE
+//https://codeofsumit.github.io/leaflet.pm/
 
 ///1. SETUP AND BASEMAP
 
@@ -33,6 +36,72 @@ var schoolicon = L.icon({
       iconSize:[8,10],
       iconAnchor:[5,7],
     });
+
+
+
+//TESTING SOME TURF FUNCTIONALITY
+//0720: SOMETHING IS WRONG WITH THE TURF FUCNTION
+//GDHKKGHDKI GDLHGLDSHGK _FGSDGSG I DONT REALLY UNDERSTAND THE CAUSES
+// OF THE PROBLEM
+// var features;
+
+// var bbox = turf.bbox(features);
+
+
+// $ npm install @turf/intersect
+// $ npm test
+
+//EXAMPLE WITH DISTANCE OPERATION
+// const distance= require('@turf/distance');
+// var from = {
+//   "type": "Feature",
+//   "properties": {},
+//   "geometry": {
+//     "type": "Point",
+//     "coordinates": [-75.343, 39.984]
+//   }
+// };
+// var to = {
+//   "type": "Feature",
+//   "properties": {},
+//   "geometry": {
+//     "type": "Point",
+//     "coordinates": [-75.534, 39.123]
+//   }
+// };
+// var units = "miles";
+// var distance = distance(from, to, units);
+
+
+
+//EXAMPLE WITH INTERSECT
+// const intersect = require('@turf/intersect');
+//
+// var poly1 = turf.polygon([[
+//   [-122.801742, 45.48565],
+//   [-122.801742, 45.60491],
+//   [-122.584762, 45.60491],
+//   [-122.584762, 45.48565],
+//   [-122.801742, 45.48565]
+// ]]);
+//
+// var poly2 = turf.polygon([[
+//   [-122.520217, 45.535693],
+//   [-122.64038, 45.553967],
+//   [-122.720031, 45.526554],
+//   [-122.669906, 45.507309],
+//   [-122.723464, 45.446643],
+//   [-122.532577, 45.408574],
+//   [-122.487258, 45.477466],
+//   [-122.520217, 45.535693]
+// ]]);
+//
+// var intersection = turf.intersect(poly1, poly2).addTo(map);
+
+// intersection.addTo(map);
+
+
+
 
 
 //1.2 SWITCH BASEMAPS
@@ -650,7 +719,12 @@ var y0, y1, x1, x2, x3, x4;
 
 $('#nation').change(function(){
   if(this.checked){
+    console.log("nation checked");
     y0 = true;
+  }
+  if(!this.checked){
+    console.log("nation unchecked");
+    y0 = false;
   }
 });
 
@@ -658,14 +732,18 @@ $('#department').change(function(){
   if(this.checked){
     y1 = true;
   }
+  if(!this.checked){
+    y1 = false;
+  }
 });
-
-
 
 
 $('#roads1').change(function(){
   if(this.checked){
     x1 = true;
+  }
+  if(!this.checked){
+    x1 = false;
   }
 });
 
@@ -673,17 +751,26 @@ $('#roads2').change(function(){
   if(this.checked){
     x2 = true;
   }
+  if(!this.checked){
+    x2 = false;
+  }
 });
 
 $('#hospital').change(function(){
   if(this.checked){
     x3 = true;
   }
+  if(!this.checked){
+    x3 = false;
+  }
 });
 
 $('#school').change(function(){
   if(this.checked){
     x4 = true;
+  }
+  if(!this.checked){
+    x4 = false;
   }
 });
 
