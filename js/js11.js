@@ -8,6 +8,7 @@
 ///1. SETUP AND BASEMAP
 
 //1.1 SETUP BASEMAP
+//SOME NOTES HERE
 var map = L.map('map', {
   center: [15.162820, -87.509107],
   zoom: 6.5
