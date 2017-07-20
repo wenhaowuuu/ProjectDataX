@@ -1041,7 +1041,7 @@ $(document).ready(function(){
     console.log("parsed13");
     layerMappedPolygons = L.geoJson(parsedData13,
       {
-        style: myStyle,
+        style: {opacity:0.4,width:0.5,color:'#EFC4AF'},
         pointToLayer: function (feature, latlng) {
           return new L.Polygon(latlng, {
           });
@@ -1066,6 +1066,40 @@ $(document).ready(function(){
         layerMappedPolygons.eachLayer(eachFeatureFunction);
       })
     });
+
+
+// $(document).ready(function(){
+//   $.ajax(municipality1).done(function(data) {
+//     parsedData13 = JSON.parse(data);
+//     console.log(parsedData13);
+//     console.log("parsed13");
+//     layerMappedPolygons = L.geoJson(parsedData13,
+//       {
+//         style: myStyle,
+//         pointToLayer: function (feature, latlng) {
+//           return new L.Polygon(latlng, {
+//           });
+//         },
+//
+//         onEachFeature: function(feature,layer){
+//             layer.bindPopup(
+//               "<b>Municipality Name: </b>" +
+//               feature.properties.m_name +
+//               "</br>" +
+//               "<b>Poverty Rate: </b>" +
+//               feature.properties.gen_pov +
+//               "</br>" +
+//               "<b>Department Name: </b>" +
+//               feature.properties.d_name +
+//               "</br>" +
+//               "<b>Data Collected Year: </b>" +
+//               feature.properties.year
+//             )
+//           }
+//         }).addTo(map);
+//         layerMappedPolygons.eachLayer(eachFeatureFunction);
+//       })
+//     });
 
 
 
