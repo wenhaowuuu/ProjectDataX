@@ -546,6 +546,9 @@ var numberofClicks = 0;
                       P_rd_21 = layer.feature.properties.rd_second / layer.feature.properties.rd_major;
                       P_rd_31 = layer.feature.properties.rd_tertiar / layer.feature.properties.rd_major;
              //LOAD THE RADAR CHART
+            //  REFERENCE
+            //  https://canvasjs.com/docs/charts/chart-types/html5-stacked-bar-chart/
+            //  
              if (radarChart!=null){
                //USING MAP REMOVE LAYER DOES NOT WORK ON CHARTS!
                radarChart.destroy();
