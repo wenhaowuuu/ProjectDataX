@@ -26,6 +26,8 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 
 .main-heading{
   position:relative;
+  font-family:arial;
+  font-size: 30px;
   left:10px;
 }
 
@@ -62,8 +64,8 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 
 .chartsarea{
   position:absolute;
-  top:160px;
-  right:30px;
+  top:0;
+  right:20px;
   z-index:50;
 }
 /*.download{
@@ -95,8 +97,9 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 div.description{
   position:absolute;
   bottom:40px;
+  top:160px;
   right:20px;
-  width:300px;
+  width:330px;
   background-color: rgba(171, 150, 150, .4);
   filter:alpha(opacity=30);
   z-index: 30;
@@ -105,9 +108,14 @@ div.description{
 
 div.description p {
     color:rgba(245, 240, 240, .6);
-    font-size: 14px;
+    font-size:14px;
     margin:15px;
     z-index:60;
+}
+
+.buttonarea{
+  position:absolute;
+  bottom:10px;
 }
 
 
@@ -330,12 +338,19 @@ canvas {
 
 #header_text{
   position:relative;
-  top:5px;
-  left:10px;
+  top:6px;
+  left:16px;
   color:#ffffff;
-  font-weight:normal;
-  font-family:sans-serif;
+  /*font-weight:lighter;*/
+  /*font-weight:lighter;*/
+  font-family:helvetica;
   font-size: 16px;
+}
+
+#color{
+  color:#f07f30;
+  font-weight: bold;
+  font-size:30px;
 }
 
 #option{
@@ -385,8 +400,9 @@ li{
   font-family: inherit;
 }
 
-
 #download1{
+  /*position:absolute;*/
+  /*bottom:30px;*/
   margin:10px;
 }
 
@@ -394,9 +410,17 @@ li{
   /*position:absolute;*/
   /*right:30px;
   bottom:20px;*/
+  /*position: absolute;*/
+  /*right:20px;*/
   margin:10px;
   z-index: 60;
 }
+
+#destext{
+  position:absolute;
+  bottom:55px;
+}
+
 
 #showmap{
   /*position:absolute;*/
@@ -460,6 +484,17 @@ li{
   width:20px;
 }
 
+#graphtitle1{
+  position:absolute;
+  top:5px;
+  left:0;
+}
+
+#graphtitle2{
+  position:absolute;
+  left:0;
+}
+
 #testTable{
   position:absolute;
   right:550px;
@@ -474,6 +509,13 @@ li{
 #testPDF{
   z-index:-20;
   display:none;
+}
+
+#chartContainer{
+  position:absolute;
+  bottom:40px;
+  left:640px;
+  z-index: 60;
 }
 
 /*//CHINESE GDP RATE*/
@@ -568,8 +610,10 @@ li{
 
 
 #main-heading{
+  /*font-size: 14px;*/
   color" #110023;
-  font-family:fantasy;
+  font-weight:lighter;
+  font-family:monospace;
   .legend {
     position: absolute;
     background-color: #fff;

@@ -139,9 +139,9 @@
     </div>
 
     <div style="display: block; over-flow:auto; position: absolute; left: 4px; width: 400px; top: 30px; data-bottom="false" z-index:50;">
-        <h1 class = "main-heading"><strong>INFRASTRUCTURE EFFICIENCY </strong> in <br><strong id = "color"> North Traingle </strong></h1>
+        <h2 class = "main-heading">INFRASTRUCTURE EFFICIENCY in <br><span id = "color"> North Traingle </span></h2>
 
-            <img id = "image" src="https://anypy.imgix.net/destination/guatemala-city-guatemala/Guatemala.City-8.jpg">
+            <!-- <img id = "image" src="https://anypy.imgix.net/destination/guatemala-city-guatemala/Guatemala.City-8.jpg"> -->
 
             <br>
 
@@ -280,29 +280,31 @@
               <li id = "AOI"><a href="#">AOI</a></li>
           </ul>
       </div>
-      <div class="chartsarea">
-        <!-- <canvas class="charts" id="myChart0" width="300" height="300"></canvas>
-        <br> -->
-        <canvas class="charts" id="myChart1" width="300" height="300"></canvas>
-        <br>
-        <canvas class="charts" id="myChart2" width="300" height="200"></canvas>
-        <!-- <canvas class="charts" id="myChart3" width="300" height="200"></canvas> -->
-      </div>
+
       <div class="description">
+        <div class="chartsarea">
+          <!-- <canvas class="charts" id="myChart0" width="300" height="300"></canvas>
+          <br> -->
+          <canvas class="charts" id="myChart1" width="300" height="300"></canvas>
+          <br>
+          <!-- <p id="graphtitle1">Infrastructure Efficiency Score</p> -->
+          <canvas class="charts" id="myChart2" width="300" height="200"></canvas>
+          <!-- <p id="graphtitle2">Regional Comparison</p> -->
+          <!-- <canvas class="charts" id="myChart3" width="300" height="200"></canvas> -->
+        </div>
 
-
-
-        <p>This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. <br><br><strong>Please select a municipality first for downloadable PDF and EXCEL table. </strong></p>
+        <p id = "destext">This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. <br><br><strong>Please select a municipality first for downloadable PDF and EXCEL table. </strong></p>
 
         <!-- <button type="submit" onclick="window.open('file.doc')">Download!</button> -->
-
-        <button class="btn btn-default dropdown-toggle" type="button" id="download1" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
-          Download PDF
-        </button>
-        <button class="btn btn-default dropdown-toggle" type="button" id="download2" onclick="tableToExcel('testTable', 'Infrastructure Efficiency Profile')" value="Export to Excel" data-toggle="dropdown" aria-haspopup="true">
-          Download EXCEL
-        </button>
-        <br>
+        <div class = "buttonarea">
+          <button class="btn btn-default dropdown-toggle" type="button" id="download1" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+            Download PDF
+          </button>
+          <button class="btn btn-default dropdown-toggle" type="button" id="download2" onclick="tableToExcel('testTable', 'Infrastructure Efficiency Profile')" value="Export to Excel" data-toggle="dropdown" aria-haspopup="true">
+            Download EXCEL
+          </button>
+          <br>
+        </div>
       </div>
 
       <canvas id = "canvas" src = "http://www.processamentodigital.com.br/wp-content/uploads/2017/06/arcgis_composicao_rgb_sentinel2.jpg"></canvas>
@@ -324,6 +326,23 @@
             <div class = label1 id = fill5></div><p class = label1> > 75%</p>
           </div>
       </div>
+      <!-- <script type="text/javascript">
+      </script> -->
+ <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+   <div id="chartContainer" style="height: 150px; width: 300px;">
+   </div>
+
+
+
+
+
+      <!-- <div id="mapimage">
+        <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" display:none
+          id="myImg"
+          alt="Image"
+          width="180"
+          height="120">
+      </div> -->
 
       <!-- A click on  -->
       <!-- Javascript Imports -->
