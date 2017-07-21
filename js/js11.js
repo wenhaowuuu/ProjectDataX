@@ -364,11 +364,16 @@ var numberofClicks = 0;
        //come back to this later!
        numberofClicks = numberofClicks + 1;
 
+
+       //YOU'D BETTER CLEAN THE HTML ELEMENT EVERY TIME YOU CLICK ON THE LAYER
+       //reference from
+       //https://stackoverflow.com/questions/24815851/how-to-clear-a-chart-from-a-canvas-so-that-hover-events-cannot-be-triggered
+
        $('#myChart1').remove();
-       $('.chartsarea').append('<canvas class="charts" id="myChart1" width="300" height="200"></canvas>');
+       $('.chartsarea').append('<canvas class="charts" id="myChart1" width="300" height="300"></canvas>');
        console.log("replace1");
 
-       
+
        $('#myChart2').remove();
        $('.chartsarea').append('<canvas class="charts" id="myChart2" width="300" height="200"></canvas>');
        console.log("replace2");
@@ -1456,12 +1461,13 @@ var tableToPDF = function(){
   // canvas parameters (left, top, canvas width, canvas height)
   // https://github.com/MrRio/jsPDF/issues/434
   // https://github.com/MrRio/jsPDF/blob/master/examples/images.html
-  doc.addImage(imgData, 'JPEG', 174, 10, 28, 22, undefined);
+  doc.addImage(imgData, 'JPEG', 174, 14, 28, 22, undefined);
 
   doc.setFontSize(10);
   doc.setFontType("light");
   doc.setFont("inherit");
-  doc.text(10, 5, 'DataXLat @ Geoadaptive LLC')
+  doc.text(10, 5, 'DataXLat @ Geoadaptive LLC.');
+  doc.text(150,5, '250 Summer St, Boston, MA, USA');
   //DIVIDING LINE
   doc.setLineWidth(1);
   doc.setDrawColor(255,140,40);
@@ -1472,78 +1478,82 @@ var tableToPDF = function(){
   doc.setFontType("bold");
   doc.text(10, 18, 'Infrastructure Efficiency Profile of ');
   doc.setTextColor(255,140,40);
-  doc.text(120, 18, ' ' + P_muni);
+  doc.text(110, 18, ' ' + P_muni);
   // doc.text(20, 30, '     ');
 
   //INTRO
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.setFontSize(14);
+  doc.setFontSize(12);
   doc.setTextColor(0,0,0);
   doc.text(10, 30, 'Following is a brief summary of infrastructure efficiency condition in ');
   doc.text(10, 36, '' + P_muni + ', department of ' + P_department + ', in ' + P_country + '.');
   // doc.text(10, 50, 'this City of ' + P_muni + ' is selected.');
 
 
+  //INSERT THE GRAPH & CHARTS
+
+
+
 
   //SOCIAL ECONOMIC INFO
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 56, '1) SOCIAL-ECONOMIC');
+  doc.text(10, 48, '1) SOCIAL-ECONOMIC');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 66, P_muni + ' has a poverty rate of ' + P_pov.toFixed(3) + '%.');
+  doc.text(10, 56, P_muni + ' has a poverty rate of ' + P_pov.toFixed(3) + '%.');
 
 
 
   //TRANSPORTATION
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 86, '2) TRANSPORTATION');
+  doc.text(10, 68, '2) TRANSPORTATION');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 96, 'Total Length of Road: ' + P_length.toFixed(3) + ' km');
-  doc.text(10, 106, 'Road Density: ' + P_density.toFixed(3) + ' km per square km');
-  doc.text(10, 116, 'Road in Urban Area: ' + P_rd_urban.toFixed(3) + ' km');
-  doc.text(10, 126, 'Road in Rural Area: ' + P_rd_rural.toFixed(3) + ' km');
-  doc.text(10, 136, 'Major Road: ' + P_rd_1.toFixed(3) + ' km');
-  doc.text(10, 146, 'Secondary Road: ' + P_rd_2.toFixed(3) + ' km');
-  doc.text(10, 156, 'Tertiary Road: ' + P_rd_3.toFixed(3) + ' km');
+  doc.text(10, 76, 'Total Length of Road: ' + P_length.toFixed(3) + ' km');
+  doc.text(10, 82, 'Road Density: ' + P_density.toFixed(3) + ' km per square km');
+  doc.text(10, 88, 'Road in Urban Area: ' + P_rd_urban.toFixed(3) + ' km');
+  doc.text(10, 94, 'Road in Rural Area: ' + P_rd_rural.toFixed(3) + ' km');
+  doc.text(10, 100, 'Major Road: ' + P_rd_1.toFixed(3) + ' km');
+  doc.text(10, 106, 'Secondary Road: ' + P_rd_2.toFixed(3) + ' km');
+  doc.text(10, 112, 'Tertiary Road: ' + P_rd_3.toFixed(3) + ' km');
 
   // doc.text(10, 150, 'Typology split (km x major/secondary/tertiary): ' + '1000 km');
-  doc.text(10, 166, 'Road Efficiency (% population within 30 minutes of road): ' + '1000 km');
+  doc.text(10, 118, 'Road Efficiency (% population within 30 minutes of road): ' + '1000 km');
 
 
   //UTILITY
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 186, '3) UTILITY');
+  doc.text(10, 130, '3) UTILITY');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 196, 'Sanitation (% of coverage): ' + '1000 km');
-  doc.text(10, 206, 'Electricity (% of coverage): ' + '1000 km');
-  doc.text(10, 216, 'Water (% of coverage): ' + '1000 km');
-  doc.text(10, 226, 'Basic Needs Unsatisfied (% of coverage): ' + '50%');
+  doc.text(10, 138, 'Sanitation (% of coverage): ' + '1000 km');
+  doc.text(10, 144, 'Electricity (% of coverage): ' + '1000 km');
+  doc.text(10, 150, 'Water (% of coverage): ' + '1000 km');
+  doc.text(10, 156, 'Basic Needs Unsatisfied (% of coverage): ' + '50%');
 
 
   //EDUCATION
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 246, '4) EDUCATION');
+  doc.text(10, 168, '4) EDUCATION');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 256, 'Literacy Rate: ' + '75%');
+  doc.text(10, 176, 'Literacy Rate: ' + '75%');
 
   //OTHER NOTES
   doc.setFont("georgia");
-  doc.text(10, 276, 'Notes: ' + 'things to keep in mind');
+  doc.text(10, 192, 'Notes: ' + 'things to keep in mind');
 
   //OTHER NOTES
   doc.setFont("times");
   doc.setFontType("italic");
-  doc.setFontSize(12);
-  doc.text(5, 288, '* This data was obtained from ');
-  doc.text(5, 292, '' + P_source);
+  doc.setFontSize(10);
+  doc.text(5, 280, '* This data was obtained from ');
+  doc.text(5, 285, '' + P_source);
 
   // doc.setFont("times");
   // doc.setFontType("normal");
