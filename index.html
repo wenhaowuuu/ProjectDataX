@@ -6,6 +6,7 @@
 <!-- read the reference in ESRI maps -->
 <!-- https://github.com/Esri/esri-leaflet/blob/master/README.md#demos -->
 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css"/>
@@ -183,8 +184,8 @@
             <label class="layerlabel">National Boundary</label><br>
             <input id="department" class="layers" type="checkbox" name="vehicle" value="Bike">
             <label class="layerlabel">Departmental Boundary</label><br>
-            <input id="municipality" class="layers" type="checkbox" name="vehicle" value="Bike">
-            <label class="layerlabel">Municipality Boundary</label><br>
+            <!-- <input id="municipality" class="layers" type="checkbox" name="vehicle" value="Bike">
+            <label class="layerlabel">Municipality Boundary</label><br> -->
 
             <input id="roads1" class="layers" type="checkbox" name="vehicle" value="Bike">
             <label class="layerlabel">Primary Roads</label><br>
@@ -202,9 +203,9 @@
               Remove All Layers
             </button>
             <br>
-            <button id = "newmuni" class="btn btn-default dropdown-toggle" type="button" id="MUNI" data-toggle="dropdown" aria-haspopup="true">
+            <!-- <button id = "MUNI" class="btn btn-default dropdown-toggle" type="button" id="MUNI" data-toggle="dropdown" aria-haspopup="true">
               NEW MUNI
-            </button>
+            </button> -->
 
           </div>
         </div>
@@ -304,7 +305,7 @@
         <br>
       </div>
 
-
+      <canvas id = "canvas" src = "http://www.processamentodigital.com.br/wp-content/uploads/2017/06/arcgis_composicao_rgb_sentinel2.jpg"></canvas>
       <div class="legend">
           <h5>Poverty Rates of Municipalities</h5>
           <div>
