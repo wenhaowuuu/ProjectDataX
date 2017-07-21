@@ -364,6 +364,16 @@ var numberofClicks = 0;
        //come back to this later!
        numberofClicks = numberofClicks + 1;
 
+       $('#myChart1').remove();
+       $('.chartsarea').append('<canvas class="charts" id="myChart1" width="300" height="200"></canvas>');
+       console.log("replace1");
+
+       
+       $('#myChart2').remove();
+       $('.chartsarea').append('<canvas class="charts" id="myChart2" width="300" height="200"></canvas>');
+       console.log("replace2");
+
+
        //Click odd number of times - loading the shape, while
        //click even number of times - removing it.
       //  if (numberofClicks % 2 == 0){
@@ -420,15 +430,6 @@ var numberofClicks = 0;
 
 
         //  $('#exceltitle').text(layer.feature.properties.m_name);
-
-
-
-
-
-
-
-
-
          //ZOOM TO THE SELECTED MUNICIPALITY
          map.fitBounds(layer.getBounds(),{
                     padding: [80,80]
@@ -470,8 +471,11 @@ var numberofClicks = 0;
 
 
          //LINK DATA WITH THE GRAPH
-         if(myChart){
-           map.removeLayer(myChart);
+         if(myChart!=null){
+          //  myChart.destroy();
+          //  $('#myChart2').remove();
+          //  $('.chartsarea').append('<canvas class="charts" id="myChart2" width="300" height="200"></canvas>');
+          //  console.log("replace2");
          }
          else {
            var ctx2 = document.getElementById("myChart2").getContext('2d');
@@ -527,8 +531,10 @@ var numberofClicks = 0;
                       P_rd_21 = layer.feature.properties.rd_second / layer.feature.properties.rd_major;
                       P_rd_31 = layer.feature.properties.rd_tertiar / layer.feature.properties.rd_major;
              //LOAD THE RADAR CHART
-             if (radarChart){
-               map.removeLayer(radarChart);
+             if (radarChart!=null){
+               //USING MAP REMOVE LAYER DOES NOT WORK ON CHARTS!
+               radarChart.destroy();
+               console.log("destroyed2");
              }
              else {
                var marksCanvas = document.getElementById("myChart1");
@@ -538,13 +544,15 @@ var numberofClicks = 0;
                  datasets: [{
                    label: P_muni,
                    backgroundColor: "rgba(255,120,35,0.5)",
-                  //  data: [(P_length - 46775.31635) / 76377.96091, (P_density - 244.1640059) / 190.074839, (P_rd_urban - 7936.693108) / 14941.34066, (P_rd_rural - 38367.5124) / 69831.91203, (P_rd_21 - 3.627827758) / 24.37334603, (P_rd_31 - 3.518684818) / 23.91963842]
-                   data: [(P_length) / 76377.96091, (P_density) / 190.074839, (P_rd_urban) / 14941.34066, (P_rd_rural) / 69831.91203, (P_rd_21) / 24.37334603, (P_rd_31) / 23.91963842]
+                   data: [(P_length - 46775.31635) / 76377.96091, (P_density - 244.1640059) / 190.074839, (P_rd_urban - 7936.693108) / 14941.34066, (P_rd_rural - 38367.5124) / 69831.91203, (P_rd_21 - 3.627827758) / 24.37334603, (P_rd_31 - 3.518684818) / 23.91963842]
+                   // OPTION 2
+                  //  data: [(P_length) / 76377.96091, (P_density) / 190.074839, (P_rd_urban) / 14941.34066, (P_rd_rural) / 69831.91203, (P_rd_21) / 24.37334603, (P_rd_31) / 23.91963842]
                  }, {
                    label: "Regional Average",
                    backgroundColor: "rgba(50,120,230,0.5)",
-                  //  data: [6, 8, 4, 7, 5, 5]
-                   data: [46775.31635 / 76377.96091, 244.1640059 / 190.074839, 7936.693108 / 14941.34066, 38367.5124 / 69831.91203, 3.627827758 / 24.37334603, 3.518684818 / 23.91963842]
+                   data: [0, 0, 0, 0, 0, 0]
+                   // OPTION 2
+                  //  data: [46775.31635 / 76377.96091, 244.1640059 / 190.074839, 7936.693108 / 14941.34066, 38367.5124 / 69831.91203, 3.627827758 / 24.37334603, 3.518684818 / 23.91963842]
                  }]
                };
 
@@ -1448,7 +1456,7 @@ var tableToPDF = function(){
   // canvas parameters (left, top, canvas width, canvas height)
   // https://github.com/MrRio/jsPDF/issues/434
   // https://github.com/MrRio/jsPDF/blob/master/examples/images.html
-  doc.addImage(imgData, 'JPEG', 172, 10, 26, 21, undefined);
+  doc.addImage(imgData, 'JPEG', 174, 10, 28, 22, undefined);
 
   doc.setFontSize(10);
   doc.setFontType("light");
@@ -1460,20 +1468,20 @@ var tableToPDF = function(){
   doc.line(0, 8, 240, 8);
 
   doc.setFont("times");
-  doc.setFontSize(20);
+  doc.setFontSize(18);
   doc.setFontType("bold");
-  doc.text(10, 20, 'Infrastructure Efficiency Profile of ');
+  doc.text(10, 18, 'Infrastructure Efficiency Profile of ');
   doc.setTextColor(255,140,40);
-  doc.text(120, 20, ' ' + P_muni);
+  doc.text(120, 18, ' ' + P_muni);
   // doc.text(20, 30, '     ');
 
   //INTRO
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.setFontSize(16);
+  doc.setFontSize(14);
   doc.setTextColor(0,0,0);
-  doc.text(10, 40, 'Following is a brief summary of infrastructure efficiency condition in ');
-  doc.text(10, 46, '' + P_muni + ', department of ' + P_department + ', in ' + P_country + '.');
+  doc.text(10, 30, 'Following is a brief summary of infrastructure efficiency condition in ');
+  doc.text(10, 36, '' + P_muni + ', department of ' + P_department + ', in ' + P_country + '.');
   // doc.text(10, 50, 'this City of ' + P_muni + ' is selected.');
 
 
@@ -1481,62 +1489,61 @@ var tableToPDF = function(){
   //SOCIAL ECONOMIC INFO
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 70, '1) SOCIAL-ECONOMIC');
+  doc.text(10, 56, '1) SOCIAL-ECONOMIC');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 80, P_muni + ' has a poverty rate of ' + P_pov + '%.');
+  doc.text(10, 66, P_muni + ' has a poverty rate of ' + P_pov.toFixed(3) + '%.');
 
 
 
   //TRANSPORTATION
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 100, '2) TRANSPORTATION');
+  doc.text(10, 86, '2) TRANSPORTATION');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 110, 'Total Length of Road: ' + P_length + ' km');
-  doc.text(10, 120, 'Road Density: ' + P_density + ' km per square km');
-  doc.text(10, 130, 'Road in Urban Area: ' + P_rd_urban + ' km');
-  doc.text(10, 140, 'Road in Rural Area: ' + P_rd_rural + ' km');
-  doc.text(10, 150, 'Major Road: ' + P_rd_1 + ' km');
-  doc.text(10, 160, 'Secondary Road: ' + P_rd_2 + ' km');
-  doc.text(10, 170, 'Tertiary Road: ' + P_rd_3 + ' km');
-
+  doc.text(10, 96, 'Total Length of Road: ' + P_length.toFixed(3) + ' km');
+  doc.text(10, 106, 'Road Density: ' + P_density.toFixed(3) + ' km per square km');
+  doc.text(10, 116, 'Road in Urban Area: ' + P_rd_urban.toFixed(3) + ' km');
+  doc.text(10, 126, 'Road in Rural Area: ' + P_rd_rural.toFixed(3) + ' km');
+  doc.text(10, 136, 'Major Road: ' + P_rd_1.toFixed(3) + ' km');
+  doc.text(10, 146, 'Secondary Road: ' + P_rd_2.toFixed(3) + ' km');
+  doc.text(10, 156, 'Tertiary Road: ' + P_rd_3.toFixed(3) + ' km');
 
   // doc.text(10, 150, 'Typology split (km x major/secondary/tertiary): ' + '1000 km');
-  doc.text(10, 180, 'Road Efficiency (% population within 30 minutes of road): ' + '1000 km');
+  doc.text(10, 166, 'Road Efficiency (% population within 30 minutes of road): ' + '1000 km');
 
 
   //UTILITY
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 200, '3) UTILITY');
+  doc.text(10, 186, '3) UTILITY');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 210, 'Sanitation (% of coverage): ' + '1000 km');
-  doc.text(10, 220, 'Electricity (% of coverage): ' + '1000 km');
-  doc.text(10, 230, 'Water (% of coverage): ' + '1000 km');
-  doc.text(10, 240, 'Basic Needs Unsatisfied (% of coverage): ' + '50%');
+  doc.text(10, 196, 'Sanitation (% of coverage): ' + '1000 km');
+  doc.text(10, 206, 'Electricity (% of coverage): ' + '1000 km');
+  doc.text(10, 216, 'Water (% of coverage): ' + '1000 km');
+  doc.text(10, 226, 'Basic Needs Unsatisfied (% of coverage): ' + '50%');
 
 
   //EDUCATION
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 260, '4) EDUCATION');
+  doc.text(10, 246, '4) EDUCATION');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 270, 'Literacy Rate: ' + '75%');
+  doc.text(10, 256, 'Literacy Rate: ' + '75%');
 
   //OTHER NOTES
   doc.setFont("georgia");
-  doc.text(10, 290, 'Notes: ' + 'things to keep in mind');
+  doc.text(10, 276, 'Notes: ' + 'things to keep in mind');
 
   //OTHER NOTES
   doc.setFont("times");
   doc.setFontType("italic");
   doc.setFontSize(12);
-  doc.text(5, 306, '* This data was obtained from ');
-  doc.text(5, 310, '' + P_source);
+  doc.text(5, 288, '* This data was obtained from ');
+  doc.text(5, 292, '' + P_source);
 
   // doc.setFont("times");
   // doc.setFontType("normal");
