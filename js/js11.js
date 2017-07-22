@@ -548,7 +548,7 @@ var numberofClicks = 0;
              //LOAD THE RADAR CHART
             //  REFERENCE
             //  https://canvasjs.com/docs/charts/chart-types/html5-stacked-bar-chart/
-            //  
+            //
              if (radarChart!=null){
                //USING MAP REMOVE LAYER DOES NOT WORK ON CHARTS!
                radarChart.destroy();

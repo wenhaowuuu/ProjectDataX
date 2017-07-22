@@ -11,36 +11,26 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- //LOAD FONTS -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">    -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300i" rel="stylesheet">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
     integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
     crossorigin=""/>
 
-    <input id ="download2" type="button" value="Export to Excel">
     <table id ="testTable" summary="Infrastructure Efficiency Profile." rules="groups" frame="hsides" border="2">
       <caption>PROFILE FOR MUNICIPALITY <p style="background-color: #f07f30; color: #ffffff; font-weight: bold;" id="exceltitle"></p></caption>
       <caption>DataXLat @ GeoAdaptive LLC</caption>
-      <!-- <colgroup align="center"></colgroup> -->
-      <!-- <colgroup align="left"></colgroup> -->
-      <!-- <colgroup span="2" align="center"></colgroup> -->
-      <!-- <colgroup span="3" align="center"></colgroup> -->
       <thead valign="top">
         <tr>
           <th>ID</th>
           <th>Country</th>
           <th>Department</th>
           <th>Municipality</th>
-          <!-- <th style="background-color: #D0F3B4; color: #000000" border="1">Social-Economy<br>Poverty Rate: % of population living in poverty</th>
-          <th style="background-color: #F7BA61; color: #000000" border="1">Transportation<br>Total Length of Roads (km)</th>
-          <th style="background-color: #F7BA61; color: #000000" border="1">Transportation<br>Road Density (area/roads km)</th>
-          <th style="background-color: #F7BA61; color: #000000" border="1">Transportation<br>Typology split: Rural / Urban</th>
-          <th style="background-color: #F7BA61; color: #000000" border="1">Transportation<br>Typology split: km x mayor, secondary, tertiary</th>
-          <th style="background-color: #F7BA61; color: #000000" border="1">Transportation<br>Road efficiency (% population within 30 minutes of road)</th>
-          <th style="background-color: #70D4F9; color: #000000" border="1">Utility<br>Sanitation: % of coverage</th>
-          <th style="background-color: #70D4F9; color: #000000" border="1">Utility<br>Electricity: % of coverage</th>
-          <th style="background-color: #70D4F9; color: #000000" border="1">Utility<br>Water: % of coverage</th>
-          <th style="background-color: #70D4F9; color: #000000" border="1">Utility<br>Basic Needs Unsatisfied:</th>
-          <th style="background-color: #4F87F8; color: #000000" border="1">Other<br>Notes:</th>
-           -->
           <th class = "X_colhead" border="1">Social-Economy<br>Poverty Rate: % of population living in poverty</th>
           <th class = "X_colhead" border="1">Transportation<br>Total Length of Roads (km)</th>
           <th class = "X_colhead" border="1">Transportation<br>Road Density (area/roads km)</th>
@@ -108,8 +98,7 @@
             <h3 class = "subtitle"> The Subtitle </h3>
               <p class = "text">the description </p>
       </div>
-
-
+      <!-- //LOAD THE SATELLITE MAP -->
           <meta charset='utf-8' />
           <title></title>
           <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
@@ -119,8 +108,6 @@
               body { margin:0; padding:0; }
               #map0 { position:absolute; left:400px; right:0; top:30px; bottom:0; }
           </style>
-
-
 
   </head>
   <body>
@@ -134,58 +121,54 @@
 
 
     <!--Left Panel-->
-    <div id = "header">
-      <p id = "header_text"><strong>GEOADAPTIVE &nbsp; </strong></p>
+    <div class = "header">
+      <!-- <p class = "header_text"><strong>GEOADAPTIVE &nbsp; </strong></p> -->
     </div>
-
-    <div style="display: block; over-flow:auto; position: absolute; left: 4px; width: 400px; top: 30px; data-bottom="false" z-index:50;">
-        <h2 class = "main-heading">INFRASTRUCTURE EFFICIENCY in <br><span id = "color"> North Traingle </span></h2>
-
-            <!-- <img id = "image" src="https://anypy.imgix.net/destination/guatemala-city-guatemala/Guatemala.City-8.jpg"> -->
-
+    <div style="display: block; over-flow:auto; position: absolute; left: 4px; width: 360px; top: 18px; data-bottom="false" z-index:50;">
+        <h2 class = "main-heading">INFRASTRUCTURE EFFICIENCY in <br>
+          <span> North Traingle </span>
+        </h2>
             <br>
 
         <br>
         <br>
-        <label id="selectionlabel" for="dest" style="position:relative; left:10px;">Look for a Municipality</label>
+        <label class="selectionlabel" for="dest" style="position:relative; left:10px;">Look for a Municipality</label>
         <br>
         <div class="search" style="display:inline-block;position:relative;left:10px;">
           <div style="display:inline-block;">
             <div class="option" class="leaflet-bar">
               <select name="basemaps" id="location1" onChange="changeBasemap1(this)">
-                <option value="">Country</option>
-                <option value="Guatemala">Guatemala</option>
-                <option value="Honduras">Honduras</option>
-                <option value="El Salvador">El Salvador</option>
+                <option class = "option" value="">Country</option>
+                <option class = "option" value="Guatemala">Guatemala</option>
+                <option class = "option" value="Honduras">Honduras</option>
+                <option class = "option" value="El Salvador">El Salvador</option>
                 <!-- <option value="Oceans">Country 4</option>
                 <option value="Oceans1">Country 5</option> -->
               </select>
               <select name="basemaps" id="location2" onChange="changeBasemap2(this)">
-                <option value="">Department</option>
-                <option value="Peten">Peten</option>
-                <option value="Guatemala">Guatemala</option>
-                <option value="Alta Verapaz">Alta Verapaz</option>
+                <option class = "option" value="">Department</option>
+                <option class = "option" value="Peten">Peten</option>
+                <option class = "option" value="Guatemala">Guatemala</option>
+                <option class = "option" value="Alta Verapaz">Alta Verapaz</option>
                 <!-- <option value="Oceans">Department D</option>
                 <option value="Oceans1">Department E</option> -->
               </select>
               <select name="basemaps" id="location3" onChange="changeBasemap3(this)">
-                <option value="">Municipality</option>
-                <option value="La Libertad">La Libertad</option>
-                <option value="Guatemala">Guatemala</option>
-                <option value="Coban">Coban</option>
+                <option class = "option" value="">Municipality</option>
+                <option class = "option" value="La Libertad">La Libertad</option>
+                <option class = "option" value="Guatemala">Guatemala</option>
+                <option class = "option" value="Coban">Coban</option>
                 <!-- <option value="Oceans">Municipal D</option>
                 <option value="Oceans1">Municipal E</option> -->
               </select>
             </div>
             <br>
-            <label for="dest">Subjects include:</label>
+            <label class="selectionlabel" for="dest">Subjects include:</label>
             <br>
             <input id="nation" class="layers" type="checkbox" name="vehicle" value="Bike">
             <label class="layerlabel">National Boundary</label><br>
             <input id="department" class="layers" type="checkbox" name="vehicle" value="Bike">
             <label class="layerlabel">Departmental Boundary</label><br>
-            <!-- <input id="municipality" class="layers" type="checkbox" name="vehicle" value="Bike">
-            <label class="layerlabel">Municipality Boundary</label><br> -->
 
             <input id="roads1" class="layers" type="checkbox" name="vehicle" value="Bike">
             <label class="layerlabel">Primary Roads</label><br>
@@ -196,23 +179,21 @@
             <input id="school" class="layers" type="checkbox" name="vehicle" value="Bike">
             <label class="layerlabel">Schools</label><br>
             <!-- <br> -->
-            <button class="btn btn-default dropdown-toggle" type="button" id="showmap" data-toggle="dropdown" aria-haspopup="true">
-              Show the Map
-            </button>
-            <button class="btn btn-default dropdown-toggle" type="button" id="hidemap" data-toggle="dropdown" aria-haspopup="true">
-              Remove All Data
-            </button>
-            <br>
-            <!-- <button id = "MUNI" class="btn btn-default dropdown-toggle" type="button" id="MUNI" data-toggle="dropdown" aria-haspopup="true">
-              NEW MUNI
-            </button> -->
-
-          </div>
+         </div>
+         <div style="display:inline-block; position:relative; bottom: -5px; left:-6px; z-index:50;">
+           <button class="btn btn-default dropdown-toggle" type="button" id="showmap" data-toggle="dropdown" aria-haspopup="true">
+             Show the Map
+           </button>
+           <button class="btn btn-default dropdown-toggle" type="button" id="hidemap" data-toggle="dropdown" aria-haspopup="true">
+             Remove All Data
+           </button>
+           <br>
+         </div>
         </div>
+
 
         <div style="position:absolute;left:5px;width:390px;top:510px;">
           <div id="results" style="display: none;">
-
             <h5 id = "selection"></h5>
             <h2 id = "sidebar-heading"><span id="LENGTH">City Name</span></h2>
             <p class="annotation">
@@ -250,36 +231,37 @@
             <!-- <p> There are over 10 cities in China with population over 10,000,000 in 2017. -->
         </div>
     </div>
-    <div id="map" style="position: absolute; right:0; left: 400px; top: 30px; height:100%; z-index:10;"></div>
+    <div id="map" style="position: absolute; right:0; left: 360px; top: 20px; height:100%; z-index:10;"></div>
       <div class="dropdown1">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Change BaseMaps
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Change Scale
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <!-- <li id = "global"><a href="#">Global</a></li> -->
+            <li id = "Global"><a href="#">Global</a></li>
+            <li id = "Regional"><a href="#">Regional</a></li>
+            <li id = "AOI"><a href="#">AOI</a></li>
+        </ul>
+      </div>
+      <div class="hint">
+        <p> Hint*: Click the boundaries to read statistics.</p>
+      </div>
+        <br>
+        <br>
+      <div class="dropdown2">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            BaseMaps
             <span class="caret"></span>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
               <li id = "dark"><a href="#">Dark</a></li>
               <li id = "light"><a href="#">Light</a></li>
               <li id = "satellite"><a href="#">Satellite</a></li>
           </ul>
       </div>
-      <div class="hint">
-        <p> Hint*: Click the boundaries to read statistics.</p>
-      </div>
 
-        <br>
-        <br>
-      <div class="dropdown2">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Change Scale
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <!-- <li id = "global"><a href="#">Global</a></li> -->
-              <li id = "Global"><a href="#">Global</a></li>
-              <li id = "Regional"><a href="#">Regional</a></li>
-              <li id = "AOI"><a href="#">AOI</a></li>
-          </ul>
-      </div>
+
 
       <div class="description">
         <div class="chartsarea">
@@ -287,20 +269,17 @@
           <br> -->
           <canvas class="charts" id="myChart1" width="300" height="300"></canvas>
           <br>
-          <!-- <p id="graphtitle1">Infrastructure Efficiency Score</p> -->
           <canvas class="charts" id="myChart2" width="300" height="200"></canvas>
           <!-- <p id="graphtitle2">Regional Comparison</p> -->
           <!-- <canvas class="charts" id="myChart3" width="300" height="200"></canvas> -->
         </div>
-
         <p id = "destext">This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. <br><br><strong>Please select a municipality first for downloadable PDF and EXCEL table. </strong></p>
-
         <!-- <button type="submit" onclick="window.open('file.doc')">Download!</button> -->
         <div class = "buttonarea">
           <button class="btn btn-default dropdown-toggle" type="button" id="download1" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
             Download PDF
           </button>
-          <button class="btn btn-default dropdown-toggle" type="button" id="download2" onclick="tableToExcel('testTable', 'Infrastructure Efficiency Profile')" value="Export to Excel" data-toggle="dropdown" aria-haspopup="true">
+          <button class="btn btn-default dropdown-toggle" type="button" id="download2" onclick="tableToExcel('testTable', 'Infrastructure Efficiency Profile')" data-toggle="dropdown" aria-haspopup="true">
             Download EXCEL
           </button>
           <br>
