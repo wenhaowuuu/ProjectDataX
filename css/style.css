@@ -103,37 +103,53 @@ div.description{
   bottom:0;
   right:0;
   width:330px;
-  background-color: rgba(171, 150, 150, .4);
+  background-color: rgba(255, 255, 255, .8);
+  /*background-color: rgba(171, 150, 150, .4);*/
   filter:alpha(opacity=30);
   z-index: 30;
 
 }
 
-
 .chartsarea{
   position:absolute;
-  top:0;
-  right:20px;
+  top:40px;;
+  right:5px;
+  left:10px;
   z-index:50;
+  padding:5px;
 }
 
-div.description p {
 
+#myChart1{
+  width:265px;
+  height:280px;
 }
+
+#myChart2{
+  position:relative;
+  top:20px;
+  width:260px;
+  height:300px;
+}
+
 
 #destext{
   position:absolute;
-  color:rgba(245, 240, 240, .6);
+  color:rgba(0, 0, 0, 0.6);
   font-size:14px;
+  font-family:'Roboto Condensed',sans-serif;
+  font-weight:lighter;
   margin:15px;
   z-index:60;
-  bottom:100px;
+  bottom:70px;
+  padding:10px;
 }
 
 
 .buttonarea{
   position:absolute;
-  bottom:45px;
+  margin:4px;
+  bottom:15px;
 }
 
 
@@ -201,16 +217,19 @@ div.intro p {
 
 .hint{
   position:absolute;
-  top:45px;
+  top:30px;
   right:60px;
   font-family: inherit;
   font-style: italic;
   font-size:13px;
-  color:#ffffff;
+  color:rgba(0, 0, 0, .6);
   word-break: auto;
   z-index:80;
 }
 
+.dropdown-menu{
+  font-family:'Roboto',sans-serif;
+}
 
 .storylink{
   position:relative;

@@ -13,11 +13,13 @@
 //1.1 SETUP BASEMAP
 //SOME NOTES HERE
 var map = L.map('map', {
-  center: [15.162820, -87.509107],
+  center: [15.162820, -87.69107],
   zoom: 6.5
 });
 
-var Style = 'dark';
+// var Style = 'dark';
+var Style = 'light';
+
 
 L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.png', {
   maxZoom: 18,
@@ -216,14 +218,14 @@ $('#satellite').click(function(){
     });
 
     $('#AOI').click(function(){
-      map.setView([15.162820, -87.509107],6.5);
+      map.setView([15.162820, -87.69107],6.5);
       // map0.setCenter([15.162820, -87.509107],6.5);
     });
 
 
 // 2. CREATE VARIABLES
 // 2.1 DATA SOURCE URLS
-  var southamerica = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/south_america.geojson";
+  // var southamerica = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/south_america.geojson";
   var northtriangle = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/guatemala.geojson";
 
 
@@ -369,12 +371,12 @@ var numberofClicks = 0;
        //https://stackoverflow.com/questions/24815851/how-to-clear-a-chart-from-a-canvas-so-that-hover-events-cannot-be-triggered
 
        $('#myChart1').remove();
-       $('.chartsarea').append('<canvas class="charts" id="myChart1" width="300" height="300"></canvas>');
+       $('.chartsarea').append('<canvas class="charts" id="myChart1"></canvas>');
        console.log("replace1");
 
 
        $('#myChart2').remove();
-       $('.chartsarea').append('<canvas class="charts" id="myChart2" width="300" height="200"></canvas>');
+       $('.chartsarea').append('<canvas class="charts" id="myChart2"></canvas>');
        console.log("replace2");
 
 
@@ -449,7 +451,7 @@ var numberofClicks = 0;
 
        _.each(namelist,function(name){
          list = order + '.' + name;
-       })
+       });
 
        $('#selection').append(blank + blank + blank + list + " ");
 
@@ -502,22 +504,24 @@ var numberofClicks = 0;
                    labels: [layer.feature.properties.m_name, "Average", "UN"],
                    datasets: [{
                        label: 'Poverty',
-                       data: [layer.feature.properties.gen_pov, 50, 30],
+                       data: [layer.feature.properties.gen_pov, 33, 20],
                        backgroundColor: [
-                           'rgba(255, 99, 132, 0.5)',
-                           'rgba(54, 162, 235, 0.5)',
+                           'rgba(255, 120, 35, 0.5)',
+                           'rgba(50, 120, 230, 0.5)',
                            'rgba(255, 206, 86, 0.5)',
 
                        ],
                        borderColor: [
-                           'rgba(255,99,132,1)',
-                           'rgba(54, 162, 235, 1)',
+                           'rgba(255, 120, 35, 1)',
+                           'rgba(50, 120, 230, 1)',
                            'rgba(255, 206, 86, 1)',
                        ],
                        borderWidth: 1
                    }]
                },
                options: {
+                 responsive: false,
+                 maintainAspectRatio: false,
                    scales: {
                        yAxes: [{
                            ticks: {
@@ -587,7 +591,7 @@ var numberofClicks = 0;
                  type: 'radar',
                  data: marksData,
                  options: {
-
+                   responsive: false, maintainAspectRatio: false,
 
                  }
                });
@@ -1024,7 +1028,7 @@ $('#showmap').click(function(){
       _.each(parsedData14,function(item){
         var itemB = L.geoJson(parsedData14,
           {
-            style: {opacity:0.6,width:1.5,color:'#F39C12'},
+            style: {opacity:0.6,width:1.2,color:'#F39C12'},
             pointToLayer: function (feature, latlngs) {
               return new L.polyline(latlngs, {
               }
@@ -1044,7 +1048,7 @@ $('#showmap').click(function(){
         _.each(parsedData15,function(item){
           var itemB = L.geoJson(parsedData15,
             {
-              style: {opacity:0.3,width:0.5,color:'#F9E79F'},
+              style: {opacity:0.35,width:0.3,color:'#f1c40f'},
               pointToLayer: function (feature, latlngs) {
                 return new L.polyline(latlngs, {
                 }
@@ -1169,26 +1173,26 @@ $(document).ready(function(){
 
 
 //LOAD SOUTH AMERICA COUNTRY DATA
-$(document).ready(function(){
-  $.ajax(southamerica).done(function(data) {
-    parsedData10 = JSON.parse(data);
-    console.log(parsedData10);
-    console.log("parsed10");
-    console.log(parsedData10.features[0].properties.country);
-    layerMappedPolygons = _.each(parsedData10,function(item){
-      L.geoJson(parsedData10,
-        {
-          style: {opacity:0.4},
-          pointToLayer: function (feature, latlngs) {
-            return new L.Polygon(latlngs, {
-            }
-          );
-        }}
-      ).addTo(map).bindPopup("text");
-    }
-  );
-  });
-});
+// $(document).ready(function(){
+//   $.ajax(southamerica).done(function(data) {
+//     parsedData10 = JSON.parse(data);
+//     console.log(parsedData10);
+//     console.log("parsed10");
+//     console.log(parsedData10.features[0].properties.country);
+//     layerMappedPolygons = _.each(parsedData10,function(item){
+//       L.geoJson(parsedData10,
+//         {
+//           style: {opacity:0.4},
+//           pointToLayer: function (feature, latlngs) {
+//             return new L.Polygon(latlngs, {
+//             }
+//           );
+//         }}
+//       ).addTo(map).bindPopup("text");
+//     }
+//   );
+//   });
+// });
 
 
 //4.2 LOADING SECONDARY ROAD NETWORK DATA
@@ -1368,10 +1372,11 @@ $(document).ready(function(){
               feature.properties.rd_density.toFixed(3) + " per square km" +
               "</br>" +
 
+              //
+              // "<b>Urban / Rural Road Ratio: </b>" + "1 : " +
+              // (feature.properties.rd_rural / feature.properties.rd_urban).toFixed(2) +
+              // "</br>" +
 
-              "<b>Urban / Rural Road Ratio: </b>" + "1 : " +
-              (feature.properties.rd_rural / feature.properties.rd_urban).toFixed(2) +
-              "</br>" +
 
               // "<b>Road Length in Urban Area: </b>" +
               // feature.properties.rd_urban + " km" +
@@ -1381,17 +1386,19 @@ $(document).ready(function(){
               // feature.properties.rd_rural + " km" +
               // "</br>" +
 
-              "<b>Major Road: </b>" +
-              feature.properties.rd_major.toFixed(3) + " km" +
-              "</br>" +
 
-              "<b>Secondary Road: </b>" +
-              feature.properties.rd_second.toFixed(3) + " km" +
-              "</br>" +
 
-              "<b>Tertiary Road: </b>" +
-              feature.properties.rd_tertiar.toFixed(3) + " km" +
-              "</br>" +
+              // "<b>Major Road: </b>" +
+              // feature.properties.rd_major.toFixed(3) + " km" +
+              // "</br>" +
+              //
+              // "<b>Secondary Road: </b>" +
+              // feature.properties.rd_second.toFixed(3) + " km" +
+              // "</br>" +
+              //
+              // "<b>Tertiary Road: </b>" +
+              // feature.properties.rd_tertiar.toFixed(3) + " km" +
+              // "</br>" +
 
               "</br>" +
               "<b>Data Collected Year: </b>" +
@@ -1652,8 +1659,8 @@ var tableToPDF = function(){
   doc.setFont("times");
   doc.setFontType("italic");
   doc.setFontSize(10);
-  doc.text(5, 280, '* This data was obtained from ');
-  doc.text(5, 285, '' + P_source);
+  doc.text(5, 285, '* This data was obtained from ');
+  doc.text(5, 290, '' + P_source);
 
   // doc.setFont("times");
   // doc.setFontType("normal");

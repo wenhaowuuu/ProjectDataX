@@ -231,7 +231,7 @@
             <!-- <p> There are over 10 cities in China with population over 10,000,000 in 2017. -->
         </div>
     </div>
-    <div id="map" style="position: absolute; right:0; left: 360px; top: 20px; height:100%; z-index:10;"></div>
+    <div id="map" style="position: absolute; right:330px; left: 360px; top: 20px; height:100%; z-index:10;"></div>
       <div class="dropdown1">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           Change Scale
@@ -265,15 +265,16 @@
 
       <div class="description">
         <div class="chartsarea">
-          <!-- <canvas class="charts" id="myChart0" width="300" height="300"></canvas>
-          <br> -->
-          <canvas class="charts" id="myChart1" width="300" height="300"></canvas>
+          <canvas class="charts" id="myChart1"></canvas>
           <br>
-          <canvas class="charts" id="myChart2" width="300" height="200"></canvas>
-          <!-- <p id="graphtitle2">Regional Comparison</p> -->
-          <!-- <canvas class="charts" id="myChart3" width="300" height="200"></canvas> -->
+          <canvas class="charts" id="myChart2"></canvas>
+<!--
+          <canvas class="charts" id="myChart1" width="280" height="240"></canvas>
+          <br>
+          <canvas class="charts" id="myChart2" width="280" height="160"></canvas> -->
+
         </div>
-        <p id = "destext">This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. <br><br><strong>Please select a municipality first for downloadable PDF and EXCEL table. </strong></p>
+        <p id = "destext">This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. <br><br>Please select a municipality first for downloadable PDF and EXCEL table.</p>
         <!-- <button type="submit" onclick="window.open('file.doc')">Download!</button> -->
         <div class = "buttonarea">
           <button class="btn btn-default dropdown-toggle" type="button" id="download1" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
@@ -287,7 +288,8 @@
       </div>
 
       <canvas id = "canvas" src = "http://www.processamentodigital.com.br/wp-content/uploads/2017/06/arcgis_composicao_rgb_sentinel2.jpg"></canvas>
-      <div class="legend">
+      <!-- //OPTIONAL LEGEND OBJECT -->
+      <!-- <div class="legend">
           <h5>Poverty Rates of Municipalities</h5>
           <div>
             <div class = label1 id = fill1></div><p class = label1> < 10%</p>
@@ -304,12 +306,9 @@
           <div>
             <div class = label1 id = fill5></div><p class = label1> > 75%</p>
           </div>
-      </div>
-      <!-- <script type="text/javascript">
-      </script> -->
+      </div> -->
+
  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-   <div id="chartContainer" style="height: 150px; width: 300px;">
-   </div>
 
 
 
