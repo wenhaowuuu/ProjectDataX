@@ -484,8 +484,50 @@ var numberofClicks = 0;
           //  console.log("replace2");
          }
          else {
-           var ctx2 = document.getElementById("myChart2").getContext('2d');
 
+
+           //STUDY THIS EXAMPLE!!!
+          //  https://stackoverflow.com/questions/43664722/how-to-save-chart-js-charts-as-image-without-black-background-using-blobs-and-fi
+          //  https://jsfiddle.net/a9hmnd9L/2/
+          //  var backgroundColor = 'white';
+          //  Chart.plugins.register({
+          //    beforeDraw: function(c) {
+          //      var ctx = c.chart.ctx;
+          //      ctx.fillStyle = backgroundColor;
+          //      ctx.fillRect(0, 0, c.chart.width, c.chart.height);
+          //     }
+          //   });
+           //
+          //   var canvas = $('#NoBidsChart').get(0);
+          //   var myChart = new Chart(canvas, {
+          //       type: 'line',
+          //       data: {
+          //         labels: [1, 2, 3, 4, 5],
+          //         datasets: [{
+          //           label: 'Line Chart',
+          //           data: [1, 2, 3, 4, 5],
+          //           backgroundColor: 'rgba(255, 0, 0, 0.2)',
+          //           borderColor: 'rgba(255, 0, 0, 0.5)',
+          //           pointBackgroundColor: 'black'
+          //         }]
+          //       }
+          //     });
+           //
+          //   // save as image
+          //   $('#save').click(function() {
+          //     canvas.toBlob(function(blob) {
+          //       saveAs(blob, "pretty image.png");
+          //     });
+          //   });
+
+
+
+
+            //
+
+           var ctx2 = document.getElementById("myChart2");
+
+           ctx2.style.backgroundColor = 'rgba(255,255,255,1)';
            //Fill the background
           //  Chart.plugins.register({
           //    beforeDraw: function(myChart) {
@@ -495,7 +537,8 @@ var numberofClicks = 0;
           //    }
           //  });
 
-          // ctx2.style.backgroundColor = 'rgba(255,0,0,1)';
+
+
           // ctx2.fillStyle = "white";
           // ctx2.fill = 'rgba(255, 0, 255, 0.5)';
            var myChart = new Chart(ctx2, {
@@ -531,6 +574,9 @@ var numberofClicks = 0;
                            }
                          }
                });
+
+              // ctx2.style.backgroundColor = 'rgba(255,0,0,1)';
+
              }
                       P_country = layer.feature.properties.country;
                       P_department = layer.feature.properties.d_name;
@@ -636,7 +682,6 @@ var numberofClicks = 0;
       //  };
 
          }
-
 
    )};
 
@@ -1468,7 +1513,7 @@ var tableToExcel = (function() {
 // GENERATE A MAP IN THE DOWNLOADABLE PDF REPORT
 // https://stackoverflow.com/questions/35447928/dynamically-create-image-map-via-javascript
 
-//REALLY GOOD REFERENCE
+//REALLY GOOD JS PDF REFERENCE
 // https://mrrio.github.io/
 
 
@@ -1551,7 +1596,7 @@ var tableToPDF = function(){
   // canvas parameters (left, top, canvas width, canvas height)
   // https://github.com/MrRio/jsPDF/issues/434
   // https://github.com/MrRio/jsPDF/blob/master/examples/images.html
-  doc.addImage(imgData, 'JPEG', 164, 14, 35, 14, undefined);
+  doc.addImage(imgData, 'JPEG', 164, 14, 35, 12, undefined);
 
   doc.setFontSize(10);
   doc.setFontType("light");
@@ -1587,13 +1632,16 @@ var tableToPDF = function(){
 
   //INSERT THE GRAPH & CHARTS
   //DEFINE THE DIFFERENT COLOR???
-  // var newCanvas1 = document.querySelector('#myChart1');
-  // var newCanvasImg1 = newCanvas1.toDataURL("image/jpeg", 1.0);
-  // doc.addImage(newCanvasImg1,'JPEG', 10, 46, 60, 60);
-  //
-  // var newCanvas2 = document.querySelector('#myChart2');
-  // var newCanvasImg2 = newCanvas2.toDataURL("image/jpeg", 1.0);
-  // doc.addImage(newCanvasImg2,'JPEG', 74, 46, 90, 60);
+
+  //REFERENCE HERE
+  //https://stackoverflow.com/questions/43664722/how-to-save-chart-js-charts-as-image-without-black-background-using-blobs-and-fi
+  var newCanvas1 = document.querySelector('#myChart1');
+  var newCanvasImg1 = newCanvas1.toDataURL("image/jpeg", 1.0);
+  doc.addImage(newCanvasImg1,'JPEG', 10, 40, 80, 80);
+
+  var newCanvas2 = document.querySelector('#myChart2');
+  var newCanvasImg2 = newCanvas2.toDataURL("image/jpeg", 1.0);
+  doc.addImage(newCanvasImg2,'JPEG', 94, 40, 60, 40);
 
 
 
