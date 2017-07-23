@@ -123,6 +123,7 @@ div.description{
 #myChart1{
   width:265px;
   height:280px;
+  /*display:none;*/
 }
 
 #myChart2{
@@ -130,6 +131,7 @@ div.description{
   top:20px;
   width:260px;
   height:300px;
+  /*display:none;*/
 }
 
 
@@ -191,6 +193,22 @@ div.intro p {
   width:400px;
   top:5px;
   left:3px;
+}
+
+.locationmap{
+  position:absolute;
+  right:5px;
+  top:70px;
+  /*display:none;*/
+}
+
+
+#locationmap{
+  position:absolute;
+  right:5px;
+  top:70px;
+  z-index:300;
+  /*display:none;*/
 }
 
 .dropdown1{

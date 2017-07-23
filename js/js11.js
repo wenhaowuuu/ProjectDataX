@@ -1634,6 +1634,63 @@ var tableToPDF = function(){
   //REFERENCE:
   //https://stackoverflow.com/questions/35447928/dynamically-create-image-map-via-javascript
   //PLACE HOLDER f39ISEhTq9gUlpaWlFR4Q0xagAMw9RqdWBgYEZGho1fYbPZiYmJGzZszMqaYjDoTSazTqczGAwMwzAMQ9M0SZJms5kgiOjo6Oee2
+  // function function1() {
+  //   var img = document.getElementById("myImg");
+  //   // var img;
+  //   var map = document.createElement("map");
+  //   map.name = "myMap";
+  //
+  //   var area = document.createElement("area");
+  //   area.shape = "rect";
+  //   area.coords = "0,0,100,60";
+  //   // area.onmouseover = function(){alert("over")};
+  //
+  //   map.appendChild(area);
+  //
+  //   var div = document.getElementById("div");
+  //   div.appendChild(map);
+  //
+  //   img.setAttribute('usemap', "#myMap");
+  //   }
+
+    //
+    // var newCanvas1 = document.querySelector('#myChart1');
+    // var newCanvasImg1 = newCanvas1.toDataURL("image/jpeg", 1.0);
+    // doc.addImage(newCanvasImg1,'JPEG', 120, 130, 80, 80);
+
+
+    // THIS MAY WORK! USING GOOGLE/CARTODB!!!
+
+    // http://staticmapmaker.com/google/
+    var location = '';
+    location = P_muni;
+    var mapURL = "https://maps.googleapis.com/maps/api/staticmap?center=" + location + "&zoom=13&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true";
+    console.log(mapURL);
+
+    // $('.chartsarea').append('<canvas class="charts" id="myChart1"></canvas>');
+
+    //
+    // $('.locationmap').append(
+    //   '<img id="locationmap" width="320" src=mapURL alt="for map"></img>'
+    // );
+
+    // THIS METHOD MAY WORK TOO!!!
+    // https://stackoverflow.com/questions/14847573/how-do-i-change-source-url-of-an-image-which-has-been-dynamically-added-to-a-div
+    var img = document.createElement('img');
+    img.src = mapURL;
+
+    $('.locationmap').append(img);
+    //
+    // $('.locationmap').append(
+    //   '<img id="locationmap" width="320" src="https://maps.googleapis.com/maps/api/staticmap?center=Beijing&zoom=13&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true" alt="for map"></img>'
+    // );
+
+
+
+
+    // src="https://maps.googleapis.com/maps/api/staticmap?center=Beijing,China&zoom=13&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true"
+
+
 
 
   var mapData1 =
@@ -1666,7 +1723,7 @@ var tableToPDF = function(){
   // var newCanvasImg3 = newCanvas3.toDataURL("image/jpeg", 1.0);
   // doc.addImage(newCanvasImg2,'JPEG', 98, 80, 60, 40);
 
-
+  //LAYOUT OPTION B - GRAPH FIRST
   // var newCanvas1 = document.querySelector('#myChart1');
   // var newCanvasImg1 = newCanvas1.toDataURL("image/jpeg", 1.0);
   // doc.addImage(newCanvasImg1,'JPEG', 10, 40, 80, 80);
@@ -1683,7 +1740,7 @@ var tableToPDF = function(){
 
 
   //TRIAL 2 STACKED BAR CHART
-  
+
   //SOCIAL ECONOMIC INFO
   doc.setFont("georgia");
   doc.setFontType("bold");
