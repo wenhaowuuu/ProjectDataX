@@ -22,6 +22,18 @@
     integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
     crossorigin=""/>
 
+    <!-- //LOAD THE SATELLITE MAP -->
+        <meta charset='utf-8' />
+        <title></title>
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
+        <style>
+            body { margin:0; padding:0; }
+            #map0 { position:absolute; left:400px; right:0; top:30px; bottom:0; }
+        </style>
+        
+
     <table id ="testTable" summary="Infrastructure Efficiency Profile." rules="groups" frame="hsides" border="2">
       <caption>PROFILE FOR MUNICIPALITY <p style="background-color: #f07f30; color: #ffffff; font-weight: bold;" id="exceltitle"></p></caption>
       <caption>DataXLat @ GeoAdaptive LLC</caption>
@@ -63,28 +75,6 @@
                <td id = "X_Notes">something to consider</td>
              </tr>
 
-<!--
-            <tbody><tr><td>1200</td>
-             <td>Unicode (BMP of ISO/IEC-10646)</td>
-             <td></td><td></td><td>X</td><td>X</td><td>*</td></tr><tr><td>1250</td>
-               <td style="font-weight: bold">Windows 3.1 Eastern European</td>
-                 <td>X</td><td></td><td>X</td><td>X</td><td>X</td></tr><tr><td>1251</td>
-                 <td>Windows 3.1 Cyrillic</td><td>X</td><td></td><td>X</td><td>X</td><td>X</td></tr><tr><td>1252</td><td>Windows 3.1 US (ANSI)</td>
-                   <td>X</td><td></td><td>X</td><td>X</td><td>X</td></tr>
-                   <tr><td>1253</td><td>Windows 3.1 Greek</td><td>X</td><td></td><td>X</td><td>X</td><td>X</td></tr>
-                   <tr><td>1254</td><td>Windows 3.1 Turkish</td><td>X</td><td></td><td>X</td><td>X</td><td>X</td></tr>
-                   <tr><td>1255</td><td>Hebrew</td><td>X</td><td></td><td></td><td></td><td>X</td></tr>
-                   <tr><td>1256</td><td>Arabic</td><td>X</td><td></td><td></td><td></td><td>X</td></tr>
-                   <tr><td>1257</td><td>Baltic</td><td>X</td><td></td><td></td><td></td><td>X</td></tr>
-                   <tr><td>1361</td><td>Korean (Johab)</td><td>X</td><td></td><td></td><td>**</td><td>X</td></tr>
-             </tbody>
-             <tbody>
-               <tr><td>437</td><td>MS-DOS United States</td><td></td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-               <tr><td>708</td><td>Arabic (ASMO 708)</td><td></td><td>X</td><td></td><td></td><td>X</td></tr>
-               <tr><td>709</td><td>Arabic (ASMO 449+, BCON V4)</td><td></td><td>X</td><td></td><td></td><td>X</td></tr>
-               <tr><td>710</td><td>Arabic (Transparent Arabic)</td><td></td><td>X</td><td></td><td></td><td>X</td></tr>
-               <tr><td>720</td><td>Arabic (Transparent ASMO)</td><td></td><td>X</td><td></td><td></td><td>X</td></tr>
-             </tbody> -->
       </table>
 
 
@@ -98,16 +88,7 @@
             <h3 class = "subtitle"> The Subtitle </h3>
               <p class = "text">the description </p>
       </div>
-      <!-- //LOAD THE SATELLITE MAP -->
-          <meta charset='utf-8' />
-          <title></title>
-          <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-          <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
-          <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
-          <style>
-              body { margin:0; padding:0; }
-              #map0 { position:absolute; left:400px; right:0; top:30px; bottom:0; }
-          </style>
+
 
   </head>
   <body>
@@ -267,14 +248,14 @@
 
 
       <div class="description">
-        <!-- <div class="chartsarea"> -->
-          <!-- <canvas class="charts" id="myChart1"></canvas> -->
+        <div class="chartsarea">
+          <canvas class="charts" id="myChart1"></canvas>
           <br>
-          <!-- <canvas class="charts" id="myChart2"></canvas> -->
+          <canvas class="charts" id="myChart2"></canvas>
 
-        <!-- </div> -->
+
+        </div>
         <p id = "destext">This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. <br><br>Please select a municipality first for downloadable PDF and EXCEL table.</p>
-        <!-- <button type="submit" onclick="window.open('file.doc')">Download!</button> -->
         <div class = "buttonarea">
           <button class="btn btn-default dropdown-toggle" type="button" id="download1" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
             Download PDF
@@ -282,11 +263,6 @@
           <button class="btn btn-default dropdown-toggle" type="button" id="download2" onclick="tableToExcel('testTable', 'Infrastructure Efficiency Profile')" data-toggle="dropdown" aria-haspopup="true">
             Download EXCEL
           </button>
-
-          <!-- <button class="btn btn-default dropdown-toggle" type="button" id="save" data-toggle="dropdown" aria-haspopup="true">
-            save
-          </button> -->
-
           <br>
         </div>
       </div>
@@ -313,7 +289,7 @@
       </div> -->
 
       <div class = "locationmap">
-
+        <canvas class="charts" id="myImage1"></canvas>
       </div>
 
 

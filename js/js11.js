@@ -1662,33 +1662,58 @@ var tableToPDF = function(){
     // THIS MAY WORK! USING GOOGLE/CARTODB!!!
 
     // http://staticmapmaker.com/google/
+    // https://devblog.mapquest.com/2011/05/11/get-creative-with-the-open-static-maps-api/
+    // http://html.com/images/how-to-make-an-image-map/
+
+
+
     var location = '';
-    location = P_muni;
+    location = P_muni + ", " + P_country;
     var mapURL = "https://maps.googleapis.com/maps/api/staticmap?center=" + location + "&zoom=13&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true";
     console.log(mapURL);
 
-    // $('.chartsarea').append('<canvas class="charts" id="myChart1"></canvas>');
-
-    //
-    // $('.locationmap').append(
-    //   '<img id="locationmap" width="320" src=mapURL alt="for map"></img>'
-    // );
-
     // THIS METHOD MAY WORK TOO!!!
     // https://stackoverflow.com/questions/14847573/how-do-i-change-source-url-of-an-image-which-has-been-dynamically-added-to-a-div
-    var img = document.createElement('img');
+    // http://html.com/images/how-to-make-an-image-map/
+
+
+    // https://jsfiddle.net/epistemex/Lsx53yn2/
+    //test 001 - not working!
+    // var img = new Image();
+    // console.log("image variable");
+    // img.onload = function(){
+    //   doc.addImage(this,100,100);
+    // };
+    // img.crossOrigin = "";
+    // console.log("image added");
+    // img.src = mapURL;
+    // console.log("image loaded");
+
+
+    //test 002
+    var img = new Image();
+    // var img = document.createElement('img');
     img.src = mapURL;
-
     $('.locationmap').append(img);
+
+    console.log("appended0");
+    // // src="https://maps.googleapis.com/maps/api/staticmap?center=Beijing,China&zoom=13&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true"
+    // //
+    // var imgData1 = img.toDataURL("image/jpeg", 1.0);
+    // console.log("appended1");
+
+    // doc.addImage(imgData1,'JPEG', 150, 230, 40, 60, undefined);
+    // doc.addImage(img, 'JPEG', 10, 40, 190, 80, undefined);
     //
-    // $('.locationmap').append(
-    //   '<img id="locationmap" width="320" src="https://maps.googleapis.com/maps/api/staticmap?center=Beijing&zoom=13&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true" alt="for map"></img>'
-    // );
+    var newCanvas1 = document.querySelector('#myImage1');
+    var newCanvasImg1 = newCanvas1.toDataURL("image/jpeg", 1.0);
+    doc.addImage(newCanvasImg1,'JPEG', 120, 130, 80, 80);
 
 
-
-
-    // src="https://maps.googleapis.com/maps/api/staticmap?center=Beijing,China&zoom=13&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true"
+    // var newCanvas1 = document.querySelector('#myChart1');
+    // var newCanvasImg1 = newCanvas1.toDataURL("image/jpeg", 1.0);
+    // doc.addImage(newCanvasImg1,'JPEG', 120, 130, 80, 80);
+    //
 
 
 
@@ -1717,7 +1742,10 @@ var tableToPDF = function(){
   var newCanvas2 = document.querySelector('#myChart2');
   var newCanvasImg2 = newCanvas2.toDataURL("image/jpeg", 1.0);
   doc.addImage(newCanvasImg2,'JPEG', 120, 220, 60, 40);
-  //
+
+
+
+
   // //another graph maybe?
   // var newCanvas3 = document.querySelector('#myChart2');
   // var newCanvasImg3 = newCanvas3.toDataURL("image/jpeg", 1.0);
