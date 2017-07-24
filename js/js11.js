@@ -244,8 +244,8 @@ $('#satellite').click(function(){
   var hospital = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_hospital_nt.geojson";
 
   // var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
-
-  var highschool = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_schools_test1.geojson";
+  // var highschool = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_schools_test1.geojson";
+  var highschool = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_schools_muni_joined1.geojson";
 
   // var roadsall = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infra_redvial_osm_2016_gt_2.geojson?token=AWa3umrkbZpL2VZXCIIaJkR15o-4Jo_Aks5ZdmxCwA%3D%3D";
 
@@ -317,19 +317,7 @@ $('#satellite').click(function(){
     'opacity': 0.01,
   };
 
-  // var highlight = {
-  //   'color': '#0000FF',
-  //   'weight': 2,
-  //   'opacity': 0.8,
-  // };
-
   var highlight = {
-    // 'border-style': 'dotted',
-    // 'border-width': '5px',
-    // 'border-color': 'rgba(255, 255, 0, 0.9)',
-    // 'weight': 2,
-    // 'borderColor': 'yellow',
-    // 'border': '5px solid yellow',
     'color':'#416FEA',
     'opacity': 0.2,
 
@@ -516,12 +504,55 @@ var numberofClicks = 0;
 
          //highlight the hospitals and schools in the
         //  selected layer, if applicable
+        // TEST 001 - NOT WORKING!
         // if (x4 == true){
         //   _.each(Schools,function(item){
-        //     if (item.features.properties)
+        //     if (item.feature.properties.m_name == layer.feature.properties.m_name){
+        //       item.setStyle(highlight);
+        //     }
+        //     else{
+        //       item.setStyle(fadeout);
+        //     }
         //   });
         //
         // }
+
+        // TEST 002 - LET'S TRY FILTER
+
+        // var myFilter = function(feature) {
+        //      if (feature.properties.gen_pov===' ') {
+        //      return false;
+        //      }
+        //      else {
+        //        return true;
+        //      }
+        //    };
+
+        // if (x4 == true){
+        //   var schoolFilter = function(feature){
+        //     if (feature.properties.m_name == layer.feature.properties.m_name){
+        //       return true;
+        //       feature.setStyle(highlight);
+        //     }
+        //     else {
+        //       return false;
+        //       feature.setStyle(fadeout);
+        //     }
+        //   };
+
+        // add the code for actual filtering and styling execution
+
+
+        }
+
+
+
+        //LAYER CLICK EVENT
+        // if (currentlayer!=null){
+        //   if(currentlayer.feature.properties.m_name == itemB.feature.properties.m_name)
+        //
+        // }
+
 
 
 
@@ -1201,6 +1232,7 @@ $('#showmap').click(function(){
                  }
              }).addTo(map).bindPopup("Schools");
              Schools.push(itemB);
+
            }
          );
          selectedmaps.push(Schools);
@@ -1263,7 +1295,7 @@ $(document).ready(function(){
   $.ajax(highschool).done(function(data) {
     parsedData17 = JSON.parse(data);
     console.log(parsedData17);
-    console.log("parsed17");
+    console.log("parsed17_schools");
   });
 });
 
