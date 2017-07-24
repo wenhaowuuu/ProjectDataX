@@ -366,6 +366,9 @@ var numberofClicks = 0;
        numberofClicks = numberofClicks + 1;
 
 
+
+
+
        //YOU'D BETTER CLEAN THE HTML ELEMENT EVERY TIME YOU CLICK ON THE LAYER
        //reference from
        //https://stackoverflow.com/questions/24815851/how-to-clear-a-chart-from-a-canvas-so-that-hover-events-cannot-be-triggered
@@ -434,8 +437,38 @@ var numberofClicks = 0;
          P_rd_21 = layer.feature.properties.rd_second / layer.feature.properties.rd_major;
          P_rd_31 = layer.feature.properties.rd_tertiar / layer.feature.properties.rd_major;
 
+         //LOAD THE SATELLITE MAP FOR THE SELECTED
+        //  BELOW WOULD PLACE AN AERIAL ON, BUT NOT REALLY WORKING,
+        // it would become VERY VERY VERY SLOW to load when the following section is released!!!
 
-        //  $('#exceltitle').text(layer.feature.properties.m_name);
+
+
+
+
+
+
+        //  var location = '';
+        //  location = P_muni + ", " + P_country;
+        //  var mapURL = "https://maps.googleapis.com/maps/api/staticmap?center=" + location + "&zoom=10&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true";
+        //  console.log(mapURL);
+        //  var img = new Image();
+        //  // var img = document.createElement('img');
+        //  img.src = mapURL;
+        //  $('.locationmap').append(img);
+        //  console.log("appended0");
+        //  console.log(img);
+
+
+
+
+
+
+
+
+
+
+
+         //  $('#exceltitle').text(layer.feature.properties.m_name);
          //ZOOM TO THE SELECTED MUNICIPALITY
          map.fitBounds(layer.getBounds(),{
                     padding: [80,80]
@@ -1667,11 +1700,6 @@ var tableToPDF = function(){
 
 
 
-    var location = '';
-    location = P_muni + ", " + P_country;
-    var mapURL = "https://maps.googleapis.com/maps/api/staticmap?center=" + location + "&zoom=13&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true";
-    console.log(mapURL);
-
     // THIS METHOD MAY WORK TOO!!!
     // https://stackoverflow.com/questions/14847573/how-do-i-change-source-url-of-an-image-which-has-been-dynamically-added-to-a-div
     // http://html.com/images/how-to-make-an-image-map/
@@ -1691,12 +1719,12 @@ var tableToPDF = function(){
 
 
     //test 002
-    var img = new Image();
-    // var img = document.createElement('img');
-    img.src = mapURL;
-    $('.locationmap').append(img);
-
-    console.log("appended0");
+    // var img = new Image();
+    // // var img = document.createElement('img');
+    // img.src = mapURL;
+    // $('.locationmap').append(img);
+    //
+    // console.log("appended0");
     // // src="https://maps.googleapis.com/maps/api/staticmap?center=Beijing,China&zoom=13&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true"
     // //
     // var imgData1 = img.toDataURL("image/jpeg", 1.0);
@@ -1705,9 +1733,9 @@ var tableToPDF = function(){
     // doc.addImage(imgData1,'JPEG', 150, 230, 40, 60, undefined);
     // doc.addImage(img, 'JPEG', 10, 40, 190, 80, undefined);
     //
-    var newCanvas1 = document.querySelector('#myImage1');
-    var newCanvasImg1 = newCanvas1.toDataURL("image/jpeg", 1.0);
-    doc.addImage(newCanvasImg1,'JPEG', 120, 130, 80, 80);
+    var newCanvas3 = document.querySelector('#myImage1');
+    var newCanvasImg3 = newCanvas3.toDataURL("image/jpeg", 1.0);
+    doc.addImage(newCanvasImg3,'JPEG', 120, 130, 80, 80);
 
 
     // var newCanvas1 = document.querySelector('#myChart1');

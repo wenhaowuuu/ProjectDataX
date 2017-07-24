@@ -26,7 +26,9 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 
 .main-heading{
   position:relative;
-  font-family:'Roboto',sans-serif;
+  /*font-family:'Roboto',sans-serif;*/
+  font-family:Roboto;
+  font-weight:lighter;
   top:0;
   font-size: 30px;
   left:10px;
@@ -203,7 +205,7 @@ div.intro p {
 }
 
 
-#locationmap{
+#myImage1{
   position:absolute;
   right:5px;
   top:70px;
@@ -226,11 +228,15 @@ div.intro p {
 }
 
 #dropdownMenu1{
-  font-family:'Roboto',sans-serif;
+  /*font-family:'Roboto',sans-serif;*/
+  font-family:Roboto;
+  font-weight:lighter;
 }
 
 #dropdownMenu2{
-  font-family:'Roboto',sans-serif;
+  /*font-family:'Roboto',sans-serif;*/
+  font-family:Roboto;
+  font-weight:lighter;
 }
 
 .hint{
@@ -421,8 +427,11 @@ canvas {
   color:#ffffff;
   /*font-weight:lighter;*/
   /*font-weight:lighter;*/
-  font-family:'Roboto',sans-serif;
+  /*font-family:'Roboto',sans-serif;*/
   /*font-weight: bolder;*/
+  font-family:Roboto;
+  font-weight:lighter;
+
   font-size: 16px;
 }
 
@@ -435,8 +444,9 @@ canvas {
 }
 
 .option{
-  font-family:'Roboto',sans-serif;
-  font-weight: regular;
+  /*font-family:'Roboto',sans-serif;*/
+  font-family:Roboto;
+  font-weight:lighter;
 }
 
 #option{
@@ -490,8 +500,11 @@ li{
 #download1{
   /*position:absolute;*/
   /*bottom:30px;*/
-  margin:10px;
-  font-family:'Roboto',sans-serif;
+  margin:12px;
+  /*font-family:'Roboto',sans-serif;*/
+  font-family:Roboto;
+  font-weight:lighter;
+
 }
 
 #download2{
@@ -500,9 +513,12 @@ li{
   bottom:20px;*/
   /*position: absolute;*/
   /*right:20px;*/
-  margin:10px;
+  margin:12px;
   z-index: 60;
-  font-family:'Roboto',sans-serif;
+  /*font-family:'Roboto',sans-serif;*/
+  font-family:Roboto;
+  font-weight:lighter;
+
 }
 
 
@@ -510,14 +526,18 @@ li{
   /*position:absolute;*/
   /*right:30px;
   bottom:20px;*/
-  font-family:'Roboto',sans-serif;
+  /*font-family:'Roboto',sans-serif;*/
+  font-family:Roboto;
+  font-weight:lighter;
   margin:10px;
   z-index: 60;
 }
 
 #hidemap{
   position:relative;
-  font-family:'Roboto',sans-serif;
+  /*font-family:'Roboto',sans-serif;*/
+  font-family:Roboto;
+  font-weight:lighter;
   left:5px;
   margin:10px;
   z-index: 60;
