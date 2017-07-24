@@ -30,7 +30,7 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
   font-family:Roboto;
   /*font-weight:normal;*/
   font-weight:lighter;
-  top:0;
+  top:5px;
   font-size: 30px;
   left:10px;
 }
@@ -133,8 +133,8 @@ div.description{
 #myChart2{
   position:relative;
   top:40px;
-  width:260px;
-  height:190px;
+  width:265px;
+  height:200px;
   /*display:none;*/
 }
 
@@ -259,12 +259,15 @@ div.intro p {
 }
 
 #logo{
-  left:20px;
+  position:relative;
+  left:5px;
   height:50px;
+  top:280px;
   opacity: 0.9;
 }
 #logoX{
   position:relative;
+  top:280px;
   left:14px;
   height:55px;
   opacity: 0.5;
@@ -272,11 +275,11 @@ div.intro p {
 
 .storylink{
   position:relative;
-  top:20px;
+  top:300px;
   left:0;
   font-family:'Roboto Condensed',sans-serif;
   font-weight:lighter;
-  font-size:14px;
+  font-size:12px;
   color:#f07f30;
 }
 
@@ -414,7 +417,7 @@ canvas {
 
 .header{
   position:fixed;
-  height:21px;
+  height:20px;
   background-color:#f07f30;
   top:0px;
   left:0;
@@ -465,7 +468,7 @@ canvas {
 
 #sidebar-heading{
   position:relative;
-  top:5px;
+  top:10px;
   left:5px;;
   color:#f07f30;
   font-weight:normal;
