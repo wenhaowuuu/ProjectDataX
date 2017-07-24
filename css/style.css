@@ -28,6 +28,7 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
   position:relative;
   /*font-family:'Roboto',sans-serif;*/
   font-family:Roboto;
+  /*font-weight:normal;*/
   font-weight:lighter;
   top:0;
   font-size: 30px;
@@ -54,8 +55,9 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 
 
 .selectionlabel{
-  font-family:'Roboto',sans-serif;
+  font-.mainfamily:Roboto;
   font-weight:lighter;
+  /*font-weight:normal;*/
 }
 
 .layers{
@@ -252,19 +254,20 @@ div.intro p {
 }
 
 .dropdown-menu{
-  font-family:'Roboto',sans-serif;
+  /*font-family:Roboto;*/
+  /*font-weight: lighter;*/
 }
 
 #logo{
   left:20px;
   height:50px;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 #logoX{
   position:relative;
   left:14px;
   height:55px;
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .storylink{
@@ -430,7 +433,7 @@ canvas {
   /*font-family:'Roboto',sans-serif;*/
   /*font-weight: bolder;*/
   font-family:Roboto;
-  font-weight:lighter;
+  /*font-weight:lighter;*/
 
   font-size: 16px;
 }
@@ -529,6 +532,7 @@ li{
   /*font-family:'Roboto',sans-serif;*/
   font-family:Roboto;
   font-weight:lighter;
+  /*font-weight:normal;*/
   margin:10px;
   z-index: 60;
 }
@@ -538,6 +542,7 @@ li{
   /*font-family:'Roboto',sans-serif;*/
   font-family:Roboto;
   font-weight:lighter;
+  /*font-weight:normal;*/
   left:5px;
   margin:10px;
   z-index: 60;
