@@ -245,7 +245,7 @@ $('#satellite').click(function(){
 
   // var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
   // var highschool = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_schools_test1.geojson";
-  var highschool = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_schools_muni_joined1.geojson";
+  var highschool = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_schools_muni_joined_clean.geojson";
 
   // var roadsall = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infra_redvial_osm_2016_gt_2.geojson?token=AWa3umrkbZpL2VZXCIIaJkR15o-4Jo_Aks5ZdmxCwA%3D%3D";
 
@@ -320,7 +320,14 @@ $('#satellite').click(function(){
   var highlight = {
     'color':'#416FEA',
     'opacity': 0.2,
+  };
 
+  var maskin = {
+    'color':'#FF0000',
+  };
+
+  var maskout = {
+    'display':'none',
   };
 
 
@@ -532,18 +539,47 @@ var numberofClicks = 0;
         //   var schoolFilter = function(feature){
         //     if (feature.properties.m_name == layer.feature.properties.m_name){
         //       return true;
-        //       feature.setStyle(highlight);
+        //       feature.setStyle(maskin);
         //     }
         //     else {
         //       return false;
-        //       feature.setStyle(fadeout);
+        //       feature.setStyle(maskout);
         //     }
         //   };
+        // add the code for actual filtering and styling execution - BELOW NOT WORKING
+        // var SelectedSchools = _.filter(parsedData17,function(item){
+        //   return item.feature.properties.m_name == layer.feature.properties.m_name;
+        // });
+        //
+        // Schools.setStyle(maskout);
+        // SelectedSchools.setStyle(maskin);
 
-        // add the code for actual filtering and styling execution
+        //if layer is not clicked, then load all the school data for the region
+        //if layer is clicked, then filter out the schools within the selected muni and display them, and not loading the others
+        // if (Schools)
+        //RECREATE THE SELECTED SCHOOLS ON THE FLY - still some issue
+        // _.each(parsedData17,function(item){
+        //   if (item.feature.properties.m_name == layer.feature.properties.m_name){
+        //     var itemB = L.geoJson(item,
+        //       {
+        //        //  style: {opacity:0.3,width:0.5,color:'#E5EF12'},
+        //         pointToLayer: function (feature, latlngs) {
+        //           return new L.circleMarker(latlngs, {
+        //              radius:4,
+        //              fillColor:'#FF0000',
+        //              color:'#EBA430',
+        //              weight:1,
+        //              opacity:0.3,
+        //              fillOpacity:0.3,
+        //             });
+        //           }
+        //       }).addTo(map).bindPopup("Schools111");
+        //     }
+        //    }
+        //  );
 
 
-        }
+      // };
 
 
 
