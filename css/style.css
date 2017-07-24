@@ -133,8 +133,8 @@ div.description{
 #myChart2{
   position:relative;
   top:40px;
-  width:265px;
-  height:200px;
+  width:260px;
+  height:190px;
   /*display:none;*/
 }
 
@@ -276,7 +276,7 @@ div.intro p {
   left:0;
   font-family:'Roboto Condensed',sans-serif;
   font-weight:lighter;
-  font-size:12px;
+  font-size:14px;
   color:#f07f30;
 }
 
