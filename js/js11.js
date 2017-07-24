@@ -249,8 +249,14 @@ $('#satellite').click(function(){
   var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
   // var roadsall = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infra_redvial_osm_2016_gt_2.geojson?token=AWa3umrkbZpL2VZXCIIaJkR15o-4Jo_Aks5ZdmxCwA%3D%3D";
 
-  var majorroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/major_infra_redvial_osm_2016.geojson?token=AWa3uoVS2zMSU2MIwc0kLP3maAAJAesBks5Zdm5JwA%3D%3D";
-  var secondaryroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/Secondary_infra_redvial_osm_2016.geojson?token=AWa3ume5fwG9rH-l740D9NlioFIxbpV4ks5Zd0LWwA%3D%3D";
+  // var majorroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/major_infra_redvial_osm_2016.geojson?token=AWa3uoVS2zMSU2MIwc0kLP3maAAJAesBks5Zdm5JwA%3D%3D";
+  // var secondaryroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/Secondary_infra_redvial_osm_2016.geojson?token=AWa3ume5fwG9rH-l740D9NlioFIxbpV4ks5Zd0LWwA%3D%3D";
+
+  var majorroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/RD_1MAJOR.geojson";
+  var secondaryroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/RD_2SECOND.geojson";
+  var tertiaryroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/RD_3TERTIARY.geojson";
+
+
 
 
 
@@ -1108,7 +1114,7 @@ $('#showmap').click(function(){
       _.each(parsedData14,function(item){
         var itemB = L.geoJson(parsedData14,
           {
-            style: {opacity:0.6,width:1.2,color:'#F39C12'},
+            style: {opacity:0.6,width:1.2,color:'#DF722B'},
             pointToLayer: function (feature, latlngs) {
               return new L.polyline(latlngs, {
               }
@@ -1128,7 +1134,7 @@ $('#showmap').click(function(){
         _.each(parsedData15,function(item){
           var itemB = L.geoJson(parsedData15,
             {
-              style: {opacity:0.35,width:0.3,color:'#f1c40f'},
+              style: {opacity:0.35,width:0.3,color:'#F7A920'},
               pointToLayer: function (feature, latlngs) {
                 return new L.polyline(latlngs, {
                 }
