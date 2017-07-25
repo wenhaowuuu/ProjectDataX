@@ -1772,6 +1772,28 @@ var tableToPDF = function(){
   //GOOD REFERENCE
   // https://mrrio.github.io/
   // define the map as an image
+  // var columns = ["ID", "Name", "Country"];
+  // var rows = [
+  //            [1, "Peten", "Guatemala"],
+  //            [2, "La Ibertad", "Guatemala"],
+  //            [3, "Garcia", "Guatemala"],
+  //          ];
+
+  // reference doc.addImage(div,'JPEG', 174, 40, 48, 32);
+  // var doc = new jsPDF('p', 'pt');
+
+  // doc.autoTable(columns, rows);
+  //
+  // doc.autoTable(columns, rows, {
+  //   styles: {fillColor: [100, 255, 255]},
+  //   columnStyles: {
+  //   	id: {fillColor: 255}
+  //   },
+  //   margin: {top: 60},
+  //   addPageContent: function(data) {
+  //   	doc.text("Header", 40, 30);
+  //   }
+  // });
 
 
   // generate table reference here
