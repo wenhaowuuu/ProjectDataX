@@ -321,6 +321,11 @@ $('#satellite').click(function(){
 
 
   //DEFINE THE FADING AND HIGHLIGHTING EFFECT WHEN CLICKED ON LAYERS
+  var samelook = {
+    'color': '#E0903F',
+    'opacity': 0.01,
+  };
+
   var fadeout = {
     'opacity': 0.01,
   };
@@ -518,6 +523,7 @@ var changeBasemap3 = function(location3){
     // var first_click = true;
 
     layer.on('click', function (event) {
+
       // if (first_click){
       //   first_click = false;
       //
@@ -733,6 +739,11 @@ var changeBasemap3 = function(location3){
 
 
           layer.setStyle(highlight);
+
+
+          $('#hidemap').click(function(){
+            layer.setStyle(samelook);
+          });
 
 
           //highlight the hospitals and schools in the
@@ -1439,7 +1450,7 @@ $('#showmap').click(function(){
         _.each(parsedData_urbanroads,function(item){
           var itemB = L.geoJson(parsedData_urbanroads,
             {
-              style: {opacity:0.35,width:0.3,color:'#F7A920'},
+              style: {opacity:0.35,width:0.3,color:'#1544D5'},
               pointToLayer: function (feature, latlngs) {
                 return new L.polyline(latlngs, {
                 }
@@ -1458,7 +1469,7 @@ $('#showmap').click(function(){
         _.each(parsedData_ruralroads,function(item){
           var itemB = L.geoJson(parsedData_ruralroads,
             {
-              style: {opacity:0.35,width:0.3,color:'#F7A920'},
+              style: {opacity:0.35,width:0.3,color:'#30CCC7'},
               pointToLayer: function (feature, latlngs) {
                 return new L.polyline(latlngs, {
                 }
@@ -1790,8 +1801,10 @@ $('#hidemap').click(function(){
 
 
   map.removeLayer(layerMappedPolygons);
-
   console.log("removed");
+  layerMappedPolygons.addTo(map);
+  console.log("reloaded");
+
 
 });
 
@@ -1944,6 +1957,11 @@ var geologo = 'logo.jpg';
 var tableToPDF = function(){
   console.log("PDF starts");
   var doc = new jsPDF();
+  //for tables in PDF
+  // VERY GOOD EXAMPLE HERE
+  // https://github.com/simonbengtsson/jsPDF-AutoTable
+
+
   //GOOD REFERENCE
   // https://mrrio.github.io/
   // define the map as an image
