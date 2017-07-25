@@ -287,6 +287,11 @@ $('#satellite').click(function(){
   var parsedData4;
   var filterFunction;
 
+  //set layer selection variables
+  var layerMappedPolygons;
+  var selectedmuni_name = '';
+  var selectedlayer;
+
   //DEFINE THE IE SCORING FACTORS FOR THE RADAR CHART
   var RD_1ST;
   var RD_2ND;
@@ -352,22 +357,156 @@ var P_rd_21 = ' ';
 var P_rd_31 = ' ';
 
 
+//PRELOAD THE FUNCTIONS
+  $(document).ready(function(){
+    $.ajax(muni_clean).done(function(data) {
+      parsedData00 = JSON.parse(data);
+      console.log(parsedData00);
+      console.log("parsed00");
+      layerMappedPolygons = L.geoJson(parsedData00,
+        {
+          style: {opacity:0.4,width:0.5,color:'#E0903F'},
+          pointToLayer: function (feature, latlng) {
+            return new L.Polygon(latlng, {
+            });
+          },
+
+          onEachFeature: function(feature,layer){
+
+            layer.bindPopup(
+              "<b>Municipality Name: </b>" +
+              feature.properties.m_name +
+              "</br>" +
+
+              "<b>Department Name: </b>" +
+              feature.properties.d_name +
+              "</br>" +
+
+              "<b>Total Road Length: </b>" +
+              feature.properties.rd_length.toFixed(3) + " km" +
+              "</br>" +
+
+              "<b>Road Density: </b>" +
+              feature.properties.rd_density.toFixed(3) + " per square km" +
+              "</br>" +
+
+              "</br>" +
+              "<b>Data Collected Year: </b>" +
+              feature.properties.year
+            )
+
+           }
+          }).addTo(map);
+          layerMappedPolygons.eachLayer(eachFeatureFunction);
+        })
+      });
+
+//ZOOM TO SELECTED LOCATIONS
+//ANOTHER METHOD HERE: http://learn.jquery.com/using-jquery-core/faq/how-do-i-get-the-text-value-of-a-selected-option/
+
+var changeBasemap1 = function(location1){
+  var value1 = location1.value;
+  console.log(value1);
+  if(value1 == 'Guatemala'){
+      map.setView([15.372844, -90.544976],8);
+  }
+  if(value1 == 'Honduras'){
+      map.setView([14.811574, -86.953985],8);
+  }
+  if(value1 == 'El Salvador'){
+      map.setView([13.650275, -88.850540],8);
+  }
+};
+
+
+
+var changeBasemap2 = function(location2){
+  var value2 = location2.value;
+  console.log(value2);
+  if(value2 == 'Peten'){
+      map.setView([16.936401, -90.036336],9);
+  }
+  if(value2 == 'Guatemala'){
+      map.setView([14.643792, -90.467986],9);
+  }
+  if(value2 == 'Alta Verapaz'){
+      map.setView([15.649419, -90.143057],9);
+  }
+};
+
+
+
+var changeBasemap3 = function(location3){
+  var value3 = location3.value;
+  console.log(value3);
+  if(value3 == 'La Libertad'){
+      map.setView([16.849479, -90.426450],10);
+      //highlight the boundary of the selected municipality
+      selectedmuni_name = 'La Libertad';
+      console.log("lalibertad selected");
+      //layermappedpolygons not defined?!
+      layerMappedPolygons.eachLayer(function(layer){
+        if (layer.feature.properties.m_name == selectedmuni_name) {
+          console.log("ready to select");
+          layer.setStyle(highlight);
+          console.log("selection highlighted")
+          };
+      });
+
+  }
+  if(value3 == 'Guatemala'){
+      map.setView([14.629168, -90.519007],10);
+      selectedmuni_name = 'Guatemala';
+      console.log("guatemala selected");
+      layerMappedPolygons.eachLayer(function(layer){
+        if (layer.feature.properties.m_name == selectedmuni_name) {
+          console.log("ready to select");
+          layer.setStyle(highlight);
+          console.log("selection highlighted")
+          };
+      });
+  }
+  if(value3 == 'Coban'){
+      map.setView([15.466670, -90.383285],10);
+      selectedmuni_name = 'Coban';
+      console.log("Coban selected");
+      layerMappedPolygons.eachLayer(function(layer){
+        if (layer.feature.properties.m_name == selectedmuni_name) {
+          console.log("ready to select");
+          layer.setStyle(highlight);
+          console.log("selection highlighted")
+          };
+      });
+  }
+};
+
+
+
+
+
+
+
+
 
 //3. FUNCTIONS
 // 3.1 WHEN THE LAYER IS CLICKED:
 var numberofClicks = 0;
   var eachFeatureFunction = function(layer) {
-     layer.on('click', function (event) {
+
+
+    // if (layer.feature.properties.m_name == 'La Libertad'){
+    //     layer.setStyle(highlight);
+    //     console.log("went in");
+    // };
+
+
+    layer.on('click', function (event) {
        console.log(layer.feature);
        console.log(layer.feature.properties);
        //TO ADD THE RE-CLICK THEN DE-SELECT FUNCTION
        //you can't really do this because the number of times clicked is not stored with the layer itself.
        //come back to this later!
        numberofClicks = numberofClicks + 1;
-
-
-
-
 
        //YOU'D BETTER CLEAN THE HTML ELEMENT EVERY TIME YOU CLICK ON THE LAYER
        //reference from
@@ -794,8 +933,6 @@ var numberofClicks = 0;
           //  });
           //  chart.render();
 
-
-
       //  };
 
          }
@@ -878,56 +1015,6 @@ var myFilter = function(feature) {
 
 
 // 4. LOADING REAL DATA
-//ZOOM TO SELECTED LOCATIONS
-//ANOTHER METHOD HERE: http://learn.jquery.com/using-jquery-core/faq/how-do-i-get-the-text-value-of-a-selected-option/
-
-var changeBasemap1 = function(location1){
-  var value1 = location1.value;
-  console.log(value1);
-  if(value1 == 'Guatemala'){
-      map.setView([15.372844, -90.544976],8);
-  }
-  if(value1 == 'Honduras'){
-      map.setView([14.811574, -86.953985],8);
-  }
-  if(value1 == 'El Salvador'){
-      map.setView([13.650275, -88.850540],8);
-  }
-};
-
-
-
-var changeBasemap2 = function(location2){
-  var value2 = location2.value;
-  console.log(value2);
-  if(value2 == 'Peten'){
-      map.setView([16.936401, -90.036336],9);
-  }
-  if(value2 == 'Guatemala'){
-      map.setView([14.643792, -90.467986],9);
-  }
-  if(value2 == 'Alta Verapaz'){
-      map.setView([15.649419, -90.143057],9);
-  }
-};
-
-
-
-var changeBasemap3 = function(location3){
-  var value3 = location3.value;
-  console.log(value3);
-  if(value3 == 'La Libertad'){
-      map.setView([16.849479, -90.426450],10);
-  }
-  if(value3 == 'Guatemala'){
-      map.setView([14.629168, -90.519007],10);
-  }
-  if(value3 == 'Coban'){
-      map.setView([15.466670, -90.383285],10);
-  }
-};
-
-
 //4.0 LOADING THREE NATIONS BOUNDARY
 $(document).ready(function(){
   $.ajax(Guatemala).done(function(data) {
@@ -1500,79 +1587,6 @@ $(document).ready(function(){
 //       })
 //     });
 
-
-
-// $('#MUNI').click(function(){
-  $(document).ready(function(){
-    $.ajax(muni_clean).done(function(data) {
-      parsedData00 = JSON.parse(data);
-      console.log(parsedData00);
-      console.log("parsed00");
-      layerMappedPolygons = L.geoJson(parsedData00,
-        {
-          style: {opacity:0.4,width:0.5,color:'#E0903F'},
-          pointToLayer: function (feature, latlng) {
-            return new L.Polygon(latlng, {
-            });
-          },
-
-          onEachFeature: function(feature,layer){
-
-            layer.bindPopup(
-              "<b>Municipality Name: </b>" +
-              feature.properties.m_name +
-              "</br>" +
-
-              "<b>Department Name: </b>" +
-              feature.properties.d_name +
-              "</br>" +
-
-              "<b>Total Road Length: </b>" +
-              feature.properties.rd_length.toFixed(3) + " km" +
-              "</br>" +
-
-              "<b>Road Density: </b>" +
-              feature.properties.rd_density.toFixed(3) + " per square km" +
-              "</br>" +
-
-              //
-              // "<b>Urban / Rural Road Ratio: </b>" + "1 : " +
-              // (feature.properties.rd_rural / feature.properties.rd_urban).toFixed(2) +
-              // "</br>" +
-
-
-              // "<b>Road Length in Urban Area: </b>" +
-              // feature.properties.rd_urban + " km" +
-              // "</br>" +
-              //
-              // "<b>Road Length in Rural Area: </b>" +
-              // feature.properties.rd_rural + " km" +
-              // "</br>" +
-
-
-
-              // "<b>Major Road: </b>" +
-              // feature.properties.rd_major.toFixed(3) + " km" +
-              // "</br>" +
-              //
-              // "<b>Secondary Road: </b>" +
-              // feature.properties.rd_second.toFixed(3) + " km" +
-              // "</br>" +
-              //
-              // "<b>Tertiary Road: </b>" +
-              // feature.properties.rd_tertiar.toFixed(3) + " km" +
-              // "</br>" +
-
-              "</br>" +
-              "<b>Data Collected Year: </b>" +
-              feature.properties.year
-            )
-
-           }
-          }).addTo(map);
-          layerMappedPolygons.eachLayer(eachFeatureFunction);
-        })
-      });
 
 // })
 
