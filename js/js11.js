@@ -239,7 +239,6 @@ $('#satellite').click(function(){
   //THE CLEANED DATASET
   var muni_clean = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/nt_muni_joined_clean.geojson";
 
-
   // var healthcenter = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/healthcenters_segeplan_2010.geojson?token=AWa3uu4HC5P_wTYFCaksa2u2C8t4hRV5ks5Zd5GcwA%3D%3D";
   // var hospital = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_hospital_nt.geojson";
   var hospital = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_hospital_muni_joined_clean.geojson";
