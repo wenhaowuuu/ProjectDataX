@@ -335,7 +335,6 @@ $('#satellite').click(function(){
   };
 
 
-
 //set PDF variables
 var P_country = ' ';
 var P_department = ' ';
@@ -398,6 +397,7 @@ var P_rd_31 = ' ';
            }
           }).addTo(map);
           layerMappedPolygons.eachLayer(eachFeatureFunction);
+          // console.log(layerMappedPolygons[0].id);
         })
       });
 
@@ -481,464 +481,549 @@ var changeBasemap3 = function(location3){
 };
 
 
-
-
-
-
-
-
-
 //3. FUNCTIONS
 // 3.1 WHEN THE LAYER IS CLICKED:
-var numberofClicks = 0;
+// var numberofClicks = 0;
+
+// REFERENCE HERE FOR CLICK EVENTS
+// https://stackoverflow.com/questions/12420910/select-unselect-text-on-click-using-jquery
+
+// THIS DOESN'T WORK BECAUSE IT DIDN'T TRACK THE ID OF THE OBJ
+// var toggle=0;
+// layer.click(function() {
+//     if(toggle==1){
+//         // $("#information").fadeIn(200);
+//         // $("#leftColumn").animate({width:"250px"}, 200);
+//         // $("#collapse").html("«");
+//
+//         toggle=0;
+//     }
+//     else
+//     {
+//         $("#information").fadeOut(200);
+//         $("#leftColumn").animate({width:"10px"}, 200);
+//         $("#collapse").html("»");
+//         toggle=1;
+//     }
+// });
+
   var eachFeatureFunction = function(layer) {
+    var id = L.stamp(layer);
+    // console.log(id);
 
-
-    // if (layer.feature.properties.m_name == 'La Libertad'){
-    //     layer.setStyle(highlight);
-    //     console.log("went in");
-    // };
-
+    // var first_click = true;
 
     layer.on('click', function (event) {
-       console.log(layer.feature);
-       console.log(layer.feature.properties);
+      // if (first_click){
+      //   first_click = false;
+      //
+      // } else {
+      //
+      // }
+      //NOT WORKING FOR REMOVE LAYER OR HIDE MAP
+      //IT SAYS THEY ARE NOT FUNCTIONS
+      // REFERENCE
+      // https://stackoverflow.com/questions/12420910/select-unselect-text-on-click-using-jquery
+      // layer.on('click',function(event){
+      //   map.removelayer(layer);
+      // });
+
+      // var x = {};
+      // function selectIt(obj)
+      // {
+      //     var id = L.stamp(layer);
+      //     if (!x.hasOwnProperty(id))
+      //       x[id] = 0;
+      //     if (x[id] % 2 == 0)
+      //     {
+      //         obj.setStyle(highlight);
+      //         // obj.select();
+      //     }
+      //     else
+      //     {
+      //         if (document.selection)
+      //         {
+      //             document.selection.empty();
+      //             obj.blur();
+      //         }
+      //         else
+      //         {
+      //             window.getSelection().removeAllRanges();
+      //         }
+      //     }
+      //
+      //     obj.focus();
+      //     x[id]++;
+      // }
+
+      //  $( "#target" ).toggle(function() {
+      //    alert( "First handler for .toggle() called." );
+      //  }, function() {
+      //    alert( "Second handler for .toggle() called." );
+      //  });
+       //
+       //
+      //  $( "td" ).toggle(
+      //    function() {
+      //      $( this ).addClass( "selected" );
+      //    }, function() {
+      //      $( this ).removeClass( "selected" );
+      //    }
+      //  );
+
+
+      console.log(layer.feature.properties);
+
+
        //TO ADD THE RE-CLICK THEN DE-SELECT FUNCTION
        //you can't really do this because the number of times clicked is not stored with the layer itself.
        //come back to this later!
-       numberofClicks = numberofClicks + 1;
-
-       //YOU'D BETTER CLEAN THE HTML ELEMENT EVERY TIME YOU CLICK ON THE LAYER
-       //reference from
-       //https://stackoverflow.com/questions/24815851/how-to-clear-a-chart-from-a-canvas-so-that-hover-events-cannot-be-triggered
-
-       $('#myChart1').remove();
-       $('.chartsarea').append('<canvas class="charts" id="myChart1"></canvas>');
-       console.log("replace1");
-
-
-       $('#myChart2').remove();
-       $('.chartsarea').append('<canvas class="charts" id="myChart2"></canvas>');
-       console.log("replace2");
-
-
-       //Click odd number of times - loading the shape, while
-       //click even number of times - removing it.
-      //  if (numberofClicks % 2 == 0){
-      //    //1. change the selection style;
-      //    layer.setStyle(myStyle);
-      //    layer.setStyle(fadeout);
-      //    //2. remove it from the layer selection list
-      //    layerselected = layerselected.filter(function(item){
-      //      return item !== layer
-      //    })
-      //
-      //    //  arr = arr.filter(function(item) {
-      //    //    return item !== value
-      //    //  })
-      //
-      //    console.log(layerselected);
-      //
-      //    //3. remove the graph and text;
-      //    map.removeLayer(myChart);
-      //
-      //    //4. remove it from the excel;
-      //  }
+      //  if (numberofClicks!=null){
+      //    console.log("selected again?");
+      //    // second time click
+      //    numberofClicks = numberofClicks + 1;
+      //    console.log("selected again!");
+      //    if (numberofClicks % 2 == 0){
+      //      layer.hide();
+      //    }
+      //    else {
+      //      layer.show();
+      //    }
        //
+      //  }
+
       //  else {
 
+         // first time click
+         var numberofClicks = 0;
+         numberofClicks = numberofClicks + 1;
+         console.log(numberofClicks);
 
-         //UPDATE THE EXCEL TABLE INFO TO BE DOWNLOADED
-         // id="exceltitle"
-         $('#exceltitle').text(layer.feature.properties.m_name);
-         $('#X_ID').text(layer.feature.properties.id);
-         $('#X_country').text(layer.feature.properties.country);
-         $('#X_department').text(layer.feature.properties.d_name);
-         $('#X_municipality').text(layer.feature.properties.m_name);
-         $('#X_PovertyRate').text(layer.feature.properties.gen_pov);
-        //  $('#X_department').text(layer.feature.properties.d_name);
-         //UPDATE THE PDF INFO TO BE DOWNLOADED
-         P_country = layer.feature.properties.country;
-         P_department = layer.feature.properties.d_name;
-         P_muni = layer.feature.properties.m_name;
-         P_pov = layer.feature.properties.gen_pov;
-         P_id = layer.feature.properties.id;
-         P_year = layer.feature.properties.year;
-         P_source = layer.feature.properties.source;
+         //YOU'D BETTER CLEAN THE HTML ELEMENT EVERY TIME YOU CLICK ON THE LAYER
+         //reference from
+         //https://stackoverflow.com/questions/24815851/how-to-clear-a-chart-from-a-canvas-so-that-hover-events-cannot-be-triggered
 
-         P_length = layer.feature.properties.rd_length;
-         P_density = layer.feature.properties.rd_density;
-         P_rd_urban = layer.feature.properties.rd_urban;
-         P_rd_rural = layer.feature.properties.rd_rural;
-         P_rd_1 = layer.feature.properties.rd_major;
-         P_rd_2 = layer.feature.properties.rd_second;
-         P_rd_3 = layer.feature.properties.rd_tertiar;
-         P_rd_21 = layer.feature.properties.rd_second / layer.feature.properties.rd_major;
-         P_rd_31 = layer.feature.properties.rd_tertiar / layer.feature.properties.rd_major;
-
-         //LOAD THE SATELLITE MAP FOR THE SELECTED
-        //  BELOW WOULD PLACE AN AERIAL ON, BUT NOT REALLY WORKING,
-        // it would become VERY VERY VERY SLOW to load when the following section is released!!!
+         $('#myChart1').remove();
+         $('.chartsarea').append('<canvas class="charts" id="myChart1"></canvas>');
+         console.log("replace1");
 
 
+         $('#myChart2').remove();
+         $('.chartsarea').append('<canvas class="charts" id="myChart2"></canvas>');
+         console.log("replace2");
 
 
-
-
-
-        //  var location = '';
-        //  location = P_muni + ", " + P_country;
-        //  var mapURL = "https://maps.googleapis.com/maps/api/staticmap?center=" + location + "&zoom=10&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true";
-        //  console.log(mapURL);
-        //  var img = new Image();
-        //  // var img = document.createElement('img');
-        //  img.src = mapURL;
-        //  $('.locationmap').append(img);
-        //  console.log("appended0");
-        //  console.log(img);
-
-
-
-
-
-
-
-
-
-
-
-         //  $('#exceltitle').text(layer.feature.properties.m_name);
-         //ZOOM TO THE SELECTED MUNICIPALITY
-         map.fitBounds(layer.getBounds(),{
-                    padding: [80,80]
-                  });
-         order = order + 1;
-         console.log(order);
-
-       //PUSH INTO THE LAYER SELECTION GROUP
-       layerselected.push(layer);
-       console.log(layerselected);
-       namelist.push(layer.feature.properties.m_name);
-       console.log(namelist);
-
-       _.each(namelist,function(name){
-         list = order + '.' + name;
-       });
-
-       $('#selection').append(blank + blank + blank + list + " ");
-
-       // $('#selection').text(namelist);
-
-       // <div id="results" style="display: none;">
-      //  document.getElementById("results").style.display = "inline";
-
-
-        //  $('#LENGTH').text(layer.feature.properties.m_name);
-        //  $('#POP').text(layer.feature.properties.d_name);
-        //  $('#30PCT').text(layer.feature.properties.gen_pov);
-        //  $('#60PCT').text(layer.feature.properties.id);
-        //  $('#90PCT').text(layer.feature.properties.year);
-
-         //HIGHLIGHT THE MAP CLICKED
-
-         layerMappedPolygons.setStyle(fadeout);
-
-
-         layer.setStyle(highlight);
-
-
-         //highlight the hospitals and schools in the
-        //  selected layer, if applicable
-        // TEST 001 - NOT WORKING!
-        // if (x4 == true){
-        //   _.each(Schools,function(item){
-        //     if (item.feature.properties.m_name == layer.feature.properties.m_name){
-        //       item.setStyle(highlight);
-        //     }
-        //     else{
-        //       item.setStyle(fadeout);
-        //     }
-        //   });
+         //Click odd number of times - loading the shape, while
+         //click even number of times - removing it.
+        //  if (numberofClicks % 2 == 0){
+        //    //1. change the selection style;
+        //    layer.setStyle(myStyle);
+        //    layer.setStyle(fadeout);
+        //    //2. remove it from the layer selection list
+        //    layerselected = layerselected.filter(function(item){
+        //      return item !== layer
+        //    })
         //
-        // }
-
-        // TEST 002 - LET'S TRY FILTER
-
-        // var myFilter = function(feature) {
-        //      if (feature.properties.gen_pov===' ') {
-        //      return false;
-        //      }
-        //      else {
-        //        return true;
-        //      }
-        //    };
-
-        // if (x4 == true){
-        //   var schoolFilter = function(feature){
-        //     if (feature.properties.m_name == layer.feature.properties.m_name){
-        //       return true;
-        //       feature.setStyle(maskin);
-        //     }
-        //     else {
-        //       return false;
-        //       feature.setStyle(maskout);
-        //     }
-        //   };
-        // add the code for actual filtering and styling execution - BELOW NOT WORKING
-        // var SelectedSchools = _.filter(parsedData17,function(item){
-        //   return item.feature.properties.m_name == layer.feature.properties.m_name;
-        // });
+        //    //  arr = arr.filter(function(item) {
+        //    //    return item !== value
+        //    //  })
         //
-        // Schools.setStyle(maskout);
-        // SelectedSchools.setStyle(maskin);
-
-        //if layer is not clicked, then load all the school data for the region
-        //if layer is clicked, then filter out the schools within the selected muni and display them, and not loading the others
-        // if (Schools)
-        //RECREATE THE SELECTED SCHOOLS ON THE FLY - still some issue
-        // _.each(parsedData17,function(item){
-        //   if (item.feature.properties.m_name == layer.feature.properties.m_name){
-        //     var itemB = L.geoJson(item,
-        //       {
-        //        //  style: {opacity:0.3,width:0.5,color:'#E5EF12'},
-        //         pointToLayer: function (feature, latlngs) {
-        //           return new L.circleMarker(latlngs, {
-        //              radius:4,
-        //              fillColor:'#FF0000',
-        //              color:'#EBA430',
-        //              weight:1,
-        //              opacity:0.3,
-        //              fillOpacity:0.3,
-        //             });
-        //           }
-        //       }).addTo(map).bindPopup("Schools111");
-        //     }
-        //    }
-        //  );
-
-
-      // };
-
-
-
-        //LAYER CLICK EVENT
-        // if (currentlayer!=null){
-        //   if(currentlayer.feature.properties.m_name == itemB.feature.properties.m_name)
+        //    console.log(layerselected);
         //
-        // }
+        //    //3. remove the graph and text;
+        //    map.removeLayer(myChart);
+        //
+        //    //4. remove it from the excel;
+        //  }
+         //
+        //  else {
+
+
+           //UPDATE THE EXCEL TABLE INFO TO BE DOWNLOADED
+           // id="exceltitle"
+           $('#exceltitle').text(layer.feature.properties.m_name);
+           $('#X_ID').text(layer.feature.properties.id);
+           $('#X_country').text(layer.feature.properties.country);
+           $('#X_department').text(layer.feature.properties.d_name);
+           $('#X_municipality').text(layer.feature.properties.m_name);
+           $('#X_PovertyRate').text(layer.feature.properties.gen_pov);
+          //  $('#X_department').text(layer.feature.properties.d_name);
+           //UPDATE THE PDF INFO TO BE DOWNLOADED
+           P_country = layer.feature.properties.country;
+           P_department = layer.feature.properties.d_name;
+           P_muni = layer.feature.properties.m_name;
+           P_pov = layer.feature.properties.gen_pov;
+           P_id = layer.feature.properties.id;
+           P_year = layer.feature.properties.year;
+           P_source = layer.feature.properties.source;
+
+           P_length = layer.feature.properties.rd_length;
+           P_density = layer.feature.properties.rd_density;
+           P_rd_urban = layer.feature.properties.rd_urban;
+           P_rd_rural = layer.feature.properties.rd_rural;
+           P_rd_1 = layer.feature.properties.rd_major;
+           P_rd_2 = layer.feature.properties.rd_second;
+           P_rd_3 = layer.feature.properties.rd_tertiar;
+           P_rd_21 = layer.feature.properties.rd_second / layer.feature.properties.rd_major;
+           P_rd_31 = layer.feature.properties.rd_tertiar / layer.feature.properties.rd_major;
+
+           //LOAD THE SATELLITE MAP FOR THE SELECTED
+          //  BELOW WOULD PLACE AN AERIAL ON, BUT NOT REALLY WORKING,
+          // it would become VERY VERY VERY SLOW to load when the following section is released!!!
 
 
 
 
-         //LINK DATA WITH THE GRAPH
-         var backgroundColor = 'white';
-         Chart.plugins.register({
-           beforeDraw: function(c) {
-             var ctx = c.chart.ctx;
-             ctx.fillStyle = backgroundColor;
-             ctx.fillRect(0, 0, c.chart.width, c.chart.height);
-            }
-          });
-          //STUDY THIS EXAMPLE!!!
-         //  https://stackoverflow.com/questions/43664722/how-to-save-chart-js-charts-as-image-without-black-background-using-blobs-and-fi
-         //  https://jsfiddle.net/a9hmnd9L/2/
-
-
-           // var canvas = $('#myChart1').get(0);
-           // var myChart = new Chart(canvas, {
-           //     type: 'line',
-           //     data: {
-           //       labels: [1, 2, 3, 4, 5],
-           //       datasets: [{
-           //         label: 'Line Chart',
-           //         data: [1, 2, 3, 4, 5],
-           //         backgroundColor: 'rgba(255, 0, 0, 0.2)',
-           //         borderColor: 'rgba(255, 0, 0, 0.5)',
-           //         pointBackgroundColor: 'black'
-           //       }]
-           //     }
-           //   });
-
-           // save as image
-           // $('#save').click(function() {
-           //   canvas.toBlob(function(blob) {
-           //     saveAs(blob, "pretty image.png");
-           //   });
-           // });
-
-
-         if(myChart!=null){
-          //  myChart.destroy();
-          //  $('#myChart2').remove();
-          //  $('.chartsarea').append('<canvas class="charts" id="myChart2" width="300" height="200"></canvas>');
-          //  console.log("replace2");
-         }
-         else {
+          //  var location = '';
+          //  location = P_muni + ", " + P_country;
+          //  var mapURL = "https://maps.googleapis.com/maps/api/staticmap?center=" + location + "&zoom=10&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true";
+          //  console.log(mapURL);
+          //  var img = new Image();
+          //  // var img = document.createElement('img');
+          //  img.src = mapURL;
+          //  $('.locationmap').append(img);
+          //  console.log("appended0");
+          //  console.log(img);
 
 
 
 
 
+           //  $('#exceltitle').text(layer.feature.properties.m_name);
+           //ZOOM TO THE SELECTED MUNICIPALITY
+           map.fitBounds(layer.getBounds(),{
+                      padding: [80,80]
+                    });
+           order = order + 1;
+           console.log(order);
+
+         //PUSH INTO THE LAYER SELECTION GROUP
+         layerselected.push(layer);
+         console.log(layerselected);
+         namelist.push(layer.feature.properties.m_name);
+         console.log(namelist);
+
+         _.each(namelist,function(name){
+           list = order + '.' + name;
+         });
+
+         $('#selection').append(blank + blank + blank + list + " ");
+
+         // $('#selection').text(namelist);
+
+         // <div id="results" style="display: none;">
+        //  document.getElementById("results").style.display = "inline";
 
 
-           var ctx2 = document.getElementById("myChart2");
-
-           ctx2.style.backgroundColor = 'rgba(255,255,255,1)';
-           //Fill the background
-          //  Chart.plugins.register({
-          //    beforeDraw: function(myChart) {
-          //     //  var ctx = myChart.chart.ctx2;
-          //      ctx2.fillStyle = 'rgba(255,255,255,0.05)';
-          //      ctx2.fillRect(0, 0, myChart.chart.width, myChart.chart.height);
-          //    }
-          //  });
+          //  $('#LENGTH').text(layer.feature.properties.m_name);
+          //  $('#POP').text(layer.feature.properties.d_name);
+          //  $('#30PCT').text(layer.feature.properties.gen_pov);
+          //  $('#60PCT').text(layer.feature.properties.id);
+          //  $('#90PCT').text(layer.feature.properties.year);
 
 
 
-          // ctx2.fillStyle = "white";
-          // ctx2.fill = 'rgba(255, 0, 255, 0.5)';
-           var myChart = new Chart(ctx2, {
-               type: 'bar',
-               data: {
-                   labels: [layer.feature.properties.m_name, "Average", "UN"],
-                   datasets: [{
-                       label: 'Poverty',
-                       data: [layer.feature.properties.gen_pov, 33, 20],
-                       backgroundColor: [
-                           'rgba(255, 120, 35, 0.5)',
-                           'rgba(50, 120, 230, 0.5)',
-                           'rgba(255, 206, 86, 0.5)',
+          //HIGHLIGHT THE MAP CLICKED
 
-                       ],
-                       borderColor: [
-                           'rgba(255, 120, 35, 1)',
-                           'rgba(50, 120, 230, 1)',
-                           'rgba(255, 206, 86, 1)',
-                       ],
-                       borderWidth: 1
-                   }]
-               },
-               options: {
-                 responsive: false,
-                 maintainAspectRatio: false,
-                   scales: {
-                       yAxes: [{
-                           ticks: {
-                               beginAtZero:true
-                               }
-                             }]
-                           }
-                         }
-               });
+          layerMappedPolygons.setStyle(fadeout);
 
-              // ctx2.style.backgroundColor = 'rgba(255,0,0,1)';
 
+          layer.setStyle(highlight);
+
+
+          //highlight the hospitals and schools in the
+         //  selected layer, if applicable
+         // TEST 001 - NOT WORKING!
+         // if (x4 == true){
+         //   _.each(Schools,function(item){
+         //     if (item.feature.properties.m_name == layer.feature.properties.m_name){
+         //       item.setStyle(highlight);
+         //     }
+         //     else{
+         //       item.setStyle(fadeout);
+         //     }
+         //   });
+         //
+         // }
+
+         // TEST 002 - LET'S TRY FILTER
+
+         // var myFilter = function(feature) {
+         //      if (feature.properties.gen_pov===' ') {
+         //      return false;
+         //      }
+         //      else {
+         //        return true;
+         //      }
+         //    };
+
+         // if (x4 == true){
+         //   var schoolFilter = function(feature){
+         //     if (feature.properties.m_name == layer.feature.properties.m_name){
+         //       return true;
+         //       feature.setStyle(maskin);
+         //     }
+         //     else {
+         //       return false;
+         //       feature.setStyle(maskout);
+         //     }
+         //   };
+         // add the code for actual filtering and styling execution - BELOW NOT WORKING
+         // var SelectedSchools = _.filter(parsedData17,function(item){
+         //   return item.feature.properties.m_name == layer.feature.properties.m_name;
+         // });
+         //
+         // Schools.setStyle(maskout);
+         // SelectedSchools.setStyle(maskin);
+
+         //if layer is not clicked, then load all the school data for the region
+         //if layer is clicked, then filter out the schools within the selected muni and display them, and not loading the others
+         // if (Schools)
+         //RECREATE THE SELECTED SCHOOLS ON THE FLY - still some issue
+         // _.each(parsedData17,function(item){
+         //   if (item.feature.properties.m_name == layer.feature.properties.m_name){
+         //     var itemB = L.geoJson(item,
+         //       {
+         //        //  style: {opacity:0.3,width:0.5,color:'#E5EF12'},
+         //         pointToLayer: function (feature, latlngs) {
+         //           return new L.circleMarker(latlngs, {
+         //              radius:4,
+         //              fillColor:'#FF0000',
+         //              color:'#EBA430',
+         //              weight:1,
+         //              opacity:0.3,
+         //              fillOpacity:0.3,
+         //             });
+         //           }
+         //       }).addTo(map).bindPopup("Schools111");
+         //     }
+         //    }
+         //  );
+
+
+       // };
+
+
+
+         //LAYER CLICK EVENT
+         // if (currentlayer!=null){
+         //   if(currentlayer.feature.properties.m_name == itemB.feature.properties.m_name)
+         //
+         // }
+
+
+
+
+          //LINK DATA WITH THE GRAPH
+          var backgroundColor = 'white';
+          Chart.plugins.register({
+            beforeDraw: function(c) {
+              var ctx = c.chart.ctx;
+              ctx.fillStyle = backgroundColor;
+              ctx.fillRect(0, 0, c.chart.width, c.chart.height);
              }
-                      P_country = layer.feature.properties.country;
-                      P_department = layer.feature.properties.d_name;
-                      P_muni = layer.feature.properties.m_name;
-                      P_pov = layer.feature.properties.gen_pov;
-                      P_id = layer.feature.properties.id;
-                      P_year = layer.feature.properties.year;
-                      P_source = layer.feature.properties.source;
+           });
+           //STUDY THIS EXAMPLE!!!
+          //  https://stackoverflow.com/questions/43664722/how-to-save-chart-js-charts-as-image-without-black-background-using-blobs-and-fi
+          //  https://jsfiddle.net/a9hmnd9L/2/
 
-                      P_length = layer.feature.properties.rd_length;
-                      P_density = layer.feature.properties.rd_density;
-                      P_rd_urban = layer.feature.properties.rd_urban;
-                      P_rd_rural = layer.feature.properties.rd_rural;
-                      P_rd_1 = layer.feature.properties.rd_major;
-                      P_rd_2 = layer.feature.properties.rd_second;
-                      P_rd_3 = layer.feature.properties.rd_tertiar;
-                      P_rd_21 = layer.feature.properties.rd_second / layer.feature.properties.rd_major;
-                      P_rd_31 = layer.feature.properties.rd_tertiar / layer.feature.properties.rd_major;
-             //LOAD THE RADAR CHART
-            //  REFERENCE
-            //  https://canvasjs.com/docs/charts/chart-types/html5-stacked-bar-chart/
+
+            // var canvas = $('#myChart1').get(0);
+            // var myChart = new Chart(canvas, {
+            //     type: 'line',
+            //     data: {
+            //       labels: [1, 2, 3, 4, 5],
+            //       datasets: [{
+            //         label: 'Line Chart',
+            //         data: [1, 2, 3, 4, 5],
+            //         backgroundColor: 'rgba(255, 0, 0, 0.2)',
+            //         borderColor: 'rgba(255, 0, 0, 0.5)',
+            //         pointBackgroundColor: 'black'
+            //       }]
+            //     }
+            //   });
+
+            // save as image
+            // $('#save').click(function() {
+            //   canvas.toBlob(function(blob) {
+            //     saveAs(blob, "pretty image.png");
+            //   });
+            // });
+
+
+          if(myChart!=null){
+           //  myChart.destroy();
+           //  $('#myChart2').remove();
+           //  $('.chartsarea').append('<canvas class="charts" id="myChart2" width="300" height="200"></canvas>');
+           //  console.log("replace2");
+          }
+          else {
+
+
+
+
+
+
+
+            var ctx2 = document.getElementById("myChart2");
+
+            ctx2.style.backgroundColor = 'rgba(255,255,255,1)';
+            //Fill the background
+           //  Chart.plugins.register({
+           //    beforeDraw: function(myChart) {
+           //     //  var ctx = myChart.chart.ctx2;
+           //      ctx2.fillStyle = 'rgba(255,255,255,0.05)';
+           //      ctx2.fillRect(0, 0, myChart.chart.width, myChart.chart.height);
+           //    }
+           //  });
+
+
+
+           // ctx2.fillStyle = "white";
+           // ctx2.fill = 'rgba(255, 0, 255, 0.5)';
+            var myChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: [layer.feature.properties.m_name, "Average", "UN"],
+                    datasets: [{
+                        label: 'Poverty',
+                        data: [layer.feature.properties.gen_pov, 33, 20],
+                        backgroundColor: [
+                            'rgba(255, 120, 35, 0.5)',
+                            'rgba(50, 120, 230, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+
+                        ],
+                        borderColor: [
+                            'rgba(255, 120, 35, 1)',
+                            'rgba(50, 120, 230, 1)',
+                            'rgba(255, 206, 86, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                  responsive: false,
+                  maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                                }
+                              }]
+                            }
+                          }
+                });
+
+               // ctx2.style.backgroundColor = 'rgba(255,0,0,1)';
+
+              }
+                       P_country = layer.feature.properties.country;
+                       P_department = layer.feature.properties.d_name;
+                       P_muni = layer.feature.properties.m_name;
+                       P_pov = layer.feature.properties.gen_pov;
+                       P_id = layer.feature.properties.id;
+                       P_year = layer.feature.properties.year;
+                       P_source = layer.feature.properties.source;
+
+                       P_length = layer.feature.properties.rd_length;
+                       P_density = layer.feature.properties.rd_density;
+                       P_rd_urban = layer.feature.properties.rd_urban;
+                       P_rd_rural = layer.feature.properties.rd_rural;
+                       P_rd_1 = layer.feature.properties.rd_major;
+                       P_rd_2 = layer.feature.properties.rd_second;
+                       P_rd_3 = layer.feature.properties.rd_tertiar;
+                       P_rd_21 = layer.feature.properties.rd_second / layer.feature.properties.rd_major;
+                       P_rd_31 = layer.feature.properties.rd_tertiar / layer.feature.properties.rd_major;
+              //LOAD THE RADAR CHART
+             //  REFERENCE
+             //  https://canvasjs.com/docs/charts/chart-types/html5-stacked-bar-chart/
+             //
+              if (radarChart!=null){
+                //USING MAP REMOVE LAYER DOES NOT WORK ON CHARTS!
+                radarChart.destroy();
+                console.log("destroyed2");
+              }
+              else {
+                var marksCanvas = document.getElementById("myChart1");
+                var ctx1 = marksCanvas.getContext('2d');
+                //Fill the background
+               //  Chart.plugins.register({
+               //    beforeDraw: function(myChart) {
+               //     //  var ctx = myChart.chart.ctx2;
+               //      ctx1.fillStyle = 'rgba(255,255,255,0.05)';
+               //      ctx1.fillRect(0, 0, myChart.chart.width, myChart.chart.height);
+               //    }
+               //  });
+
+                var marksData = {
+                  labels: ["Total Length", "Density", "Urban Road", "Rural Road", "Secondary/Major", "Tertiary/Major"],
+                  datasets: [{
+                    label: P_muni,
+                    backgroundColor: "rgba(255,120,35,0.5)",
+                    data: [(P_length - 46775.31635) / 76377.96091, (P_density - 244.1640059) / 190.074839, (P_rd_urban - 7936.693108) / 14941.34066, (P_rd_rural - 38367.5124) / 69831.91203, (P_rd_21 - 3.627827758) / 24.37334603, (P_rd_31 - 3.518684818) / 23.91963842]
+                    // OPTION 2
+                   //  data: [(P_length) / 76377.96091, (P_density) / 190.074839, (P_rd_urban) / 14941.34066, (P_rd_rural) / 69831.91203, (P_rd_21) / 24.37334603, (P_rd_31) / 23.91963842]
+                  }, {
+                    label: "Regional Average",
+                    backgroundColor: "rgba(50,120,230,0.5)",
+                    data: [0, 0, 0, 0, 0, 0]
+                    // OPTION 2
+                   //  data: [46775.31635 / 76377.96091, 244.1640059 / 190.074839, 7936.693108 / 14941.34066, 38367.5124 / 69831.91203, 3.627827758 / 24.37334603, 3.518684818 / 23.91963842]
+                  }]
+                };
+
+                var radarChart = new Chart(marksCanvas, {
+                  type: 'radar',
+                  data: marksData,
+                  options: {
+                    responsive: false, maintainAspectRatio: false,
+
+                  }
+                });
+              }
+
+              //LOAD THE STACKED BAR CHART -- needs some work!!
+           //      var chart = new CanvasJS.Chart("chartContainer",
+           //      {
+           //        title:{
+           //          text: "Road Breakdown"
+           //        },
             //
-             if (radarChart!=null){
-               //USING MAP REMOVE LAYER DOES NOT WORK ON CHARTS!
-               radarChart.destroy();
-               console.log("destroyed2");
-             }
-             else {
-               var marksCanvas = document.getElementById("myChart1");
-               var ctx1 = marksCanvas.getContext('2d');
-               //Fill the background
-              //  Chart.plugins.register({
-              //    beforeDraw: function(myChart) {
-              //     //  var ctx = myChart.chart.ctx2;
-              //      ctx1.fillStyle = 'rgba(255,255,255,0.05)';
-              //      ctx1.fillRect(0, 0, myChart.chart.width, myChart.chart.height);
-              //    }
-              //  });
+           //        data: [
+           //          {
+           //            type: "stackedBar",
+           //            dataPoints: [
+           //              { x: new Date(2012, 01, 1), y: P_rd_1 },
+           //              { x: new Date(2012, 02, 1), y: 6407.589269},
+           //            ]
+           //    },
+           //      {
+           //      type: "stackedBar",
+           //       dataPoints: [
+           //      { x: new Date(2012, 01, 1), y: P_rd_2 },
+           //      { x: new Date(2012, 02, 1), y: 21603.01897},
+           //      ]
+           //    },
+           //      {
+           //      type: "stackedBar",
+           //       dataPoints: [
+           //      { x: new Date(2012, 01, 1), y: P_rd_3 },
+           //      { x: new Date(2012, 02, 1), y: 18764.70811},
+           //      ]
+           //    },
+            //
+           //    ]
+           //  });
+           //  chart.render();
 
-               var marksData = {
-                 labels: ["Total Length", "Density", "Urban Road", "Rural Road", "Secondary/Major", "Tertiary/Major"],
-                 datasets: [{
-                   label: P_muni,
-                   backgroundColor: "rgba(255,120,35,0.5)",
-                   data: [(P_length - 46775.31635) / 76377.96091, (P_density - 244.1640059) / 190.074839, (P_rd_urban - 7936.693108) / 14941.34066, (P_rd_rural - 38367.5124) / 69831.91203, (P_rd_21 - 3.627827758) / 24.37334603, (P_rd_31 - 3.518684818) / 23.91963842]
-                   // OPTION 2
-                  //  data: [(P_length) / 76377.96091, (P_density) / 190.074839, (P_rd_urban) / 14941.34066, (P_rd_rural) / 69831.91203, (P_rd_21) / 24.37334603, (P_rd_31) / 23.91963842]
-                 }, {
-                   label: "Regional Average",
-                   backgroundColor: "rgba(50,120,230,0.5)",
-                   data: [0, 0, 0, 0, 0, 0]
-                   // OPTION 2
-                  //  data: [46775.31635 / 76377.96091, 244.1640059 / 190.074839, 7936.693108 / 14941.34066, 38367.5124 / 69831.91203, 3.627827758 / 24.37334603, 3.518684818 / 23.91963842]
-                 }]
-               };
+       //  };
 
-               var radarChart = new Chart(marksCanvas, {
-                 type: 'radar',
-                 data: marksData,
-                 options: {
-                   responsive: false, maintainAspectRatio: false,
+       // this below is the else } !!!
+          // }
 
-                 }
-               });
-             }
-
-             //LOAD THE STACKED BAR CHART -- needs some work!!
-          //      var chart = new CanvasJS.Chart("chartContainer",
-          //      {
-          //        title:{
-          //          text: "Road Breakdown"
-          //        },
-           //
-          //        data: [
-          //          {
-          //            type: "stackedBar",
-          //            dataPoints: [
-          //              { x: new Date(2012, 01, 1), y: P_rd_1 },
-          //              { x: new Date(2012, 02, 1), y: 6407.589269},
-          //            ]
-          //    },
-          //      {
-          //      type: "stackedBar",
-          //       dataPoints: [
-          //      { x: new Date(2012, 01, 1), y: P_rd_2 },
-          //      { x: new Date(2012, 02, 1), y: 21603.01897},
-          //      ]
-          //    },
-          //      {
-          //      type: "stackedBar",
-          //       dataPoints: [
-          //      { x: new Date(2012, 01, 1), y: P_rd_3 },
-          //      { x: new Date(2012, 02, 1), y: 18764.70811},
-          //      ]
-          //    },
-           //
-          //    ]
-          //  });
-          //  chart.render();
-
-      //  };
-
-         }
-
+       }
    )};
-
 
 var myFilter = function(feature) {
      if (feature.properties.gen_pov===' ') {
@@ -1394,6 +1479,10 @@ $('#hidemap').click(function(){
     map.removeLayer(layer);
   });
 
+
+
+  map.removeLayer(layerMappedPolygons);
+
   console.log("removed");
 
 });
@@ -1680,7 +1769,17 @@ var geologo = 'logo.jpg';
 var tableToPDF = function(){
   console.log("PDF starts");
   var doc = new jsPDF();
+  //GOOD REFERENCE
+  // https://mrrio.github.io/
   // define the map as an image
+
+
+  // generate table reference here
+  // GREAT EXAMPLE!!
+  // 0: https://simonbengtsson.github.io/jsPDF-AutoTable/
+  // 1: https://stackoverflow.com/questions/19807870/how-to-export-the-html-tables-data-into-pdf-using-jspdf
+  // 2: https://stackoverflow.com/questions/23018171/create-pdf-using-jspdf-with-formatted-table-data
+
 
   //////////////////TO BE FIXED!!!//////
   // function function1() {
