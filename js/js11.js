@@ -245,8 +245,8 @@ $('#satellite').click(function(){
   var majorroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/RD_1MAJOR.geojson";
   var secondaryroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/RD_2SECOND.geojson";
   var tertiaryroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/RD_3TERTIARY.geojson";
-  var urbanroads = "";
-  var ruralroads = "";
+  var urbanroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/rd_urban.geojson";
+  var ruralroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/rd_rural.geojson";
 
   //UTILITIES
 
@@ -1460,6 +1460,42 @@ $('#showmap').click(function(){
     }
 
 
+    if (x4 == true){
+        //LOAD THE TERTIARY ROAD NETWORKS
+        _.each(parsedData_urbanroads,function(item){
+          var itemB = L.geoJson(parsedData_urbanroads,
+            {
+              style: {opacity:0.35,width:0.3,color:'#F7A920'},
+              pointToLayer: function (feature, latlngs) {
+                return new L.polyline(latlngs, {
+                }
+              );
+            }}
+          ).addTo(map).bindPopup("road2");
+          SecondaryRoads.push(itemB);
+        }
+        );
+        selectedmaps.push(UrbanRoads);
+    }
+
+
+    if (x5 == true){
+        //LOAD THE TERTIARY ROAD NETWORKS
+        _.each(parsedData_ruralroads,function(item){
+          var itemB = L.geoJson(parsedData_ruralroads,
+            {
+              style: {opacity:0.35,width:0.3,color:'#F7A920'},
+              pointToLayer: function (feature, latlngs) {
+                return new L.polyline(latlngs, {
+                }
+              );
+            }}
+          ).addTo(map).bindPopup("road2");
+          SecondaryRoads.push(itemB);
+        }
+        );
+        selectedmaps.push(RuralRoads);
+    }
 
     // if (x3 == true){
     //   //LOAD THE TERTIARY DATA
@@ -1486,9 +1522,6 @@ $('#showmap').click(function(){
 
 
 
-
-
-
     if (z1 == true){
       //LOAD THE HEALTH CENTERS DATA
          _.each(parsedData_hospital,function(item){
@@ -1511,6 +1544,32 @@ $('#showmap').click(function(){
           );
           selectedmaps.push(Hospitals);
       }
+
+
+      //LOAD CLINICS DATA
+      // if (z2 == true){
+      //   //LOAD THE HEALTH CENTERS DATA
+      //      _.each(parsedData_clinics,function(item){
+      //         var itemB = L.geoJson(parsedData_hospital,
+      //           {
+      //             pointToLayer: function (feature, latlngs) {
+      //               return new L.circleMarker(latlngs, {
+      //                  radius:3,
+      //                  fillColor:'#41D0EA',
+      //                  color:'#2365D8',
+      //                  weight:1,
+      //                  opacity:0.3,
+      //                  fillOpacity:0.3,
+      //                 });
+      //               }
+      //           }).addTo(map).bindPopup("Hospitals");
+      //           Hospitals.push(itemB);
+      //
+      //         }
+      //       );
+      //       selectedmaps.push(Hospitals);
+      //   }
+      //
 
 
       if (x4 == true){
@@ -1584,51 +1643,6 @@ $('#hidemap').click(function(){
 });
 
 
-//DOWNLOAD DATA OF DIFFERENT LAYERS
-//LOAD THE HOSPITAL DATA
-// var healthcenter = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/healthcenters_segeplan_2010.geojson?token=AWa3uu4HC5P_wTYFCaksa2u2C8t4hRV5ks5Zd5GcwA%3D%3D";
-// var highschool = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/High_Schools_in_Triangulo_Norte.geojson";
-
-  $(document).ready(function(){
-    $.ajax(hospital).done(function(data) {
-      parsedData_hospital = JSON.parse(data);
-      console.log(parsedData_hospital);
-      console.log("parsedData_hospital");
-    });
-  });
-
-//LOAD SCHOOLS
-$(document).ready(function(){
-  $.ajax(school).done(function(data) {
-    parsedData_Schools = JSON.parse(data);
-    console.log(parsedData_Schools);
-    console.log("parsed_Schools");
-  });
-});
-
-
-//LOAD SOUTH AMERICA COUNTRY DATA
-// $(document).ready(function(){
-//   $.ajax(southamerica).done(function(data) {
-//     parsedData10 = JSON.parse(data);
-//     console.log(parsedData10);
-//     console.log("parsed10");
-//     console.log(parsedData10.features[0].properties.country);
-//     layerMappedPolygons = _.each(parsedData10,function(item){
-//       L.geoJson(parsedData10,
-//         {
-//           style: {opacity:0.4},
-//           pointToLayer: function (feature, latlngs) {
-//             return new L.Polygon(latlngs, {
-//             }
-//           );
-//         }}
-//       ).addTo(map).bindPopup("text");
-//     }
-//   );
-//   });
-// });
-
 
 //4.2 LOADING ROAD NETWORK DATA
 $(document).ready(function(){
@@ -1659,6 +1673,52 @@ $(document).ready(function(){
       console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
     });
   });
+
+
+//PARSING THE UTILITIES DATA
+  $(document).ready(function(){
+    $.ajax(majorroads).done(function(data) {
+      parsedData_majorroads = JSON.parse(data);
+      console.log(parsedData_majorroads);
+      console.log("parsed14");
+      console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
+    });
+  });
+
+//PARSING THE PUBLIC HEALTH DATA
+
+
+//DOWNLOAD DATA OF DIFFERENT LAYERS
+//PARSING THE HOSPITALS
+  $(document).ready(function(){
+    $.ajax(hospital).done(function(data) {
+      parsedData_hospital = JSON.parse(data);
+      console.log(parsedData_hospital);
+      console.log("parsedData_hospital");
+    });
+  });
+
+//
+// //PARSING THE CLINICS
+//   $(document).ready(function(){
+//     $.ajax(majorroads).done(function(data) {
+//       parsedData_majorroads = JSON.parse(data);
+//       console.log(parsedData_majorroads);
+//       console.log("parsed14");
+//       console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
+//     });
+//   });
+
+
+//PARSING THE SCHOOLS
+$(document).ready(function(){
+  $.ajax(school).done(function(data) {
+    parsedData_Schools = JSON.parse(data);
+    console.log(parsedData_Schools);
+    console.log("parsed_Schools");
+  });
+});
+
 
 
 //THE WHOLE SCHOOL DATA IS HUGE
