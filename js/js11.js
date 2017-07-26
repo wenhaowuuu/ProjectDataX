@@ -1114,67 +1114,67 @@ var myFilter = function(feature) {
 
 // 4. LOADING REAL DATA
 //4.0 LOADING THREE NATIONS BOUNDARY
-$(document).ready(function(){
-  $.ajax(Guatemala).done(function(data) {
-    parsedData_Guatemala = JSON.parse(data);
-    console.log("parsed_Guatemala");
-    console.log(parsedData_Guatemala.features[0].properties.country);
-  //   layerMappedPolygons = _.each(parsedData_Guatemala,function(item){
-  //     L.geoJson(parsedData_Guatemala,
-  //       {
-  //         style: {opacity:0.4},
-  //         pointToLayer: function (feature, latlngs) {
-  //           return new L.Polygon(latlngs, {
-  //           }
-  //         );
-  //       }}
-  //     ).addTo(map).bindPopup("text");
-  //   }
-  // );
-  });
-});
+// $(document).ready(function(){
+//   $.ajax(Guatemala).done(function(data) {
+//     parsedData_Guatemala = JSON.parse(data);
+//     console.log("parsed_Guatemala");
+//     console.log(parsedData_Guatemala.features[0].properties.country);
+//   //   layerMappedPolygons = _.each(parsedData_Guatemala,function(item){
+//   //     L.geoJson(parsedData_Guatemala,
+//   //       {
+//   //         style: {opacity:0.4},
+//   //         pointToLayer: function (feature, latlngs) {
+//   //           return new L.Polygon(latlngs, {
+//   //           }
+//   //         );
+//   //       }}
+//   //     ).addTo(map).bindPopup("text");
+//   //   }
+//   // );
+//   });
+// });
 
 
-$(document).ready(function(){
-  $.ajax(Salvador).done(function(data) {
-    parsedData_Salvador = JSON.parse(data);
-    console.log("parsed_Salvador");
-    console.log(parsedData_Salvador.features[0].properties.country);
-  //   layerMappedPolygons = _.each(parsedData_Salvador,function(item){
-  //     L.geoJson(parsedData_Salvador,
-  //       {
-  //         style: {opacity:0.4},
-  //         pointToLayer: function (feature, latlngs) {
-  //           return new L.Polygon(latlngs, {
-  //           }
-  //         );
-  //       }}
-  //     ).addTo(map).bindPopup("text");
-  //   }
-  // );
-  });
-});
+// $(document).ready(function(){
+//   $.ajax(Salvador).done(function(data) {
+//     parsedData_Salvador = JSON.parse(data);
+//     console.log("parsed_Salvador");
+//     console.log(parsedData_Salvador.features[0].properties.country);
+//   //   layerMappedPolygons = _.each(parsedData_Salvador,function(item){
+//   //     L.geoJson(parsedData_Salvador,
+//   //       {
+//   //         style: {opacity:0.4},
+//   //         pointToLayer: function (feature, latlngs) {
+//   //           return new L.Polygon(latlngs, {
+//   //           }
+//   //         );
+//   //       }}
+//   //     ).addTo(map).bindPopup("text");
+//   //   }
+//   // );
+//   });
+// });
 
 
-$(document).ready(function(){
-  $.ajax(Honduras).done(function(data) {
-    parsedData_Honduras = JSON.parse(data);
-    console.log("parsed23");
-    console.log(parsedData_Honduras.features[0].properties.country);
-  //   layerMappedPolygons = _.each(parsedData_Honduras,function(item){
-  //     L.geoJson(parsedData_Honduras,
-  //       {
-  //         style: {opacity:0.4},
-  //         pointToLayer: function (feature, latlngs) {
-  //           return new L.Polygon(latlngs, {
-  //           }
-  //         );
-  //       }}
-  //     ).addTo(map).bindPopup("text");
-  //   }
-  // );
-  });
-});
+// $(document).ready(function(){
+//   $.ajax(Honduras).done(function(data) {
+//     parsedData_Honduras = JSON.parse(data);
+//     console.log("parsed23");
+//     console.log(parsedData_Honduras.features[0].properties.country);
+//   //   layerMappedPolygons = _.each(parsedData_Honduras,function(item){
+//   //     L.geoJson(parsedData_Honduras,
+//   //       {
+//   //         style: {opacity:0.4},
+//   //         pointToLayer: function (feature, latlngs) {
+//   //           return new L.Polygon(latlngs, {
+//   //           }
+//   //         );
+//   //       }}
+//   //     ).addTo(map).bindPopup("text");
+//   //   }
+//   // );
+//   });
+// });
 
 
 
@@ -1290,7 +1290,9 @@ $('#water').change(function(){
 
 
 //PUBLIC HEALTH
-//WHY Z1 IS NOT CLICKABLE?
+//WHY Z1 IS NOT CLICKABLE???
+//A BIG BUGS HERE! SEEMS THAT ONLY THE EIGHTH AND NINTH BUTTON IS ONLY
+// CLICKABLE AFTER THE SHOWMAP BUTTON IS CLICKED...
 $('#hospital').change(function(){
   console.log("hospital is clicked");
   if(this.checked){
@@ -1549,7 +1551,7 @@ if (y2 == true){
 
 
 
-    if (m1 == true){
+    if (m1 === true){
       //LOAD THE HOSPITALS DATA
          _.each(parsedData_Hospital,function(item){
             var itemB = L.geoJson(parsedData_Hospital,
@@ -1557,7 +1559,7 @@ if (y2 == true){
                 pointToLayer: function (feature, latlngs) {
                   return new L.circleMarker(latlngs, {
                      radius:3,
-                     fillColor:'#41D0EA',
+                     fillColor:'#4330EA',
                      color:'#2365D8',
                      weight:1,
                      opacity:0.3,
@@ -1573,30 +1575,30 @@ if (y2 == true){
       }
 
 
-      //LOAD CLINICS DATA
-      // if (m2 == true){
-      //   //LOAD THE CLINICS DATA
-      //      _.each(parsedData_clinics,function(item){
-      //         var itemB = L.geoJson(parsedData_hospital,
-      //           {
-      //             pointToLayer: function (feature, latlngs) {
-      //               return new L.circleMarker(latlngs, {
-      //                  radius:3,
-      //                  fillColor:'#41D0EA',
-      //                  color:'#2365D8',
-      //                  weight:1,
-      //                  opacity:0.3,
-      //                  fillOpacity:0.3,
-      //                 });
-      //               }
-      //           }).addTo(map).bindPopup("Hospitals");
-      //           Hospitals.push(itemB);
-      //
-      //         }
-      //       );
-      //       selectedmaps.push(Hospitals);
-      //   }
-      //
+      // LOAD CLINICS DATA
+      if (m2 === true){
+        //LOAD THE CLINICS DATA
+           _.each(parsedData_Clinic,function(item){
+              var itemB = L.geoJson(parsedData_Clinic,
+                {
+                  pointToLayer: function (feature, latlngs) {
+                    return new L.circleMarker(latlngs, {
+                       radius:3,
+                       fillColor:'#41E0EA',
+                       color:'#2365D8',
+                       weight:1,
+                       opacity:0.3,
+                       fillOpacity:0.3,
+                      });
+                    }
+                }).addTo(map).bindPopup("Clinics");
+                Clinics.push(itemB);
+
+              }
+            );
+            selectedmaps.push(Clinics);
+        }
+
 
 
 //LOAD SCHOOL DATA IN DIFFERENT KINDS
@@ -1721,7 +1723,6 @@ if (y2 == true){
          selectedmaps.push(HighSchools);
       }
 
-
       // if (w4 == true){
       //   var myFilter4 = function(feature) {
       //       if (feature.properties.school_typ == "Pre-Básica,Básica,Media") {
@@ -1783,6 +1784,10 @@ $('#hidemap').click(function(){
   });
 
   _.each(Hospitals,function(layer){
+    map.removeLayer(layer);
+  });
+
+  _.each(Clinics,function(layer){
     map.removeLayer(layer);
   });
 
@@ -1881,6 +1886,13 @@ $(document).ready(function(){
     });
   });
 
+  $(document).ready(function(){
+    $.ajax(clinic).done(function(data) {
+      parsedData_Clinic = JSON.parse(data);
+      console.log(parsedData_Clinic);
+      console.log("parsedData_Clinic");
+    });
+  });
 // //PARSING THE CLINICS
 //   $(document).ready(function(){
 //     $.ajax(majorroads).done(function(data) {
@@ -1955,44 +1967,14 @@ var geologo = 'logo.jpg';
 
 var tableToPDF = function(){
   console.log("PDF starts");
-  var doc = new jsPDF();
-  //for tables in PDF
-  // VERY GOOD EXAMPLE HERE
-  // https://github.com/simonbengtsson/jsPDF-AutoTable
+  // SETTUING THE THE PDF PARAMETERS
+  // https://stackoverflow.com/questions/24335372/setting-pdf-page-width-height-when-using-jspdf
+  var doc = new jsPDF("1", "", "letter");
+  var pageHeight = doc.internal.pageSize.height;
+  var pageWidth = doc.internal.pageSize.width;
+  console.log(pageHeight);
+  console.log(pageWidth);
 
-
-  //GOOD REFERENCE
-  // https://mrrio.github.io/
-  // define the map as an image
-  // var columns = ["ID", "Name", "Country"];
-  // var rows = [
-  //            [1, "Peten", "Guatemala"],
-  //            [2, "La Ibertad", "Guatemala"],
-  //            [3, "Garcia", "Guatemala"],
-  //          ];
-
-  // reference doc.addImage(div,'JPEG', 174, 40, 48, 32);
-  // var doc = new jsPDF('p', 'pt');
-
-  // doc.autoTable(columns, rows);
-  //
-  // doc.autoTable(columns, rows, {
-  //   styles: {fillColor: [100, 255, 255]},
-  //   columnStyles: {
-  //   	id: {fillColor: 255}
-  //   },
-  //   margin: {top: 60},
-  //   addPageContent: function(data) {
-  //   	doc.text("Header", 40, 30);
-  //   }
-  // });
-
-
-  // generate table reference here
-  // GREAT EXAMPLE!!
-  // 0: https://simonbengtsson.github.io/jsPDF-AutoTable/
-  // 1: https://stackoverflow.com/questions/19807870/how-to-export-the-html-tables-data-into-pdf-using-jspdf
-  // 2: https://stackoverflow.com/questions/23018171/create-pdf-using-jspdf-with-formatted-table-data
 
 
   //////////////////TO BE FIXED!!!//////
@@ -2230,42 +2212,201 @@ var tableToPDF = function(){
   doc.text(10, 182, 'Major Road: ' + P_rd_1.toFixed(3) + ' km');
   doc.text(10, 188, 'Secondary Road: ' + P_rd_2.toFixed(3) + ' km');
   doc.text(10, 194, 'Tertiary Road: ' + P_rd_3.toFixed(3) + ' km');
-
-  // doc.text(10, 150, 'Typology split (km x major/secondary/tertiary): ' + '1000 km');
-  doc.text(10, 200, 'Road Efficiency');
-  doc.text(10, 206, '(% population within 30 minutes of road): ' + '41%');
+  doc.text(10, 200, 'Urban Road: ' + P_rd_urban.toFixed(3) + ' km');
+  doc.text(10, 206, 'Rural Road: ' + P_rd_rural.toFixed(3) + ' km');
+  doc.text(10, 212, 'Road Efficiency');
+  doc.text(10, 218, '(% population within 30 minutes of road): ' + '41%');
 
 
   //UTILITY
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 218, '3) UTILITY');
+  doc.text(10, 230, '3) UTILITIES');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 226, 'Sanitation (% of coverage): ' + '1000 km');
-  doc.text(10, 232, 'Electricity (% of coverage): ' + '1000 km');
-  doc.text(10, 238, 'Water (% of coverage): ' + '1000 km');
-  doc.text(10, 244, 'Basic Needs Unsatisfied (% of coverage): ' + '50%');
+  doc.text(10, 236, 'Sanitation (% of coverage): ' + '1000 km');
+  doc.text(10, 242, 'Electricity (% of coverage): ' + '1000 km');
+  doc.text(10, 248, 'Water (% of coverage): ' + '1000 km');
+  doc.text(10, 254, 'Basic Needs Unsatisfied (% of coverage): ' + '50%');
 
+
+  //PAGE NUMBER
+  doc.setFont("arial");
+  doc.setFontType("normal");
+  doc.setFontSize(8);
+  doc.text(95, 275, 'Page 1 of 3');
+
+
+
+  // JUMP TO THE SECOND PAGE
+  // ADD ANOTHER PAGE
+  // REFERENCE
+  // https://stackoverflow.com/questions/19272933/jspdf-multi-page-pdf-with-html-renderrer
+  // https://github.com/MrRio/jsPDF/issues/101
+  // https://stackoverflow.com/questions/25904440/jspdf-addhtml-multiple-canvas-page
+  doc.addPage();
+  doc.setPage(2);
+
+  doc.setFontSize(10);
+  doc.setFontType("light");
+  doc.setFont("inherit");
+  doc.text(10, 5, 'DataXLat @ Geoadaptive LLC.');
+  doc.text(150, 5, '250 Summer St, Boston, MA, USA');
+  //DIVIDING LINE
+  doc.setLineWidth(1);
+  doc.setDrawColor(255,140,40);
+  doc.line(0, 8, 240, 8);
 
   //EDUCATION
   doc.setFont("georgia");
   doc.setFontType("bold");
-  doc.text(10, 256, '4) EDUCATION');
+  doc.setFontSize(12);
+  doc.text(10, 18, '4) EDUCATION');
   doc.setFont("times");
   doc.setFontType("normal");
-  doc.text(10, 264, 'Literacy Rate: ' + '75%');
+  doc.text(10, 26, 'Literacy Rate: ' + '75%');
+  doc.text(10, 32, 'Number of Primary Schools: ' + '311');
+  doc.text(10, 38, 'Number of Middle Schools: ' + '69');
+  doc.text(10, 44, 'Number of High Schools: ' + '18');
+  doc.text(10, 50, 'Total Enrollment Number: ' + '12067');
+
+  //PUBLIC HEALTH
+  doc.setFont("georgia");
+  doc.setFontType("bold");
+  // doc.setFontSize(12);
+  doc.text(10, 62, '5) PUBLIC HEALTH');
+  doc.setFont("times");
+  doc.setFontType("normal");
+  doc.text(10, 70, 'Number of Hospitals: ' + '3');
+  doc.text(10, 76, 'Number of Clinics: ' + '42');
+  doc.text(10, 82, 'Maximum Capacity for Medical Treatment: ' + '30021');
 
   //OTHER NOTES
   doc.setFont("georgia");
-  doc.text(10, 276, 'Notes: ' + 'things to keep in mind');
+  doc.text(10, 250, 'Notes: ' + 'things to keep in mind');
 
   //OTHER NOTES
   doc.setFont("times");
   doc.setFontType("italic");
   doc.setFontSize(10);
-  doc.text(5, 285, '* This data was obtained from ');
-  doc.text(5, 290, '' + P_source);
+  doc.text(10, 260, '* This data was obtained from ');
+  doc.text(10, 265, '' + P_source);
+
+
+  //PAGE NUMBER
+  doc.setFont("arial");
+  doc.setFontType("normal");
+  doc.setFontSize(8);
+  doc.text(95, 275, 'Page 2 of 3');
+
+
+  //THE THIRD PAGE FOR TABLE ONLY
+  doc.addPage();
+  doc.setPage(3);
+
+  doc.setFontSize(10);
+  doc.setFontType("light");
+  doc.setFont("inherit");
+  doc.text(10, 5, 'DataXLat @ Geoadaptive LLC.');
+  doc.text(150, 5, '250 Summer St, Boston, MA, USA');
+  //DIVIDING LINE
+  doc.setLineWidth(1);
+  doc.setDrawColor(255,140,40);
+  doc.line(0, 8, 240, 8);
+
+  //TABLE HEADING STARTS HERE
+
+
+  //for tables in PDF
+  // VERY GOOD EXAMPLE HERE
+  // https://github.com/simonbengtsson/jsPDF-AutoTable
+
+
+
+
+  //GOOD REFERENCE
+  // https://mrrio.github.io/
+  // define the map as an image
+  // var columns = ["INDICATORS", "Name", "Country"];
+  // var rows = [
+  //            [1, "Peten", "Guatemala"],
+  //            [2, "La Ibertad", "Guatemala"],
+  //            [3, "Garcia", "Guatemala"],
+  //          ];
+  //
+
+
+  var columns = [
+           {title: "Subjects", dataKey: "sb"},
+           {title: "Indicators", dataKey: "id"},
+           {title: "Value", dataKey: "val"},
+         ];
+  var rows = [
+           {"sb": "TRANSPORTATION", "id": "Total Road Length (km)", "val": P_length.toFixed(3)},
+           {"sb": "", "id": "Road Density (km per sq km)", "val": P_density.toFixed(3)},
+           {"sb": "", "id": "Major Road (km)", "val": P_rd_1.toFixed(3)},
+           {"sb": "", "id": "Secondary Road (km)", "val": P_rd_2.toFixed(3)},
+           {"sb": "", "id": "Tertiary Road (km)", "val": P_rd_3.toFixed(3)},
+           {"sb": "", "id": "", "val": ""},
+           {"sb": "UTILITIES", "id": "Sanitation", "val": "67%"},
+           {"sb": "", "id": "Electricity", "val": "84%"},
+           {"sb": "", "id": "Water", "val": "90%"},
+           {"sb": "", "id": "Basic Needs Unsatisfied", "val": "28%"},
+           {"sb": "", "id": "", "val": ""},
+           {"sb": "EDUCATION", "id": "Literacy Rates", "val": "75%"},
+           {"sb": "", "id": "Number of Primary Schools", "val": "311"},
+           {"sb": "", "id": "Number of Middle Schools", "val": "69"},
+           {"sb": "", "id": "Number of High Schools", "val": "18"},
+           {"sb": "", "id": "Total Enrollment Number", "val": "12067"},
+           {"sb": "", "id": "", "val": ""},
+           {"sb": "PUBLC HEALTH", "id": "Number of Hospitals", "val": "3"},
+           {"sb": "", "id": "Number of Clinics", "val": "42"},
+           {"sb": "", "id": "Maximum Capacity of Medical Treatment", "val": "30021"},
+
+         ];
+
+  // reference doc.addImage(div,'JPEG', 174, 40, 48, 32);
+  // doc.autoTable(columns, rows);
+
+
+  doc.autoTable(columns, rows, {
+    // header: {textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold'},
+    styles: {
+      fillColor: [214, 225, 225]
+    },
+    // rowStyles: {
+    //   {fillColor: [255, 140, 40]},
+    //
+    // },
+    headerStyles: {fillColor: [255, 140, 40]},
+    columnStyles: {
+      sb: {fillColor: [214, 225, 225]},
+    	// id: {fillColor: [255,140,0],
+      },
+
+    margin: {left: 10, top: 20},
+    addPageContent: function(data) {
+      doc.setFontSize(14);
+      doc.setFontType("bold");
+      doc.setFont("georgia");
+    	doc.text("Table of Indicators", 10, 15);
+    }
+  });
+
+
+  // generate table reference here
+  // GREAT EXAMPLE!!
+  // 0: https://simonbengtsson.github.io/jsPDF-AutoTable/
+  // 1: https://stackoverflow.com/questions/19807870/how-to-export-the-html-tables-data-into-pdf-using-jspdf
+  // 2: https://stackoverflow.com/questions/23018171/create-pdf-using-jspdf-with-formatted-table-data
+
+
+  //PAGE NUMBER
+  doc.setFont("arial");
+  doc.setFontType("normal");
+  doc.setFontSize(8);
+  doc.text(95, 275, 'Page 3 of 3');
+
 
   // doc.setFont("times");
   // doc.setFontType("normal");
@@ -2277,11 +2418,70 @@ var tableToPDF = function(){
   //
   // doc.text(20, 140, '10 degrees rotated', null, 10);
   // doc.text(20, 160, '-10 degrees rotated', null, -10);
+
+
+
+
   doc.save('test.pdf');
   console.log("PDF ready");
 };
 
 
+
+//reference on complete new page loading
+// function makePDF() {
+//
+//         var quotes = document.getElementById('container-fluid');
+//
+//         html2canvas(quotes, {
+//             onrendered: function(canvas) {
+//
+//             //! MAKE YOUR PDF
+//             var pdf = new jsPDF('p', 'pt', 'letter');
+//
+//             for (var i = 0; i <= quotes.clientHeight/980; i++) {
+//                 //! This is all just html2canvas stuff
+//                 var srcImg  = canvas;
+//                 var sX      = 0;
+//                 var sY      = 980*i; // start 980 pixels down for every new page
+//                 var sWidth  = 900;
+//                 var sHeight = 980;
+//                 var dX      = 0;
+//                 var dY      = 0;
+//                 var dWidth  = 900;
+//                 var dHeight = 980;
+//
+//                 window.onePageCanvas = document.createElement("canvas");
+//                 onePageCanvas.setAttribute('width', 900);
+//                 onePageCanvas.setAttribute('height', 980);
+//                 var ctx = onePageCanvas.getContext('2d');
+//                 // details on this usage of this function:
+//                 // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images#Slicing
+//                 ctx.drawImage(srcImg,sX,sY,sWidth,sHeight,dX,dY,dWidth,dHeight);
+//
+//                 // document.body.appendChild(canvas);
+//                 var canvasDataURL = onePageCanvas.toDataURL("image/png", 1.0);
+//
+//                 var width         = onePageCanvas.width;
+//                 var height        = onePageCanvas.clientHeight;
+//
+//                 //! If we're on anything other than the first page,
+//                 // add another page
+//                 if (i > 0) {
+//                     pdf.addPage(612, 791); //8.5" x 11" in pts (in*72)
+//                 }
+//                 //! now we declare that we're working on that page
+//                 pdf.setPage(i+1);
+//                 //! now we add content to that page!
+//                 pdf.addImage(canvasDataURL, 'PNG', 20, 40, (width*.62), (height*.62));
+//
+//             }
+//             //! after the for loop is finished running, we save the pdf.
+//             pdf.save('Test.pdf');
+//         }
+//       });
+//     }
+//
 
 
 
