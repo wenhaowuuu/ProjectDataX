@@ -2146,7 +2146,7 @@ var tableToPDF = function(){
 
 
   // doc.addImage(mapData, 'JPEG', 110, 140, 75, 50, undefined);
-  doc.addImage(mapData1, 'JPEG', 10, 40, 190, 80, undefined);
+  doc.addImage(mapData1, 'JPEG', 10, 40, 195, 76, undefined);
 
 
   //INSERT THE GRAPH & CHARTS
@@ -2371,17 +2371,19 @@ var tableToPDF = function(){
 
   doc.autoTable(columns, rows, {
     // header: {textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold'},
+    headerStyles: {fillColor: [255, 140, 40]},
+    alternateRow: { fillColor: 211},
     styles: {
-      fillColor: [245, 245, 245]
+      // fillColor: [245, 245, 245]
       // fillColor: [214, 225, 225]
     },
     // rowStyles: {
-    //   {fillColor: [255, 140, 40]},
+    //   {fillColor: [255, 140, 40]}
     //
     // },
-    headerStyles: {fillColor: [255, 140, 40]},
+
     columnStyles: {
-      sb: {fillColor: [214, 225, 225]},
+      // sb: {fillColor: [214, 225, 225]},
     	// id: {fillColor: [255,140,0],
       },
 
@@ -2390,7 +2392,7 @@ var tableToPDF = function(){
       doc.setFontSize(14);
       doc.setFontType("bold");
       doc.setFont("georgia");
-    	doc.text("Table of Indicators", 10, 15);
+    	doc.text("Table of Indicators", 10, 16);
     }
   });
 
