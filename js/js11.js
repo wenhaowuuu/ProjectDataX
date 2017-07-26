@@ -1,4 +1,36 @@
 //AS OF JULY 20TH, THE UPDATE HERE
+//LOAD THE INTRO PAGE
+//THIS IS USEFUL BUT MAYBE NOT THE BEST
+
+// THE FADE-OUT EFFECT 001
+//https://www.webdesignerdepot.com/2014/05/how-to-create-a-scrollable-splash-screen-with-css3-and-jquery/
+$.fn.center = function () {
+  this.css("position","absolute");
+  this.css("top", Math.max(0, (
+    ($(window).height() - $(this).outerHeight()) / 2) +
+     $(window).scrollTop()) + "px"
+  );
+  this.css("left", Math.max(0, (
+    ($(window).width() - $(this).outerWidth()) / 2) +
+     $(window).scrollLeft()) + "px"
+  );
+  return this;
+}
+
+$("#overlay").show();
+$("#overlay-content").show().center();
+
+$('.enter1').click(function () {
+    $(this).parent('.overlay').fadeOut(1200);
+});
+
+
+
+//THE FADING EFFECT 2
+
+
+
+
 //the migration is complete.
 // TARGET: TO LEARN THE OSMNX TOOLBOX
 // AUTOMATICALLY IDENTIFY AND GENERATE STREET NETWORK
@@ -101,8 +133,6 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.pn
 // var intersection = turf.intersect(poly1, poly2).addTo(map);
 
 // intersection.addTo(map);
-
-
 
 
 
@@ -1875,6 +1905,17 @@ $(document).ready(function(){
   //     console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
   //   });
   // });
+
+  // $(document).ready(function(){
+  //   $.ajax(water).done(function(data) {
+  //     parsedData_water = JSON.parse(data);
+  //     console.log(parsedData_water);
+  //     console.log("parsed14");
+  //     console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
+  //   });
+  // });
+
+
 
 //PARSING THE PUBLIC HEALTH DATA
 //PARSING THE HOSPITALS
