@@ -709,19 +709,33 @@ var changeBasemap3 = function(location3){
           //  BELOW WOULD PLACE AN AERIAL ON, BUT NOT REALLY WORKING,
           // it would become VERY VERY VERY SLOW to load when the following section is released!!!
 
+          if (location != null){
+              location = P_muni + ", " + P_country;
+
+              //getelementby id and then remove
+              mapURL = "https://maps.googleapis.com/maps/api/staticmap?center=" + location + "&zoom=10&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true";
+              console.log(mapURL);
+              img.src = mapURL;
+          }
+          else {
+            var location = '';
+            location = P_muni + ", " + P_country;
+            var mapURL = "https://maps.googleapis.com/maps/api/staticmap?center=" + location + "&zoom=10&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true";
+            console.log(mapURL);
+
+            var img = new Image();
+            // var img = document.createElement('img');
+            img.src = mapURL;
+          }
+
+          // just like the charts going on the sidebar
+
+          $('.locationmap').append(img);
+          console.log("appended0");
+          console.log(img);
 
 
 
-          //  var location = '';
-          //  location = P_muni + ", " + P_country;
-          //  var mapURL = "https://maps.googleapis.com/maps/api/staticmap?center=" + location + "&zoom=10&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true";
-          //  console.log(mapURL);
-          //  var img = new Image();
-          //  // var img = document.createElement('img');
-          //  img.src = mapURL;
-          //  $('.locationmap').append(img);
-          //  console.log("appended0");
-          //  console.log(img);
 
 
 
@@ -2151,7 +2165,7 @@ var tableToPDF = function(){
     // console.log("image loaded");
 
 
-    //test 002
+    //test 002 - THIS WORKED! this below part has been moved up for the click layer activity
     // var img = new Image();
     // // var img = document.createElement('img');
     // img.src = mapURL;
@@ -2166,6 +2180,8 @@ var tableToPDF = function(){
     // doc.addImage(imgData1,'JPEG', 150, 230, 40, 60, undefined);
     // doc.addImage(img, 'JPEG', 10, 40, 190, 80, undefined);
     //
+
+
     var newCanvas3 = document.querySelector('#myImage1');
     var newCanvasImg3 = newCanvas3.toDataURL("image/jpeg", 1.0);
     doc.addImage(newCanvasImg3,'JPEG', 120, 130, 80, 80);
