@@ -209,24 +209,19 @@ $('#satellite').click(function(){
 // 1.3 SWITCHING SACLES
     $('#Global').click(function(){
       map.setView([15.162820, -87.509107],2);
-      // map0.setCenter([15.162820, -87.509107],2);
     });
 
     $('#Regional').click(function(){
       map.setView([15.162820, -87.509107],5);
-      // map0.setCenter([15.162820, -87.509107],5);
     });
 
     $('#AOI').click(function(){
       map.setView([15.162820, -87.69107],6.5);
-      // map0.setCenter([15.162820, -87.509107],6.5);
     });
 
 
 // 2. CREATE VARIABLES
 // 2.1 DATA SOURCE URLS
-  // var southamerica = "https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/south_america.geojson";
-
   //THE CLEANED DATASET
   var muni_clean = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/nt_muni_joined_clean.geojson";
 
@@ -249,9 +244,7 @@ $('#satellite').click(function(){
 
 
   //PUBLIC HEALTH
-  // Z1, Z2
-  // var healthcenter = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/healthcenters_segeplan_2010.geojson?token=AWa3uu4HC5P_wTYFCaksa2u2C8t4hRV5ks5Zd5GcwA%3D%3D";
-  // var hospital = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_hospital_nt.geojson";
+  // M1, M2
   var hospital = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_hospital_muni_joined_clean.geojson";
   var clinic = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_nonhospital.geojson";
 
@@ -261,12 +254,11 @@ $('#satellite').click(function(){
 
 
 // 2.2 VARIABLES
-  var SalVardoB;
-  var HondurasB;
-  var GuatemalaB;
-  var NationsB = [ ];
-
-  var DepartmentsB = [ ];
+//   var SalVardoB;
+//   var HondurasB;
+//   var GuatemalaB;
+//   var NationsB = [ ];
+//   var DepartmentsB = [ ];
 
   var PrimaryRoads = [ ];
   var SecondaryRoads = [ ];
@@ -275,6 +267,12 @@ $('#satellite').click(function(){
   var RuralRoads = [ ];
 
   var Hospitals = [ ];
+  var Clinics = [ ];
+
+  var PrimarySchools = [ ];
+  var MiddleSchools = [ ];
+  var HighSchools = [ ];
+
   var Schools = [ ];
 
   var layerselected = [];
@@ -1186,7 +1184,7 @@ $(document).ready(function(){
 // console.log(document.getElementById("infrastructure").checked);
 //ADD THE LAYERS TO THE MAP
 var selectedmaps = [];
-var x1, x2, x3, x4, x5, y1, y2, z1, z2, w1, w2, w3;
+var x1, x2, x3, x4, x5, y1, y2, m1, m2, w1, w2, w3;
 
 
 // $('#nation').change(function(){
@@ -1280,8 +1278,10 @@ $('#electricity').change(function(){
 });
 
 $('#water').change(function(){
+  // console.log("water is clicked");
   if(this.checked){
     y2 = true;
+    // console.log("water is clicked 111");
   }
   if(!this.checked){
     y2 = false;
@@ -1292,20 +1292,23 @@ $('#water').change(function(){
 //PUBLIC HEALTH
 //WHY Z1 IS NOT CLICKABLE?
 $('#hospital').change(function(){
+  console.log("hospital is clicked");
   if(this.checked){
-    z1 = true;
+    m1 = true;
+    console.log("hospital is clicked 111");
   }
   if(!this.checked){
-    z1 = false;
+    m1 = false;
   }
 });
 
+
 $('#clinic').change(function(){
   if(this.checked){
-    z2 = true;
+    m2 = true;
   }
   if(!this.checked){
-    z2 = false;
+    m2 = false;
   }
 });
 
@@ -1343,7 +1346,7 @@ $('#highschool').change(function(){
 
 // SHOW THE MAPS OR HIDE THEM
 $('#showmap').click(function(){
-  console.log(x1,x2,x3,x4,x5,y1,y2,z1,z2,w1,w2,w3);
+  console.log(x1,x2,x3,x4,x5,y1,y2,m1,m2,w1,w2,w3);
   //LOAD NATIONAL BOUNDARIES
 //   if (y0 == true){
 //     GuatemalaB =
@@ -1399,7 +1402,6 @@ $('#showmap').click(function(){
             );
           }}
         ).addTo(map).bindPopup("road1");
-
         PrimaryRoads.push(itemB);
       }
       );
@@ -1496,7 +1498,7 @@ if (y1 == true){
           );
         }}
       ).addTo(map).bindPopup("road2");
-      SecondaryRoads.push(itemB);
+      Electricity.push(itemB);
     }
     );
     selectedmaps.push(Electricity);
@@ -1515,7 +1517,7 @@ if (y2 == true){
           );
         }}
       ).addTo(map).bindPopup("road2");
-      SecondaryRoads.push(itemB);
+      Water.push(itemB);
     }
     );
     selectedmaps.push(Water);
@@ -1547,10 +1549,10 @@ if (y2 == true){
 
 
 
-    if (z1 == true){
+    if (m1 == true){
       //LOAD THE HOSPITALS DATA
-         _.each(parsedData_hospital,function(item){
-            var itemB = L.geoJson(parsedData_hospital,
+         _.each(parsedData_Hospital,function(item){
+            var itemB = L.geoJson(parsedData_Hospital,
               {
                 pointToLayer: function (feature, latlngs) {
                   return new L.circleMarker(latlngs, {
@@ -1572,7 +1574,7 @@ if (y2 == true){
 
 
       //LOAD CLINICS DATA
-      // if (z2 == true){
+      // if (m2 == true){
       //   //LOAD THE CLINICS DATA
       //      _.each(parsedData_clinics,function(item){
       //         var itemB = L.geoJson(parsedData_hospital,
@@ -1629,12 +1631,12 @@ if (y2 == true){
                     fillOpacity:0.3,
                    });
                  }
-             }).addTo(map).bindPopup("Schools");
-             Schools.push(itemB);
+             }).addTo(map).bindPopup("PrimarySchools");
+             PrimarySchools.push(itemB);
 
            }
          );
-         selectedmaps.push(Schools);
+         selectedmaps.push(PrimarySchools);
       }
 
 
@@ -1670,12 +1672,12 @@ if (y2 == true){
                     fillOpacity:0.3,
                    });
                  }
-             }).addTo(map).bindPopup("Schools");
-             Schools.push(itemB);
+             }).addTo(map).bindPopup("MiddleSchools");
+             MiddleSchools.push(itemB);
 
            }
          );
-         selectedmaps.push(Schools);
+         selectedmaps.push(MiddleSchools);
       }
 
 
@@ -1711,12 +1713,12 @@ if (y2 == true){
                     fillOpacity:0.3,
                    });
                  }
-             }).addTo(map).bindPopup("Schools");
-             Schools.push(itemB);
+             }).addTo(map).bindPopup("HighSchools");
+             HighSchools.push(itemB);
 
            }
          );
-         selectedmaps.push(Schools);
+         selectedmaps.push(HighSchools);
       }
 
 
@@ -1760,15 +1762,6 @@ $('#hidemap').click(function(){
   console.log("ready to remove");
   console.log(selectedmaps);
 
-  _.each(NationsB,function(layer){
-    map.removeLayer(layer);
-  });
-
-  _.each(DepartmentsB,function(layer){
-    map.removeLayer(layer);
-  });
-
-
   _.each(PrimaryRoads,function(layer){
     map.removeLayer(layer);
   });
@@ -1793,11 +1786,17 @@ $('#hidemap').click(function(){
     map.removeLayer(layer);
   });
 
-  _.each(Schools,function(layer){
+  _.each(PrimarySchools,function(layer){
     map.removeLayer(layer);
   });
 
+  _.each(MiddleSchools,function(layer){
+    map.removeLayer(layer);
+  });
 
+  _.each(HighSchools,function(layer){
+    map.removeLayer(layer);
+  });
 
 
   map.removeLayer(layerMappedPolygons);
@@ -1876,9 +1875,9 @@ $(document).ready(function(){
 //PARSING THE HOSPITALS
   $(document).ready(function(){
     $.ajax(hospital).done(function(data) {
-      parsedData_hospital = JSON.parse(data);
-      console.log(parsedData_hospital);
-      console.log("parsedData_hospital");
+      parsedData_Hospital = JSON.parse(data);
+      console.log(parsedData_Hospital);
+      console.log("parsedData_Hospital");
     });
   });
 
