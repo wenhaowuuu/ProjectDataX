@@ -297,8 +297,21 @@ div.description{
 }
 
 
+#txt {
+  position:absolute;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+  /*font-weight: bold;*/
+  font-size: 36px;
+  right:700px;
+  bottom:290px;
+  z-index: 50;
+}
+
+
 #x {
   color:#F51A13;
+  font-weight:bold;
   /*color:#B92412;*/
 }
 
