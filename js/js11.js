@@ -2019,28 +2019,76 @@ var geologo = 'logo.jpg';
 // If we already had the jpeg image binary data loaded into
 // a string, we create the pdf without delay.
 
+$('#PrintMap').click(function(){
+  //001 first try leaflet print
+  // var printProvider, printControl;
+  // printProvider = L.print.provider({
+  //           capabilities: printConfig,
+  //           method: 'GET',
+  //       dpi: 254,
+  //       outputFormat: 'pdf',
+  //       customParams: {
+  //         mapTitle: 'Print Test',
+  //         comment: 'Testing Leaflet printing'
+  //       }
+  //     });
+  //
+  // // Create a print control with the configured provider and add to the map
+  // printControl = L.control.print({
+  //   provider: printProvider
+  // });
+  //
+  // map.addControl(printControl);
 
-var printProvider, printControl;
+  //002 then try map print function
 
-printProvider = L.print.provider({
-          capabilities: printConfig,
-          method: 'GET',
-		  dpi: 254,
-		  outputFormat: 'pdf',
-		  customParams: {
-			  mapTitle: 'Print Test',
-			  comment: 'Testing Leaflet printing'
-		  }
-	  });
+  // function printPage(){
+// var nowWidth = $("#map").width(); // get current width of mapdiv
+// var nowHeight = $("#map").height(); // get current height of map div
+// // $('<style>@media print { #map { height: ' + currHeight + 'px; width: ' + currWidth + 'px;} }</style>').appendTo('head'); // add print style with current width and height
+// //
+// // $('#map').css('width',nowWidth / 5);
+// // $('#map').css('width',nowHeight / 5);
+//   //
+//   // $('#map').css('width', '267mm');
+//   // $('#map').css('height', '210mm');
+//
+//   map.invalidateSize();
+//   var content = window.document.getElementById("map"); // get you map details
+//     var newWindow = window.open(); // open a new window
+//     // var A4size = {
+//     //   'height':'267mm',
+//     //   'width':'210mm',
+//     // };
+//
+//     // newWindow.document.setStyle(A4size);
+//
+//     newWindow.document.write(content.innerHTML); // write the map into the new window
+//     newWindow.print(); // print the new window
+//   // $('#map').print();
+//   // $('#map').css('width', nowWidth);
+//   // $('#map').css('height', nowHeight);
+
+  //003 easy print plugin please
 
 
-// Create a print control with the configured provider and add to the map
-printControl = L.control.print({
-	provider: printProvider
+
 });
 
-map.addControl(printControl);
+// npm install leaflet-easyprint
+// var printer = L.easyPrint({
+//       tileLayer: tiles,
+//         sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
+//           filename: 'myMap',
+//             exportOnly: true,
+//               hideControlContainer: true
+//     }).addTo(map);
 
+var printPlugin = L.easyPrint({
+    	hidden: true,
+    	sizeModes: ['A4Portrait']
+    }).addTo(map);
+printPlugin.printMap('A4Portait');
 
 
 var tableToPDF = function(){

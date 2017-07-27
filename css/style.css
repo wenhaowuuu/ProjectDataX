@@ -793,6 +793,23 @@ div.intro p {
   z-index: 70;
 }
 
+@media print {
+    #map {
+        margin: 0;
+        /*border: initial;*/
+        /*border-radius: initial;*/
+        /*width: 267mm;*/
+        /*height: 210mm;*/
+        size: 8.5in 5.5in;
+        size: portrait;
+        /*min-height: initial;*/
+        /*box-shadow: initial;*/
+        /*background: initial;*/
+        page-break-after: avoid;
+    }
+}
+
+
 .hint{
   position:absolute;
   top:30px;
