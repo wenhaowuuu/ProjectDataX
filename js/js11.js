@@ -2020,6 +2020,29 @@ var geologo = 'logo.jpg';
 // a string, we create the pdf without delay.
 
 
+var printProvider, printControl;
+
+printProvider = L.print.provider({
+          capabilities: printConfig,
+          method: 'GET',
+		  dpi: 254,
+		  outputFormat: 'pdf',
+		  customParams: {
+			  mapTitle: 'Print Test',
+			  comment: 'Testing Leaflet printing'
+		  }
+	  });
+
+
+// Create a print control with the configured provider and add to the map
+printControl = L.control.print({
+	provider: printProvider
+});
+
+map.addControl(printControl);
+
+
+
 var tableToPDF = function(){
   console.log("PDF starts");
   // SETTUING THE THE PDF PARAMETERS

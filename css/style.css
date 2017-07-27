@@ -786,6 +786,13 @@ div.intro p {
   font-weight:lighter;
 }
 
+#PrintMap{
+  position:absolute;
+  top:30px;
+  right:1410px;
+  z-index: 70;
+}
+
 .hint{
   position:absolute;
   top:30px;

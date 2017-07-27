@@ -74,11 +74,17 @@
 
 
   <head>
+
+    <link rel="stylesheet" href="dist/leaflet.print.css"/>
+    <script src="dist/leaflet.print.js"></script>
+    <script src="http://localhost:8080/mapfish-print/pdf/info.json?var=printConfig"></script>
+
     <!-- FOR PREVIEWING THE WEBSITE -->
     <!-- http://rawgit.com/ -->
 <!-- read the reference in ESRIs -->
 <!-- https://github.com/Esri/esri-leaflet/blob/master/README.md#demos -->
 <!-- //LOAD THE SATELLITE MAP -->
+
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
@@ -321,6 +327,9 @@
         </div>
     </div>
     <div id="map" style="position: absolute; right:330px; left: 360px; top:20px; height:98%; z-index:10;"></div>
+    <button class="btn btn-default dropdown-toggle" type="button" id="PrintMap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Print Map
+    </button>
       <div class="dropdown1">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           Change Scale
@@ -353,13 +362,13 @@
 
 
       <div class="description">
-        <!-- <div class="chartsarea">
+        <div class="chartsarea">
           <canvas class="charts" id="myChart1"></canvas>
           <br>
           <canvas class="charts" id="myChart2"></canvas>
 
 
-        </div> -->
+        </div>
         <!-- <p id = "destext">This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. <br><br>Please select a municipality first for downloadable PDF and EXCEL table.</p> -->
         <div class = "buttonarea">
           <button class="btn btn-default dropdown-toggle" type="button" id="download1" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
@@ -393,9 +402,9 @@
           </div>
       </div> -->
 
-      <div class = "locationmap">
+      <!-- <div class = "locationmap">
         <canvas class="charts" id="myImage1"></canvas>
-      </div>
+      </div> -->
 
 
 
