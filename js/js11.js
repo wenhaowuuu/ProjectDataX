@@ -345,6 +345,11 @@ $('#satellite').click(function(){
   var selectedmuni_name = '';
   var selectedlayer;
 
+
+
+  var mapURL;
+  var img;
+
   //DEFINE THE IE SCORING FACTORS FOR THE RADAR CHART
   var RD_1ST;
   var RD_2ND;
@@ -672,6 +677,7 @@ var changeBasemap3 = function(location3){
          console.log("replace2");
 
 
+
          //Click odd number of times - loading the shape, while
          //click even number of times - removing it.
         //  if (numberofClicks % 2 == 0){
@@ -731,29 +737,47 @@ var changeBasemap3 = function(location3){
           // it would become VERY VERY VERY SLOW to load when the following section is released!!!
 
           if (location != null){
-              location = P_muni + ", " + P_country;
-
+              location = P_muni + P_country;
               //getelementby id and then remove
-              mapURL = "https://maps.googleapis.com/maps/api/staticmap?center=" + location + "&zoom=10&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true";
+              mapURL = "https://maps.googleapis.com/maps/api/staticmap?&zoom=10&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true&center=" + location;
               console.log(mapURL);
-              img.src = mapURL;
+              // img.src = mapURL;
+              // img = new Image();
+              // img.src = mapURL;
+              // imgcontent = document.getElementById("myImage1");
           }
           else {
             var location = '';
-            location = P_muni + ", " + P_country;
-            var mapURL = "https://maps.googleapis.com/maps/api/staticmap?center=" + location + "&zoom=10&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true";
+            location = P_muni + P_country;
+            mapURL = "https://maps.googleapis.com/maps/api/staticmap?&zoom=10&scale=1&size=320x460&maptype=satellite&format=png&visual_refresh=true&center=" + location;
             console.log(mapURL);
+            //
+            // img = new Image();
+            // // var img = document.createElement('img');
+            // img.src = mapURL;
+            // var imgcontent = document.getElementById("myImage1");
 
-            var img = new Image();
-            // var img = document.createElement('img');
-            img.src = mapURL;
+            // img = new Image();
+            img = document.createElement('img');
+            // img.src = mapURL;
+            // $('#myImage1').append(img);
+
           }
 
-          // just like the charts going on the sidebar
 
-          $('.locationmap').append(img);
-          console.log("appended0");
-          console.log(img);
+
+          // just like the charts going on the sidebar
+          //
+          // $('#myImage1').append(img);
+          // $('.locationmap').append(img);
+          // console.log("appended0");
+          // console.log(img);
+
+          // $('#myImage1').remove();
+          // $('.locationmap').append('<canvas class="charts" id="myImage1"></canvas>');
+          // $('.locationmap').append('<canvas class="charts" id="myImage1"></canvas>');
+          console.log("replace3");
+
 
 
 
@@ -2336,6 +2360,14 @@ var tableToPDF = function(){
   var newCanvasImg2 = newCanvas2.toDataURL("image/jpeg", 1.0);
   doc.addImage(newCanvasImg2,'JPEG', 120, 220, 60, 40);
 
+  // var newCanvas0 = document.querySelector('#myImage1');
+  // var newCanvasImg0 = newCanvas0.toDataURL("image/jpeg", 1.0);
+  // doc.addImage(newCanvasImg0,'JPEG', 120, 220, 60, 40);
+
+  // var imgcanvas0 = document.querySelector("#myImage1");
+  // var newImg0 = imgcanvas0.toDataURL("image/jpeg", 1.0);
+  // doc.addImage(newImg0,'JPEG',10, 140, 60, 100);
+
 
 
 
@@ -2363,32 +2395,35 @@ var tableToPDF = function(){
   //TRIAL 2 STACKED BAR CHART
 
   //SOCIAL ECONOMIC INFO
-  doc.setFont("georgia");
-  doc.setFontType("bold");
-  doc.text(10, 130, '1) SOCIAL-ECONOMIC');
-  doc.setFont("times");
-  doc.setFontType("normal");
-  doc.text(10, 138, P_muni + ' has a poverty rate of ' + P_pov.toFixed(3) + '%.');
+  var splitTitle = doc.splitTextToSize("this is a test paragraph that goes no longer than this is a test paragraph that goe this is a test paragraph that goe this is a test paragraph that goe this is a test paragraph that goe this is a test paragraph that goe this is a test paragraph that goe this is a test paragraph that goe this is a test paragraph that goe this is a test paragraph that goe this is a test paragraph that goesh yes. reportTitle ", 90);
+  doc.text(10, 130, splitTitle);
+
+  // doc.setFont("georgia");
+  // doc.setFontType("bold");
+  // doc.text(10, 130, '1) SOCIAL-ECONOMIC');
+  // doc.setFont("times");
+  // doc.setFontType("normal");
+  // doc.text(10, 138, P_muni + ' has a poverty rate of ' + P_pov.toFixed(3) + '%.');
 
 
 
   //TRANSPORTATION
-  doc.setFont("georgia");
-  doc.setFontType("bold");
-  doc.text(10, 150, '2) TRANSPORTATION');
-  doc.setFont("times");
-  doc.setFontType("normal");
-  doc.text(10, 158, 'Total Length of Road: ' + P_length.toFixed(3) + ' km');
-  doc.text(10, 164, 'Road Density: ' + P_density.toFixed(3) + ' km per square km');
-  doc.text(10, 170, 'Road in Urban Area: ' + P_rd_urban.toFixed(3) + ' km');
-  doc.text(10, 176, 'Road in Rural Area: ' + P_rd_rural.toFixed(3) + ' km');
-  doc.text(10, 182, 'Major Road: ' + P_rd_1.toFixed(3) + ' km');
-  doc.text(10, 188, 'Secondary Road: ' + P_rd_2.toFixed(3) + ' km');
-  doc.text(10, 194, 'Tertiary Road: ' + P_rd_3.toFixed(3) + ' km');
-  doc.text(10, 200, 'Urban Road: ' + P_rd_urban.toFixed(3) + ' km');
-  doc.text(10, 206, 'Rural Road: ' + P_rd_rural.toFixed(3) + ' km');
-  doc.text(10, 212, 'Road Efficiency');
-  doc.text(10, 218, '(% population within 30 minutes of road): ' + '41%');
+  // doc.setFont("georgia");
+  // doc.setFontType("bold");
+  // doc.text(10, 150, '2) TRANSPORTATION');
+  // doc.setFont("times");
+  // doc.setFontType("normal");
+  // doc.text(10, 158, 'Total Length of Road: ' + P_length.toFixed(3) + ' km');
+  // doc.text(10, 164, 'Road Density: ' + P_density.toFixed(3) + ' km per square km');
+  // doc.text(10, 170, 'Road in Urban Area: ' + P_rd_urban.toFixed(3) + ' km');
+  // doc.text(10, 176, 'Road in Rural Area: ' + P_rd_rural.toFixed(3) + ' km');
+  // doc.text(10, 182, 'Major Road: ' + P_rd_1.toFixed(3) + ' km');
+  // doc.text(10, 188, 'Secondary Road: ' + P_rd_2.toFixed(3) + ' km');
+  // doc.text(10, 194, 'Tertiary Road: ' + P_rd_3.toFixed(3) + ' km');
+  // doc.text(10, 200, 'Urban Road: ' + P_rd_urban.toFixed(3) + ' km');
+  // doc.text(10, 206, 'Rural Road: ' + P_rd_rural.toFixed(3) + ' km');
+  // doc.text(10, 212, 'Road Efficiency');
+  // doc.text(10, 218, '(% population within 30 minutes of road): ' + '41%');
 
 
   //UTILITY
