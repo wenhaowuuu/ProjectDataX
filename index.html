@@ -36,8 +36,14 @@
       <img class = "welcomeimage" src="https://preview.ibb.co/jutBPk/bogota.jpg">
       <!-- <a href="#" class = "enterlink">Enter DataXLat 1.0 </a> -->
       <a href="#" class = "enter1">enter</a>
-      <a href="#" class = "enter2">enter</a>
+      <a href="https://www.w3schools.com" class = "enter2">enter</a>
       <a href="#" class = "enter3">enter</a>
+
+      <div class = "companyintro">
+        <a href = "http://geoadaptive.com/">
+          GeoAdaptive
+        </a>
+      </div>
 
 
   </div>
@@ -71,15 +77,77 @@
   </div> -->
 
 
-
+<!--
+  <script src="leaflet-easyPrint-gh-pages/dist/jQuery.print.js"></script>
+  <script src="leaflet-easyPrint-gh-pages/dist/leaflet.easyPrint.js"></script> -->
 
   <head>
-    <script src="dist/bundle.js"></script>
+    <!-- <script src="dist/bundle.js"></script> -->
+    <style>
+		/*html {background: #222222; padding: 40px 200px;font-family: 'Lato', sans-serif;}*/
+		/*h2,p {color: white;}
+		.gitButton{
+			padding:15px 30px;
+			background-color: #47a230;
+			text-decoration: none;
+			font-weight: 900;
+			color: white;
+			text-transform:uppercase;
+			transition: background-color .5s;
+			border: none;
+    		border-radius: 2px;
+		}
+		.gitButton:hover {background-color: #1d7806}
+		.gitButton:visited {color: white;}*/
+	</style>
+
+
+  <!-- //try with the leaflet image -->
+  <script src="js/leaflet-image.js"></script>
+  <style>
+  /*.ui-button {
+    position:absolute;
+    top:10px;
+    right:10px;
+    z-index:1000;
+  }
+
+  #snapshot {
+    position:absolute;
+    top:0;bottom:0;right:0;
+    width:50%;
+  }*/
+  </style>
+  <!-- <button id='snap' class='ui-button'>Take a snapshot</button> -->
+  <!-- <div id='snapshot'></div> -->
+  <script>
+//     var snapshot = document.getElementById('snapshot');
+//
+//     document.getElementById('snap').addEventListener('click', function() {
+//     leafletImage(map, doImage);
+// });
+//
+//     function doImage(err, canvas) {
+//       var img = document.createElement('img');
+//       var dimensions = map.getSize();
+//       img.width = dimensions.x;
+//       img.height = dimensions.y;
+//       img.src = canvas.toDataURL();
+//       snapshot.innerHTML = '';
+//       snapshot.appendChild(img);
+//     }
+
+
+
+// THIS IS SO COOL!!! THE MOUSE HEAT MAP
+// https://rawgit.com/mapbox/leaflet-image/gh-pages/index.html
+
+
+  </script>
 
     <link rel="stylesheet" href="dist/leaflet.print.css"/>
-    <script src="dist/leaflet.print.js"></script>
-    <script src="http://localhost:8080/mapfish-print/pdf/info.json?var=printConfig"></script>
-
+    <!-- <script src="dist/leaflet.print.js"></script> -->
+    <!-- <script src="http://localhost:8080/mapfish-print/pdf/info.json?var=printConfig"></script> -->
     <!-- FOR PREVIEWING THE WEBSITE -->
     <!-- http://rawgit.com/ -->
 <!-- read the reference in ESRIs -->
@@ -91,6 +159,7 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.4/leaflet-image.js'></script> -->
     <style>
         body { margin:0; padding:0; }
         #map0 { position:absolute; left:400px; right:0; top:30px; bottom:0; }
@@ -98,7 +167,6 @@
 
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css">
@@ -109,14 +177,10 @@
 
     <!-- fonts: a combination of google fonts and local fonts -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet"> -->
-
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300i" rel="stylesheet">
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
     integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
     crossorigin=""/>
-
-
 
 
     <table id ="testTable" summary="Infrastructure Efficiency Profile." rules="groups" frame="hsides" border="2">
@@ -161,8 +225,6 @@
              </tr>
       </table>
 
-
-
       <!-- //PDF BASIC FRAMEWORK -->
       <div id = "testPDF">
         <h1 id = "PDFheading">The PDF Heading </h1>
@@ -173,11 +235,11 @@
               <p class = "text">the description </p>
       </div>
 
-
   </head>
 
 
   <body>
+    <div class = "wrapper">
     <div id='map0'></div>
     <!-- <div id="map2" style="position: absolute; right:0; left: 400px; top: 30px; height:100%; z-index:20;"></div> -->
 
@@ -462,12 +524,11 @@
       <!-- <script src="bootstrap.js"></script> -->
 
 
-      <script src="https://www.jqueryscript.net/demo/jQuery-Plugin-To-Print-Any-Part-Of-Your-Page-Print/jQuery.print.js"></script>
-
-
+      <!-- <script src="https://www.jqueryscript.net/demo/jQuery-Plugin-To-Print-Any-Part-Of-Your-Page-Print/jQuery.print.js"></script> -->
       <script src="js/js11.js"></script>
       <!-- Copyright (c) 2010-2016 James Hall, https://github.com/MrRio/jsPDF -->
 
 
+    </div>
   </body>
 </html>
