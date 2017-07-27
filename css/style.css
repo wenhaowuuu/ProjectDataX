@@ -38,9 +38,8 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 .main-heading{
   position:relative;
   /*font-family:'Roboto',sans-serif;*/
-  font-family:Roboto;
-  /*font-weight:normal;*/
-  font-weight:lighter;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
   top:2px;
   font-size: 30px;
   left:10px;
@@ -66,8 +65,8 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 
 
 .selectionlabel{
-  font-.mainfamily:Roboto;
-  font-weight:lighter;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
   /*font-weight:normal;*/
 }
 
@@ -307,8 +306,7 @@ div.description{
   position: relative;
   left: 15px;
   top: 0;
-  /*color:black;*/
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-weight: lighter;
   font-size: 44px;
   z-index: 200;
@@ -799,14 +797,14 @@ div.intro p {
 
 #dropdownMenu1{
   /*font-family:'Roboto',sans-serif;*/
-  font-family:Roboto;
-  font-weight:lighter;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
 }
 
 #dropdownMenu2{
   /*font-family:'Roboto',sans-serif;*/
-  font-family:Roboto;
-  font-weight:lighter;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
 }
 
 #PrintMap{
@@ -848,6 +846,8 @@ div.intro p {
 .dropdown-menu{
   /*font-family:Roboto;*/
   /*font-weight: lighter;*/
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
 }
 
 #logo{
@@ -1027,8 +1027,8 @@ canvas {
   /*font-weight:lighter;*/
   /*font-family:'Roboto',sans-serif;*/
   /*font-weight: bolder;*/
-  font-family:Roboto;
-  /*font-weight:lighter;*/
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
 
   font-size: 16px;
 }
@@ -1043,8 +1043,8 @@ canvas {
 
 .option{
   /*font-family:'Roboto',sans-serif;*/
-  font-family:Roboto;
-  font-weight:lighter;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
 }
 
 #option{
@@ -1100,8 +1100,8 @@ li{
   /*bottom:30px;*/
   margin:12px;
   /*font-family:'Roboto',sans-serif;*/
-  font-family:Roboto;
-  font-weight:lighter;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
 
 }
 
@@ -1114,8 +1114,8 @@ li{
   margin:12px;
   z-index: 60;
   /*font-family:'Roboto',sans-serif;*/
-  font-family:Roboto;
-  font-weight:lighter;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
 
 }
 
@@ -1125,8 +1125,8 @@ li{
   /*right:30px;
   bottom:20px;*/
   /*font-family:'Roboto',sans-serif;*/
-  font-family:Roboto;
-  font-weight:lighter;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
   /*font-weight:normal;*/
   margin:10px;
   z-index: 60;
@@ -1135,8 +1135,8 @@ li{
 #hidemap{
   position:relative;
   /*font-family:'Roboto',sans-serif;*/
-  font-family:Roboto;
-  font-weight:lighter;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
   /*font-weight:normal;*/
   left:5px;
   margin:10px;
