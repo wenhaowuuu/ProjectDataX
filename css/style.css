@@ -208,10 +208,6 @@ div.description{
     -webkit-animation-delay: 1.5s;
     -moz-animation-delay: 1.5s;
     animation-delay: 1.5s;
-    border: 3px solid white;
-    /*-webkit-border-radius: 50%;*/
-    /*-moz-border-radius: 50%;*/
-    /*border-radius: 50%;*/
 }
 
 .overlay-content {
