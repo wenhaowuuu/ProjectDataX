@@ -172,6 +172,11 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.pn
 
 // intersection.addTo(map);
 
+//ADD VALUE CHAIN LOCATIONS FOR HONDURAS
+// L.marker([13.309449, -87.227567]).addTo(map).bindPopup('Iron and steel Fundición y Maquinado (FUNYMAQ) Grupo Imferra');
+// L.marker([15.472559, -88.028377]).addTo(map).bindPopup('Other bars and rods of iron or non alloy steel, not further worked thanforged, hot-rolled, hotdrawn or hot-extruded; forged INTREFICA');
+// L.marker([13.336175, -87.205594]).addTo(map).bindPopup('Barbed wire of iron or steel; twisted hoop or single flat wire, barbed or not, and loosely twisted double wire, of a kind use for fencing Derivados de Metal, S.A. INTREFICA');
+// L.marker([15.513698, -88.007150]).addTo(map).bindPopup('Endless bands for machinery, of stainless steel INTREFICA');
 
 
 //1.2 SWITCH BASEMAPS
